@@ -1,0 +1,373 @@
+/*!
+ * font-alphabet
+ *
+ * MIT licensed
+ * Copyright (C) 2013 Tim Holman, http://tholman.com
+ */
+
+/*********************************************
+ * VARIABLES + MIXINS
+ *********************************************/
+
+$black: #241F20;
+
+@mixin transition($what: all, $length: 1s, $easing: ease-in-out) {
+    -webkit-transition: $what $length $easing;
+    -moz-transition:    $what $length $easing;
+    -ms-transition:     $what $length $easing;
+    -o-transition:      $what $length $easing;
+    transition:         $what $length $easing;
+}
+
+@mixin transform($params) {
+    -webkit-transform: $params;
+    -moz-transform:    $params;
+    -ms-transform:     $params;
+    -o-transform:      $params;
+    transform:         $params;
+}
+
+/*********************************************
+ * MAIN
+ *********************************************/
+
+* {
+	-webkit-font-smoothing: antialiased;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+html, body {
+	width: 100%;
+	height: 100%;
+	padding: 0px;
+	margin: 0px;
+
+	-webkit-perspective: 600px;
+}
+
+// Tile button
+.tile-view {
+	cursor: pointer;
+	position: fixed;
+	height: 23px;
+	width: 24px;
+	z-index: 1;
+	left: 20px;
+	top: 20px;
+
+	.square {
+		@include transition( all, 200ms );
+		margin-bottom: 1px;
+		margin-right: 1px;
+		background: #fff;
+		float: left;
+		height: 7px;
+		width: 7px;
+	}
+
+	&:hover {
+	    .a {
+	     	@include transform( translate3d(-2px, -2px, 0px) );
+	    }
+
+	    .b {
+	      @include transform( translate3d(0px, -2px, 0px) );
+	    }
+
+	    .c {
+	      @include transform( translate3d(2px, -2px, 0px) );  
+	    }
+
+	    .d {
+	      @include transform( translate3d(-2px, 0px, 0px) );    
+	    }
+
+	    .f {
+	      @include transform( translate3d(2px, 0px, 0px) );    
+	    }
+
+	    .g {
+	      @include transform( translate3d(-2px, 2px, 0px) );          
+	    }
+
+	    .h {
+	      @include transform( translate3d(0px, 2px, 0px) );    
+	    }
+
+	    .i {
+	      @include transform( translate3d(2px, 2px, 0px) );    
+	    }
+	}
+
+	&:active {
+	    .square {
+	     	@include transform( translate3d(0px, 0px, 0px) );
+	    }
+	}
+
+	&.open {
+
+		.square {
+			opacity: 0;
+		}
+
+	    .a {
+	     	@include transform( translate3d(-6px, -6px, 0px) );
+	    }
+
+	    .b {
+	      @include transform( translate3d(0px, -6px, 0px) );
+	    }
+
+	    .c {
+	      @include transform( translate3d(6px, -6px, 0px) );  
+	    }
+
+	    .d {
+	      @include transform( translate3d(-6px, 0px, 0px) );    
+	    }
+
+	    .f {
+	      @include transform( translate3d(6px, 0px, 0px) );    
+	    }
+
+	    .g {
+	      @include transform( translate3d(-6px, 6px, 0px) );          
+	    }
+
+	    .h {
+	      @include transform( translate3d(0px, 6px, 0px) );    
+	    }
+
+	    .i {
+	      @include transform( translate3d(6px, 6px, 0px) );    
+	    }
+	}
+}
+
+nav {
+	font-family: 'Roboto Condensed', sans-serif;
+	background: $black;
+	position: fixed;
+	height: 100%;
+	width: 30px;
+	z-index: 2;
+	right: 0px;
+	top: 0px;
+
+	ul {
+		position: relative;
+		width: 100%;
+		display: block;
+		list-style: none;
+		padding: 0px;
+		margin: 0px;
+		color: #fff;
+		font-weight: bold;
+		font-size: 10px;
+		text-align: center;
+	}
+
+	li {
+		cursor: pointer;
+		position: relative;
+		line-height: 29px;
+		height: 29px;
+		width: 100%;
+
+		&.claim-me {
+
+			.text, .name-letter {
+				font-family: 'Times', sans-serif;
+				font-size: 24px;
+				color: greenyellow;
+			}
+		}
+
+		&:hover {
+			.name {
+				opacity: 1;
+			}
+		}
+
+		.name {
+
+			@include transition( opacity, 300ms );
+			text-transform: uppercase;
+			pointer-events: none;
+			margin-right: -30px;
+			position: absolute;
+			line-height: 37px;
+			font-weight: bold;
+			background: #fff;
+			z-index: 2;
+			opacity: 0;
+			width: 150px;
+			height: 37px;
+			color: $black;
+			right: 30px;
+			top: -4px;
+
+			.name-letter {
+				border-left: 1px solid #eee;
+				height: 100%;
+				float: right;
+				width: 30px;
+			}
+		}
+	}
+}
+
+section {
+	@include transition( all, 300ms, linear );
+	// @include transform( translate3d( 0, 0, -100px ) );
+
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0px;
+	left: 0px;
+
+	&.active {
+		@include transform( translate3d( 0, 0, 0 ) );
+		opacity: 1;
+	}
+
+	&.ready {
+		pointer-events: none;
+	}
+
+}
+
+.tiles {
+	-webkit-perspective: 400px;
+	background: transparent;
+
+	&.active {
+		.tile {
+			@include transform( translate3d( 0, 0, 0 ) !important );
+			opacity: 1 !important;
+		}	
+	}
+
+	&.ready {
+
+		.tile {
+
+		}
+	}
+}
+
+.panes {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+.tile {
+	@include transition( all, 400ms, linear );
+	opacity: 0;
+	background: #f5f5f5;
+	border: 3px solid #ddd;
+}
+
+.letter {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+
+	.showcase {
+		text-align: center;
+		width: 600px;
+		margin: auto;
+
+		.example {
+			position: relative;
+			text-align: center;
+			font-weight: 900;
+			font-size: 240px;
+			margin: auto;
+			color: #fff;
+		}
+
+		h1, h2, h3 {
+			padding: 0px;
+			margin: 0px;
+		}
+
+		h2 {
+			line-height: 26px;
+			font-size: 30px;
+		}
+
+		h3 {
+			text-transform: uppercase;
+			letter-spacing: 6px;
+			font-weight: 600;
+			margin-top: 20px;
+			font-size: 11px;
+			color: #fff;
+		}
+
+		hr {
+			position: absolute;
+			background: #fff;
+			display: block;
+			width: 100%;
+			height: 1px;
+			color: #fff;
+			border: 0px;
+			padding: 0;
+			margin: 0;
+			margin-top: -30px;
+		}
+
+	}
+
+	&.a {
+
+		// Temporary!
+		background-image: url('../img/stripe-1.png');
+		background-size: 200px 400px;
+
+		font-family: "mostra-nuova";
+	}
+
+	&.b {
+
+		// Temporary!
+		background-image: url('../img/stripe-2.png');
+		background-size: 200px 400px;
+
+		font-family: "mostra-nuova";
+	}
+
+	&.next {
+		@include transform( translateY( 100% ) ); 
+	}
+
+	.link {
+		border-radius: 3px;
+		position: absolute;
+		overflow: hidden;
+		background: #fff;
+		width: 300px;
+		height: 60px;
+		bottom: 20px;
+		left: 20px;
+
+		div {
+			float: left;
+		}
+
+		.type {
+			background: $black;
+			width: 85px;
+			height: 100%;
+		}
+	}
+}
+

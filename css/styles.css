@@ -1,0 +1,324 @@
+/*
+ * font-alphabet
+ *
+ * MIT licensed
+ * Copyright (C) 2013 Tim Holman, http://tholman.com
+ */
+/*********************************************
+ * VARIABLES + MIXINS
+ *********************************************/
+/*********************************************
+ * MAIN
+ *********************************************/
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+
+html, body {
+  width: 100%;
+  height: 100%;
+  padding: 0px;
+  margin: 0px;
+  -webkit-perspective: 600px; }
+
+.tile-view {
+  cursor: pointer;
+  position: fixed;
+  height: 23px;
+  width: 24px;
+  z-index: 1;
+  left: 20px;
+  top: 20px; }
+  .tile-view .square {
+    -webkit-transition: all 200ms ease-in-out;
+    -moz-transition: all 200ms ease-in-out;
+    -ms-transition: all 200ms ease-in-out;
+    -o-transition: all 200ms ease-in-out;
+    transition: all 200ms ease-in-out;
+    margin-bottom: 1px;
+    margin-right: 1px;
+    background: #fff;
+    float: left;
+    height: 7px;
+    width: 7px; }
+  .tile-view:hover .a {
+    -webkit-transform: translate3d(-2px, -2px, 0px);
+    -moz-transform: translate3d(-2px, -2px, 0px);
+    -ms-transform: translate3d(-2px, -2px, 0px);
+    -o-transform: translate3d(-2px, -2px, 0px);
+    transform: translate3d(-2px, -2px, 0px); }
+  .tile-view:hover .b {
+    -webkit-transform: translate3d(0px, -2px, 0px);
+    -moz-transform: translate3d(0px, -2px, 0px);
+    -ms-transform: translate3d(0px, -2px, 0px);
+    -o-transform: translate3d(0px, -2px, 0px);
+    transform: translate3d(0px, -2px, 0px); }
+  .tile-view:hover .c {
+    -webkit-transform: translate3d(2px, -2px, 0px);
+    -moz-transform: translate3d(2px, -2px, 0px);
+    -ms-transform: translate3d(2px, -2px, 0px);
+    -o-transform: translate3d(2px, -2px, 0px);
+    transform: translate3d(2px, -2px, 0px); }
+  .tile-view:hover .d {
+    -webkit-transform: translate3d(-2px, 0px, 0px);
+    -moz-transform: translate3d(-2px, 0px, 0px);
+    -ms-transform: translate3d(-2px, 0px, 0px);
+    -o-transform: translate3d(-2px, 0px, 0px);
+    transform: translate3d(-2px, 0px, 0px); }
+  .tile-view:hover .f {
+    -webkit-transform: translate3d(2px, 0px, 0px);
+    -moz-transform: translate3d(2px, 0px, 0px);
+    -ms-transform: translate3d(2px, 0px, 0px);
+    -o-transform: translate3d(2px, 0px, 0px);
+    transform: translate3d(2px, 0px, 0px); }
+  .tile-view:hover .g {
+    -webkit-transform: translate3d(-2px, 2px, 0px);
+    -moz-transform: translate3d(-2px, 2px, 0px);
+    -ms-transform: translate3d(-2px, 2px, 0px);
+    -o-transform: translate3d(-2px, 2px, 0px);
+    transform: translate3d(-2px, 2px, 0px); }
+  .tile-view:hover .h {
+    -webkit-transform: translate3d(0px, 2px, 0px);
+    -moz-transform: translate3d(0px, 2px, 0px);
+    -ms-transform: translate3d(0px, 2px, 0px);
+    -o-transform: translate3d(0px, 2px, 0px);
+    transform: translate3d(0px, 2px, 0px); }
+  .tile-view:hover .i {
+    -webkit-transform: translate3d(2px, 2px, 0px);
+    -moz-transform: translate3d(2px, 2px, 0px);
+    -ms-transform: translate3d(2px, 2px, 0px);
+    -o-transform: translate3d(2px, 2px, 0px);
+    transform: translate3d(2px, 2px, 0px); }
+  .tile-view:active .square {
+    -webkit-transform: translate3d(0px, 0px, 0px);
+    -moz-transform: translate3d(0px, 0px, 0px);
+    -ms-transform: translate3d(0px, 0px, 0px);
+    -o-transform: translate3d(0px, 0px, 0px);
+    transform: translate3d(0px, 0px, 0px); }
+  .tile-view.open .square {
+    opacity: 0; }
+  .tile-view.open .a {
+    -webkit-transform: translate3d(-6px, -6px, 0px);
+    -moz-transform: translate3d(-6px, -6px, 0px);
+    -ms-transform: translate3d(-6px, -6px, 0px);
+    -o-transform: translate3d(-6px, -6px, 0px);
+    transform: translate3d(-6px, -6px, 0px); }
+  .tile-view.open .b {
+    -webkit-transform: translate3d(0px, -6px, 0px);
+    -moz-transform: translate3d(0px, -6px, 0px);
+    -ms-transform: translate3d(0px, -6px, 0px);
+    -o-transform: translate3d(0px, -6px, 0px);
+    transform: translate3d(0px, -6px, 0px); }
+  .tile-view.open .c {
+    -webkit-transform: translate3d(6px, -6px, 0px);
+    -moz-transform: translate3d(6px, -6px, 0px);
+    -ms-transform: translate3d(6px, -6px, 0px);
+    -o-transform: translate3d(6px, -6px, 0px);
+    transform: translate3d(6px, -6px, 0px); }
+  .tile-view.open .d {
+    -webkit-transform: translate3d(-6px, 0px, 0px);
+    -moz-transform: translate3d(-6px, 0px, 0px);
+    -ms-transform: translate3d(-6px, 0px, 0px);
+    -o-transform: translate3d(-6px, 0px, 0px);
+    transform: translate3d(-6px, 0px, 0px); }
+  .tile-view.open .f {
+    -webkit-transform: translate3d(6px, 0px, 0px);
+    -moz-transform: translate3d(6px, 0px, 0px);
+    -ms-transform: translate3d(6px, 0px, 0px);
+    -o-transform: translate3d(6px, 0px, 0px);
+    transform: translate3d(6px, 0px, 0px); }
+  .tile-view.open .g {
+    -webkit-transform: translate3d(-6px, 6px, 0px);
+    -moz-transform: translate3d(-6px, 6px, 0px);
+    -ms-transform: translate3d(-6px, 6px, 0px);
+    -o-transform: translate3d(-6px, 6px, 0px);
+    transform: translate3d(-6px, 6px, 0px); }
+  .tile-view.open .h {
+    -webkit-transform: translate3d(0px, 6px, 0px);
+    -moz-transform: translate3d(0px, 6px, 0px);
+    -ms-transform: translate3d(0px, 6px, 0px);
+    -o-transform: translate3d(0px, 6px, 0px);
+    transform: translate3d(0px, 6px, 0px); }
+  .tile-view.open .i {
+    -webkit-transform: translate3d(6px, 6px, 0px);
+    -moz-transform: translate3d(6px, 6px, 0px);
+    -ms-transform: translate3d(6px, 6px, 0px);
+    -o-transform: translate3d(6px, 6px, 0px);
+    transform: translate3d(6px, 6px, 0px); }
+
+nav {
+  font-family: 'Roboto Condensed', sans-serif;
+  background: #241f20;
+  position: fixed;
+  height: 100%;
+  width: 30px;
+  z-index: 2;
+  right: 0px;
+  top: 0px; }
+  nav ul {
+    position: relative;
+    width: 100%;
+    display: block;
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 10px;
+    text-align: center; }
+  nav li {
+    cursor: pointer;
+    position: relative;
+    line-height: 29px;
+    height: 29px;
+    width: 100%; }
+    nav li.claim-me .text, nav li.claim-me .name-letter {
+      font-family: 'Times', sans-serif;
+      font-size: 24px;
+      color: greenyellow; }
+    nav li:hover .name {
+      opacity: 1; }
+    nav li .name {
+      -webkit-transition: opacity 300ms ease-in-out;
+      -moz-transition: opacity 300ms ease-in-out;
+      -ms-transition: opacity 300ms ease-in-out;
+      -o-transition: opacity 300ms ease-in-out;
+      transition: opacity 300ms ease-in-out;
+      text-transform: uppercase;
+      pointer-events: none;
+      margin-right: -30px;
+      position: absolute;
+      line-height: 37px;
+      font-weight: bold;
+      background: #fff;
+      z-index: 2;
+      opacity: 0;
+      width: 150px;
+      height: 37px;
+      color: #241f20;
+      right: 30px;
+      top: -4px; }
+      nav li .name .name-letter {
+        border-left: 1px solid #eee;
+        height: 100%;
+        float: right;
+        width: 30px; }
+
+section {
+  -webkit-transition: all 300ms linear;
+  -moz-transition: all 300ms linear;
+  -ms-transition: all 300ms linear;
+  -o-transition: all 300ms linear;
+  transition: all 300ms linear;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px; }
+  section.active {
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    -o-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    opacity: 1; }
+  section.ready {
+    pointer-events: none; }
+
+.tiles {
+  -webkit-perspective: 400px;
+  background: transparent; }
+  .tiles.active .tile {
+    -webkit-transform: translate3d(0, 0, 0) !important;
+    -moz-transform: translate3d(0, 0, 0) !important;
+    -ms-transform: translate3d(0, 0, 0) !important;
+    -o-transform: translate3d(0, 0, 0) !important;
+    transform: translate3d(0, 0, 0) !important;
+    opacity: 1 !important; }
+
+.panes {
+  width: 100%;
+  height: 100%;
+  overflow: hidden; }
+
+.tile {
+  -webkit-transition: all 400ms linear;
+  -moz-transition: all 400ms linear;
+  -ms-transition: all 400ms linear;
+  -o-transition: all 400ms linear;
+  transition: all 400ms linear;
+  opacity: 0;
+  background: #f5f5f5;
+  border: 3px solid #ddd; }
+
+.letter {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%; }
+  .letter .showcase {
+    text-align: center;
+    width: 600px;
+    margin: auto; }
+    .letter .showcase .example {
+      position: relative;
+      text-align: center;
+      font-weight: 900;
+      font-size: 240px;
+      margin: auto;
+      color: #fff; }
+    .letter .showcase h1, .letter .showcase h2, .letter .showcase h3 {
+      padding: 0px;
+      margin: 0px; }
+    .letter .showcase h2 {
+      line-height: 26px;
+      font-size: 30px; }
+    .letter .showcase h3 {
+      text-transform: uppercase;
+      letter-spacing: 6px;
+      font-weight: 600;
+      margin-top: 20px;
+      font-size: 11px;
+      color: #fff; }
+    .letter .showcase hr {
+      position: absolute;
+      background: #fff;
+      display: block;
+      width: 100%;
+      height: 1px;
+      color: #fff;
+      border: 0px;
+      padding: 0;
+      margin: 0;
+      margin-top: -30px; }
+  .letter.a {
+    background-image: url("../img/stripe-1.png");
+    background-size: 200px 400px;
+    font-family: "mostra-nuova"; }
+  .letter.b {
+    background-image: url("../img/stripe-2.png");
+    background-size: 200px 400px;
+    font-family: "mostra-nuova"; }
+  .letter.next {
+    -webkit-transform: translateY(100%);
+    -moz-transform: translateY(100%);
+    -ms-transform: translateY(100%);
+    -o-transform: translateY(100%);
+    transform: translateY(100%); }
+  .letter .link {
+    border-radius: 3px;
+    position: absolute;
+    overflow: hidden;
+    background: #fff;
+    width: 300px;
+    height: 60px;
+    bottom: 20px;
+    left: 20px; }
+    .letter .link div {
+      float: left; }
+    .letter .link .type {
+      background: #241f20;
+      width: 85px;
+      height: 100%; }
