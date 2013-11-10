@@ -44,12 +44,13 @@ html, body {
 	margin: 0px;
 
 	-webkit-perspective: 600px;
+	overflow: hidden;
 }
 
 // Tile button
 .tile-view {
 	cursor: pointer;
-	position: fixed;
+	position: absolute;
 	height: 23px;
 	width: 24px;
 	z-index: 1;
@@ -156,7 +157,16 @@ nav {
 	right: 0px;
 	top: 0px;
 
+	&.hovered {
+		.name-slider {
+
+			right: 30px !important;
+			opacity: 1 !important;
+		}
+	}
+
 	ul {
+		background: $black;
 		position: relative;
 		width: 100%;
 		display: block;
@@ -193,7 +203,7 @@ nav {
 
 		.name {
 
-			@include transition( opacity, 300ms );
+			// @include transition( opacity, 300ms );
 			text-transform: uppercase;
 			pointer-events: none;
 			margin-right: -30px;
@@ -203,7 +213,7 @@ nav {
 			background: #fff;
 			z-index: 2;
 			opacity: 0;
-			width: 150px;
+			width: 30px;
 			height: 37px;
 			color: $black;
 			right: 30px;
@@ -216,6 +226,27 @@ nav {
 				width: 30px;
 			}
 		}
+	}
+
+	.name-slider {
+
+		@include transition( right, 300ms );
+
+		text-transform: uppercase;
+		pointer-events: none;
+		position: absolute;
+		text-align: center;
+		line-height: 37px;
+		line-height: 37px;
+		font-weight: bold;
+		background: #fff;
+		font-size: 10px;
+		color: $black;
+		width: 120px;
+		height: 37px;
+		right: -90px;
+		opacity: 1;
+		top: -4px;
 	}
 }
 
@@ -262,7 +293,6 @@ section {
 .panes {
 	width: 100%;
 	height: 100%;
-	overflow: hidden;
 }
 
 .tile {
@@ -365,8 +395,15 @@ section {
 
 		.type {
 			background: $black;
-			width: 85px;
+			width: 86px;
 			height: 100%;
+
+			svg {
+				margin-left: 23px;
+				margin-top: 10px;
+				height: 40px;
+				width: 40px;
+			}
 		}
 	}
 }

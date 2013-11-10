@@ -21,6 +21,8 @@ function App() {
 	var nameSlider;
 	var nameSliderText;
 
+	this.a;
+
     this.init = function() {
 
     	this.prepareCards();
@@ -29,7 +31,10 @@ function App() {
     	// Nav positioning.
     	nav = $( 'nav ul' );
     	var navMarginTop = ( pageHeight - nav.height() ) / 2
-    	nav.css({ 'margin-top': navMarginTop });
+    	nav.css({ 
+    		'padding-top': navMarginTop,
+    		'padding-bottom': navMarginTop
+		});
 
     	$( '.tile-view' ).mouseup( function() {
     		$( '.tile-view' ).toggleClass( 'open' );	
@@ -59,6 +64,17 @@ function App() {
     		}, 1000 )
     	})
 
+
+    	// Bind nav hovering.
+    	nameSlider = $( '.name-slider' );
+    	nameSliderText = $( '.the-name', nameSlider );
+
+    	$( 'nav li' ).on( "mouseover", this.moveNavName );
+    	$( 'nav ul' ).on( "mouseout", this.hideNavName );
+
+    	this.a = $( '.panes' ).onepage_scroll( {
+    		pagination: false
+    	});
 
     	// Position Mo
     	$( '.showcase' ).css({
@@ -96,5 +112,26 @@ function App() {
 				"opacity": "300ms"
 			});
 		}
+    }
+
+    this.moveNavName = function( event ) {
+    	
+    	$( 'nav' ).addClass( "hovered" );
+    	var $target = $( event.currentTarget );
+    	var top = $target.offset().top - 4; // Element is offset 4 above its position.
+    	nameSlider.css({
+    		top: top + 'px'
+    	})
+    	nameSliderText.html( $( '.text',  $target ).html() + '-font' );
+    }
+
+    this.hideNavName = function( event ) {
+
+    	if ( event.relatedTarget.localName === 'li' ) {
+    		return;
+    	} else {
+    		$( 'nav' ).removeClass( "hovered" );
+    	}
+
     }
 }
