@@ -10,6 +10,7 @@
  *********************************************/
 
 $black: #241F20;
+$topLevel: 1000;
 
 @mixin transition($what: all, $length: 1s, $easing: ease-in-out) {
     -webkit-transition: $what $length $easing;
@@ -53,7 +54,7 @@ html, body {
 	position: absolute;
 	height: 23px;
 	width: 24px;
-	z-index: 1;
+	z-index: $topLevel; // Above all slides
 	left: 20px;
 	top: 20px;
 
@@ -153,7 +154,7 @@ nav {
 	position: fixed;
 	height: 100%;
 	width: 30px;
-	z-index: 2;
+	z-index: $topLevel;
 	right: 0px;
 	top: 0px;
 
@@ -251,8 +252,6 @@ nav {
 }
 
 section {
-	@include transition( all, 300ms, linear );
-	// @include transform( translate3d( 0, 0, -100px ) );
 
 	position: absolute;
 	width: 100%;
@@ -261,12 +260,9 @@ section {
 	left: 0px;
 
 	&.active {
-		@include transform( translate3d( 0, 0, 0 ) );
-		opacity: 1;
 	}
 
 	&.ready {
-		pointer-events: none;
 	}
 
 }
@@ -302,7 +298,18 @@ section {
 	border: 3px solid #ddd;
 }
 
+.wrapper {
+	overflow: hidden;
+}
+
 .letter {
+
+ //     -webkit-animation-name: slide;
+ //  	-webkit-animation-iteration-count: infinite;
+ //  	-webkit-animation-timing-function: linear;
+ //  	-webkit-animation-duration: 50000ms;
+
+
 	position: absolute;
 	top: 0px;
 	left: 0px;
@@ -408,3 +415,12 @@ section {
 	}
 }
 
+
+// @-webkit-keyframes slide {
+//   0% {
+//     background-position: 0% 50%;
+//   }
+//   100% {
+//     background-position: 100% 50%;
+//   }
+// }

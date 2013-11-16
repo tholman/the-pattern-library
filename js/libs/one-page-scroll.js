@@ -4,6 +4,9 @@
  * Copyright 2013 Pete Rojwongsuriya.
  * http://www.thepetedesign.com
  *
+ * Create an Apple-like website that let user scroll
+ * one page at a time
+ *
  * Credit: Eike Send for the awesome swipe event
  * https://github.com/peachananr/onepage-scroll
  * 
@@ -27,7 +30,7 @@
 	};
 	
 	/*------------------------------------------------*/
-	/*  Credit: Eike Send for the awesome swipe event */
+	/*  Credit: Eike Send for the awesome swipe event */    
 	/*------------------------------------------------*/
 	
 	$.fn.swipeEvents = function() {
@@ -122,7 +125,6 @@
       if (typeof settings.beforeMove == 'function') settings.beforeMove( current.data("index"));
       current.removeClass("active")
       next.addClass("active");
-      
       if(settings.pagination == true) {
         $(".onepage-pagination li a" + "[data-index='" + index + "']").removeClass("active");
         $(".onepage-pagination li a" + "[data-index='" + next.data("index") + "']").addClass("active");

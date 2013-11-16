@@ -72,9 +72,13 @@ function App() {
     	$( 'nav li' ).on( "mouseover", this.moveNavName );
     	$( 'nav ul' ).on( "mouseout", this.hideNavName );
 
-    	this.a = $( '.panes' ).onepage_scroll( {
-    		pagination: false
-    	});
+    	// this.a = $( '.panes' ).onepage_scroll( {
+    	//	pagination: false
+    	// });
+		var scrollSystem = new ScrollSystem();
+		scrollSystem.init();
+
+        // Set z indexing on scroll items
 
     	// Position Mo
     	$( '.showcase' ).css({
@@ -127,8 +131,17 @@ function App() {
 
     this.hideNavName = function( event ) {
 
+        // Mouse has been moved off the screen.
+        if ( !event.relatedTarget ) {
+            $( 'nav' ).removeClass( "hovered" );
+            return;
+        }
+
+        // Mouse has moved to another list element.
     	if ( event.relatedTarget.localName === 'li' ) {
     		return;
+
+        // Mouse has been moved off the nav, but is in the screen.
     	} else {
     		$( 'nav' ).removeClass( "hovered" );
     	}
