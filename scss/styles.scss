@@ -310,6 +310,7 @@ section {
 
 
 	position: absolute;
+ 	padding-right: 30px;
 	top: 0px;
 	left: 0px;
 	width: 100%;
@@ -431,6 +432,22 @@ section {
 				font-size: 11px;
 				color: #A8E64E;
 			}
+		}
+	}
+
+	.background-artist {
+		padding-right: 30px;
+		position: absolute;
+		text-align: center;
+		width: 100%;
+		bottom: 40px;
+		font-weight: 400;
+		font-size: 12px;
+		letter-spacing: 1px;
+		color: #fff;
+
+		a {
+			color: #fff;
 		}
 	}
 }

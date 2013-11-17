@@ -45,12 +45,16 @@ function ScrollSystem() {
 
         if ( scrollPosition < 0 ) {
             scrollPosition = 0;
+        } else if ( scrollPosition > ( ( wrappers.length - 1 ) * windowHeight ) ) {
+            scrollPosition = ( ( wrappers.length - 1 ) * windowHeight );
         }
 
         var scrollLevel = Math.floor( scrollPosition / windowHeight );
         var scrollDepth = scrollPosition % windowHeight;
 
         if ( scrollLevel === ( wrappers.length - 1 ) ) {
+
+            $( wrappers[ scrollLevel - 1 ] ).height( 0 );   
             return;
         }
 
