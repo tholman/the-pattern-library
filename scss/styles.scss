@@ -458,8 +458,8 @@ section {
 		font-family: 'Comfortaa', cursive;
 
 		background-color: #ea9d73;
-		background-image: url('../img/c.png');
-		background-size: 140px 632px;
+		background-image: url('../img/c.jpg');
+		background-size: 320px 1440px;
 		background-position: 50% 50%;
 		background-repeat: repeat-x;
 
@@ -478,6 +478,18 @@ section {
 			color: #f2d795;
 		}
 	}
+
+	&.e {
+		font-family: "effra";
+		
+		background-image: url('../img/e.jpg');
+		background-size: 760px 380px;
+
+		h2 {
+			color: #f2d795;
+		}
+	}
+
 
 	&.next {
 		@include transform( translateY( 100% ) ); 

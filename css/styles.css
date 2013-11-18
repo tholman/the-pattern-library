@@ -351,8 +351,8 @@ section {
   .letter.c {
     font-family: 'Comfortaa', cursive;
     background-color: #ea9d73;
-    background-image: url("../img/c.png");
-    background-size: 140px 632px;
+    background-image: url("../img/c.jpg");
+    background-size: 320px 1440px;
     background-position: 50% 50%;
     background-repeat: repeat-x; }
     .letter.c h2 {
@@ -362,6 +362,12 @@ section {
     background-image: url("../img/c.png");
     background-size: auto 100%; }
     .letter.d h2 {
+      color: #f2d795; }
+  .letter.e {
+    font-family: "effra";
+    background-image: url("../img/e.jpg");
+    background-size: 760px 380px; }
+    .letter.e h2 {
       color: #f2d795; }
   .letter.next {
     -webkit-transform: translateY(100%);
