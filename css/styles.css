@@ -260,6 +260,22 @@ section {
     float: left;
     background: #fff;
     border: 1px solid #e4e4e4; }
+    .tiles .tile.c {
+      color: #fff;
+      font-family: 'Comfortaa', cursive;
+      background: url("/img/c.jpg");
+      background-position: 50% 20%;
+      background-size: auto 720px; }
+      .tiles .tile.c .character {
+        font-size: 131px; }
+    .tiles .tile.e {
+      color: #fff;
+      font-family: "effra";
+      background: url("/img/e.jpg");
+      background-position: 50% 50%;
+      background-size: auto 100%; }
+      .tiles .tile.e .character {
+        font-size: 138px; }
   .tiles .character {
     -webkit-font-smoothing: antialiased;
     font-weight: bold;

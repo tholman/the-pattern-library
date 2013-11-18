@@ -298,6 +298,32 @@ section {
 		float: left;
 		background: #fff;
 		border: 1px solid #e4e4e4;
+
+		&.c {
+
+			.character {
+				font-size: 131px;
+			}
+
+			color: #fff;
+			font-family: 'Comfortaa', cursive;
+			background: url('/img/c.jpg');
+			background-position: 50% 20%;
+			background-size: auto 720px;
+		}
+
+		&.e {
+
+			.character {
+				font-size: 138px;
+			}
+			
+			color: #fff;
+			font-family: "effra";
+			background: url("/img/e.jpg");
+			background-position: 50% 50%;
+			background-size: auto 100%;
+		}
 	}
 
 	.character {
