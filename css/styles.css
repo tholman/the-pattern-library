@@ -457,6 +457,7 @@ section {
         font-size: 11px;
         color: #A8E64E; }
   .letter .background-artist {
+    font-family: 'Roboto Condensed', sans-serif;
     padding-right: 30px;
     position: absolute;
     text-align: center;
