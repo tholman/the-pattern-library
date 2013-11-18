@@ -483,7 +483,9 @@ section {
 		font-family: "effra";
 		
 		background-image: url('../img/e.jpg');
+		background-origin: content-box;
 		background-size: 760px 380px;
+		background-position: 50% 50%;
 
 		h2 {
 			color: #f2d795;

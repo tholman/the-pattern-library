@@ -366,7 +366,9 @@ section {
   .letter.e {
     font-family: "effra";
     background-image: url("../img/e.jpg");
-    background-size: 760px 380px; }
+    background-origin: content-box;
+    background-size: 760px 380px;
+    background-position: 50% 50%; }
     .letter.e h2 {
       color: #f2d795; }
   .letter.next {
