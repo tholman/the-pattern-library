@@ -243,14 +243,24 @@ section {
   left: 0px; }
 
 .tiles {
-  -webkit-transform: translateZ(0px);
-  -moz-transform: translateZ(0px);
-  -ms-transform: translateZ(0px);
-  -o-transform: translateZ(0px);
-  transform: translateZ(0px);
+  -webkit-transform: translate3d(0px, 0px, 0px);
+  -moz-transform: translate3d(0px, 0px, 0px);
+  -ms-transform: translate3d(0px, 0px, 0px);
+  -o-transform: translate3d(0px, 0px, 0px);
+  transform: translate3d(0px, 0px, 0px);
   background: #f7f7f7;
   pointer-events: none; }
   .tiles .tile {
+    -webkit-transform: translate3d(0px, 0px, 0px);
+    -moz-transform: translate3d(0px, 0px, 0px);
+    -ms-transform: translate3d(0px, 0px, 0px);
+    -o-transform: translate3d(0px, 0px, 0px);
+    transform: translate3d(0px, 0px, 0px);
+    -webkit-transition: all 300ms ease-in-out;
+    -moz-transition: all 300ms ease-in-out;
+    -ms-transition: all 300ms ease-in-out;
+    -o-transition: all 300ms ease-in-out;
+    transition: all 300ms ease-in-out;
     cursor: pointer;
     text-align: center;
     width: 220px;
@@ -259,7 +269,14 @@ section {
     margin: 10px;
     float: left;
     background: #fff;
-    border: 1px solid #e4e4e4; }
+    border: 0px; }
+    .tiles .tile:hover {
+      -webkit-transform: translate3d(-5px, -5px, 0px);
+      -moz-transform: translate3d(-5px, -5px, 0px);
+      -ms-transform: translate3d(-5px, -5px, 0px);
+      -o-transform: translate3d(-5px, -5px, 0px);
+      transform: translate3d(-5px, -5px, 0px);
+      box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, 0.2); }
     .tiles .tile.c {
       color: #fff;
       font-family: 'Comfortaa', cursive;
@@ -285,6 +302,7 @@ section {
     font-size: 12px; }
   .tiles .claim {
     font-family: "mostra-nuova";
+    border: 1px solid #e4e4e4;
     color: #241f20; }
     .tiles .claim div {
       -webkit-transition: color 300ms ease-in-out;
@@ -295,8 +313,15 @@ section {
     .tiles .claim .prompt {
       letter-spacing: 1px;
       color: #cccccc; }
-    .tiles .claim:hover .character, .tiles .claim:hover .prompt {
-      color: #ff0000; }
+    .tiles .claim:hover {
+      box-shadow: none;
+      -webkit-transform: translate3d(0px, 0px, 0px);
+      -moz-transform: translate3d(0px, 0px, 0px);
+      -ms-transform: translate3d(0px, 0px, 0px);
+      -o-transform: translate3d(0px, 0px, 0px);
+      transform: translate3d(0px, 0px, 0px); }
+      .tiles .claim:hover .character, .tiles .claim:hover .prompt {
+        color: #ff0000; }
   .tiles.active {
     z-index: 1001;
     opacity: 1;
