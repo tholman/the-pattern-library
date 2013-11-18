@@ -537,6 +537,7 @@ section {
 	}
 
 	.link {
+		font-family: 'Roboto Condensed', sans-serif;
 		border-radius: 3px;
 		position: absolute;
 		overflow: hidden;
@@ -565,7 +566,7 @@ section {
 
 		.location {
 			padding-left: 20px;
-			padding-top: 15px;
+			padding-top: 13px;
 			width: 212px;
 			height: 100%;
 
@@ -575,6 +576,7 @@ section {
 			}
 
 			.source {
+				letter-spacing: 1px;
 				font-size: 11px;
 				color: #A8E64E;
 			}

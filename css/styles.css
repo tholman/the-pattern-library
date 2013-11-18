@@ -426,6 +426,7 @@ section {
     -o-transform: translateY(100%);
     transform: translateY(100%); }
   .letter .link {
+    font-family: 'Roboto Condensed', sans-serif;
     border-radius: 3px;
     position: absolute;
     overflow: hidden;
@@ -447,13 +448,14 @@ section {
         width: 40px; }
     .letter .link .location {
       padding-left: 20px;
-      padding-top: 15px;
+      padding-top: 13px;
       width: 212px;
       height: 100%; }
       .letter .link .location .name {
         font-size: 14px;
         width: 100%; }
       .letter .link .location .source {
+        letter-spacing: 1px;
         font-size: 11px;
         color: #A8E64E; }
   .letter .background-artist {
