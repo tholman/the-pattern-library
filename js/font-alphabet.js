@@ -140,7 +140,7 @@ function App() {
     	nameSlider.css({
     		top: top + 'px'
     	})
-    	nameSliderText.html( $( '.text',  $target ).html() + '-font' );
+    	nameSliderText.html( $( '.text',  $target ).attr( 'data-name' ) );
     }
 
     this.hideNavName = function( event ) {
