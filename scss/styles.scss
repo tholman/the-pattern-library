@@ -283,6 +283,7 @@ section {
 }
 
 .tiles {
+	@include transform( translateZ(0px) );
 	background: #f7f7f7;
 	pointer-events: none;
 	// -webkit-perspective: 400px;

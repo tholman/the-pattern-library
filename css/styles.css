@@ -243,6 +243,11 @@ section {
   left: 0px; }
 
 .tiles {
+  -webkit-transform: translateZ(0px);
+  -moz-transform: translateZ(0px);
+  -ms-transform: translateZ(0px);
+  -o-transform: translateZ(0px);
+  transform: translateZ(0px);
   background: #f7f7f7;
   pointer-events: none; }
   .tiles .tile {
