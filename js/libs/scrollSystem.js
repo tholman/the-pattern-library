@@ -29,7 +29,7 @@ function ScrollSystem() {
             heights.push( windowHeight );
         }
 
-        $( document ).bind( 'mousewheel DOMMouseScroll', function( event ) {
+        $( '.panes' ).bind( 'mousewheel DOMMouseScroll', function( event ) {
             
             event.preventDefault();
             

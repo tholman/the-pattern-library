@@ -182,9 +182,25 @@ nav {
 	li {
 		cursor: pointer;
 		position: relative;
-		line-height: 29px;
-		height: 29px;
+		line-height: 28px;
+		height: 28px;
 		width: 100%;
+
+		&.info {
+
+			.text {
+				border-radius: 100%;
+				line-height: 25px;
+				font-weight: bold;
+				background: #fff;
+				margin-left: 5px;
+				color: #000;
+				width: 23px;
+				height: 23px;
+				display: block;
+				margin-top: 4px;
+			}
+		}
 
 		&.claim-me {
 
@@ -204,7 +220,7 @@ nav {
 		.name {
 
 			// @include transition( opacity, 300ms );
-			text-transform: uppercase;
+			// text-transform: uppercase;
 			pointer-events: none;
 			margin-right: -30px;
 			position: absolute;
@@ -267,14 +283,61 @@ section {
 }
 
 .tiles {
-	-webkit-perspective: 400px;
-	background: transparent;
+	background: #f7f7f7;
+	pointer-events: none;
+	// -webkit-perspective: 400px;
+
+	.tile {
+		cursor: pointer;
+		text-align: center;
+		width: 220px;
+		height: 300px;
+		border-radius: 4px;
+		margin: 10px;
+		float: left;
+		background: #fff;
+		border: 1px solid #e4e4e4;
+	}
+
+	.claim {
+		font-family: "mostra-nuova";
+		color: $black;
+
+		div {
+			@include transition( color, 300ms );
+		}
+
+		.character {
+			-webkit-font-smoothing: antialiased;
+			font-weight: bold;
+			font-size: 140px;
+			margin-top: 45px;
+		}
+
+		.prompt {
+			letter-spacing: 1px;
+			font-size: 12px;
+			color: #cccccc;
+		}
+
+		&:hover {
+
+			.character, .prompt {
+				color: #ff0000;
+			}
+		}
+	}
 
 	&.active {
-		.tile {
-			@include transform( translate3d( 0, 0, 0 ) !important );
-			opacity: 1 !important;
-		}	
+		z-index: 1001;
+		opacity: 1;
+		overflow: auto;
+		pointer-events: auto;
+
+		// .tile {
+		// 	@include transform( translate3d( 0, 0, 0 ) !important );
+		// 	opacity: 1 !important;
+		// }	
 	}
 
 	&.ready {
@@ -290,12 +353,12 @@ section {
 	height: 100%;
 }
 
-.tile {
-	@include transition( all, 400ms, linear );
-	opacity: 0;
-	background: #f5f5f5;
-	border: 3px solid #ddd;
-}
+// .tile {
+// 	@include transition( all, 400ms, linear );
+// 	opacity: 0;
+// 	background: #f5f5f5;
+// 	border: 3px solid #ddd;
+// }
 
 .wrapper {
 	overflow: hidden;

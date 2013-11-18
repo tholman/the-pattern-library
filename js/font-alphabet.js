@@ -25,8 +25,8 @@ function App() {
 
     this.init = function() {
 
-    	this.prepareCards();
-    	skewTiles();
+    	// this.prepareCards();
+    	// skewTiles();
 
     	// Nav positioning.
     	nav = $( 'nav ul' );

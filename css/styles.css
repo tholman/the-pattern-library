@@ -174,9 +174,20 @@ nav {
   nav li {
     cursor: pointer;
     position: relative;
-    line-height: 29px;
-    height: 29px;
+    line-height: 28px;
+    height: 28px;
     width: 100%; }
+    nav li.info .text {
+      border-radius: 100%;
+      line-height: 25px;
+      font-weight: bold;
+      background: #fff;
+      margin-left: 5px;
+      color: #000;
+      width: 23px;
+      height: 23px;
+      display: block;
+      margin-top: 4px; }
     nav li.claim-me .text, nav li.claim-me .name-letter {
       font-family: 'Times', sans-serif;
       font-size: 24px;
@@ -184,7 +195,6 @@ nav {
     nav li:hover .name {
       opacity: 1; }
     nav li .name {
-      text-transform: uppercase;
       pointer-events: none;
       margin-right: -30px;
       position: absolute;
@@ -233,29 +243,47 @@ section {
   left: 0px; }
 
 .tiles {
-  -webkit-perspective: 400px;
-  background: transparent; }
-  .tiles.active .tile {
-    -webkit-transform: translate3d(0, 0, 0) !important;
-    -moz-transform: translate3d(0, 0, 0) !important;
-    -ms-transform: translate3d(0, 0, 0) !important;
-    -o-transform: translate3d(0, 0, 0) !important;
-    transform: translate3d(0, 0, 0) !important;
-    opacity: 1 !important; }
+  background: #f7f7f7;
+  pointer-events: none; }
+  .tiles .tile {
+    cursor: pointer;
+    text-align: center;
+    width: 220px;
+    height: 300px;
+    border-radius: 4px;
+    margin: 10px;
+    float: left;
+    background: #fff;
+    border: 1px solid #e4e4e4; }
+  .tiles .claim {
+    font-family: "mostra-nuova";
+    color: #241f20; }
+    .tiles .claim div {
+      -webkit-transition: color 300ms ease-in-out;
+      -moz-transition: color 300ms ease-in-out;
+      -ms-transition: color 300ms ease-in-out;
+      -o-transition: color 300ms ease-in-out;
+      transition: color 300ms ease-in-out; }
+    .tiles .claim .character {
+      -webkit-font-smoothing: antialiased;
+      font-weight: bold;
+      font-size: 140px;
+      margin-top: 45px; }
+    .tiles .claim .prompt {
+      letter-spacing: 1px;
+      font-size: 12px;
+      color: #cccccc; }
+    .tiles .claim:hover .character, .tiles .claim:hover .prompt {
+      color: #ff0000; }
+  .tiles.active {
+    z-index: 1001;
+    opacity: 1;
+    overflow: auto;
+    pointer-events: auto; }
 
 .panes {
   width: 100%;
   height: 100%; }
-
-.tile {
-  -webkit-transition: all 400ms linear;
-  -moz-transition: all 400ms linear;
-  -ms-transition: all 400ms linear;
-  -o-transition: all 400ms linear;
-  transition: all 400ms linear;
-  opacity: 0;
-  background: #f5f5f5;
-  border: 3px solid #ddd; }
 
 .wrapper {
   overflow: hidden; }
