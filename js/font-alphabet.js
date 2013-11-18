@@ -36,33 +36,47 @@ function App() {
     		'padding-bottom': navMarginTop
 		});
 
-    	$( '.tile-view' ).mouseup( function() {
-    		$( '.tile-view' ).toggleClass( 'open' );	
-    	});
+        $( '.tile' ).click( function() {
 
-    	$( document.body ).click( function() {
+            $( '.tiles' ).removeClass( 'active' );
+            $( '.tile-view' ).removeClass( 'open' );
+        });
 
-    		if ( pane ) {
-    			$( '.panes' ).removeClass( "active" );
-    			$( '.tiles' ).removeClass( "ready" ).addClass( "active" );
-    		} else {
-    			$( '.tiles' ).removeClass( "active" );
-    			$( '.panes' ).removeClass( "ready" ).addClass( "active" );
-    		}
+        $( '.tile-view' ).click( function() {
 
-    		pane = !pane;
+           $( '.tiles' ).addClass( 'active' ); 
+           $( '.tile-view' ).addClass( 'open' );
+        });
+
+
+
+    	// $( '.tile-view' ).mouseup( function() {
+    	// 	$( '.tile-view' ).toggleClass( 'open' );	
+    	// });
+
+    	// $( document.body ).click( function() {
+
+    	// 	if ( pane ) {
+    	// 		$( '.panes' ).removeClass( "active" );
+    	// 		$( '.tiles' ).removeClass( "ready" ).addClass( "active" );
+    	// 	} else {
+    	// 		$( '.tiles' ).removeClass( "active" );
+    	// 		$( '.panes' ).removeClass( "ready" ).addClass( "active" );
+    	// 	}
+
+    	// 	pane = !pane;
     		
-    		setTimeout( function() {
+    	// 	setTimeout( function() {
 
-    			if ( pane ) {
-    				$( '.tiles' ).addClass( 'ready' );
-    				skewTiles();
-    			} else {
-    				$( '.panes' ).addClass( 'ready' );
-    			}
+    	// 		if ( pane ) {
+    	// 			$( '.tiles' ).addClass( 'ready' );
+    	// 			skewTiles();
+    	// 		} else {
+    	// 			$( '.panes' ).addClass( 'ready' );
+    	// 		}
     			
-    		}, 1000 )
-    	})
+    	// 	}, 1000 )
+    	// })
 
 
     	// Bind nav hovering.
