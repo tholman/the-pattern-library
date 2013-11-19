@@ -422,11 +422,7 @@ section {
 
 .letter {
 
- //     -webkit-animation-name: slide;
- //  	-webkit-animation-iteration-count: infinite;
- //  	-webkit-animation-timing-function: linear;
- //  	-webkit-animation-duration: 50000ms;
-
+	@include transform( translateZ(0px) );
 
 	position: absolute;
  	padding-right: 30px;
@@ -548,6 +544,10 @@ section {
 		h2 {
 			color: #d63544;
 		}
+		// -webkit-animation-name: slide-right;
+		// -webkit-animation-iteration-count: infinite;
+		// -webkit-animation-timing-function: linear;
+		// -webkit-animation-duration: 50000ms;
 	}
 
 
@@ -621,11 +621,20 @@ section {
 }
 
 
-// @-webkit-keyframes slide {
-//   0% {
-//     background-position: 0% 50%;
-//   }
-//   100% {
-//     background-position: 100% 50%;
-//   }
-// }
+@-webkit-keyframes slide-right {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+@-webkit-keyframes slide-up {
+  0% {
+    background-position: 50% 100%;
+  }
+  100% {
+    background-position: 50% 0%;
+  }
+}

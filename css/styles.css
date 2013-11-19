@@ -349,6 +349,11 @@ section {
   overflow: hidden; }
 
 .letter {
+  -webkit-transform: translateZ(0px);
+  -moz-transform: translateZ(0px);
+  -ms-transform: translateZ(0px);
+  -o-transform: translateZ(0px);
+  transform: translateZ(0px);
   position: absolute;
   padding-right: 30px;
   top: 0px;
@@ -478,3 +483,17 @@ section {
     color: #fff; }
     .letter .background-artist a {
       color: #fff; }
+
+@-webkit-keyframes slide-right {
+  0% {
+    background-position: 0% 50%; }
+
+  100% {
+    background-position: 100% 50%; } }
+
+@-webkit-keyframes slide-up {
+  0% {
+    background-position: 50% 100%; }
+
+  100% {
+    background-position: 50% 0%; } }
