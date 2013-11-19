@@ -302,6 +302,7 @@ section {
 		display: inline-block;
 		background: #fff;
 		border: 0px;
+		color: #fff;
 
 		&:hover {
 			@include transition( all, 150ms );
@@ -315,7 +316,6 @@ section {
 				font-size: 131px;
 			}
 
-			color: #fff;
 			font-family: 'Comfortaa', cursive;
 			background: url('../img/c.jpg');
 			background-position: 50% 20%;
@@ -328,12 +328,25 @@ section {
 				font-size: 138px;
 			}
 			
-			color: #fff;
 			font-family: "effra";
 			background: url("../img/e.jpg");
 			background-position: 50% 50%;
 			background-size: auto 100%;
 		}
+
+		&.m {
+
+			.character {
+				font-weight: 900;
+			}
+
+			font-family: "mostra-nuova";
+			background-position: 80% 120%;
+			background-image: url("../img/m.jpg");
+			background-size: 548px 200px;
+		
+		}
+
 	}
 
 	.character {
@@ -422,6 +435,8 @@ section {
 	width: 100%;
 	height: 100%;
 
+	background-position: 50% 50%;
+
 	.showcase {
 		text-align: center;
 		width: 600px;
@@ -499,7 +514,6 @@ section {
 		background-color: #ea9d73;
 		background-image: url('../img/c.jpg');
 		background-size: 320px 1440px;
-		background-position: 50% 50%;
 		background-repeat: repeat-x;
 
 		h2 {
@@ -508,26 +522,31 @@ section {
 	}
 
 	&.d {
-		font-family: 'Comfortaa', cursive;
-		
-		background-image: url('../img/c.png');
-		background-size: auto 100%;
-
-		h2 {
-			color: #f2d795;
-		}
 	}
 
 	&.e {
 		font-family: "effra";
+
 		
 		background-image: url('../img/e.jpg');
 		background-origin: content-box;
 		background-size: 760px 380px;
-		background-position: 50% 50%;
+		
 
 		h2 {
 			color: #9396a0;
+		}
+	}
+
+	&.m {
+		font-family: "mostra-nuova";
+		background-position: 0% 0%;
+		background-image: url('../img/m.jpg');
+		background-origin: content-box;
+		background-size: 548px 200px;
+		
+		h2 {
+			color: #d63544;
 		}
 	}
 
