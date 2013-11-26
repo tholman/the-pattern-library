@@ -90,12 +90,6 @@ html, body {
     -ms-transform: translate3d(2px, 2px, 0px);
     -o-transform: translate3d(2px, 2px, 0px);
     transform: translate3d(2px, 2px, 0px); }
-  .tile-view:active .square {
-    -webkit-transform: translate3d(0px, 0px, 0px);
-    -moz-transform: translate3d(0px, 0px, 0px);
-    -ms-transform: translate3d(0px, 0px, 0px);
-    -o-transform: translate3d(0px, 0px, 0px);
-    transform: translate3d(0px, 0px, 0px); }
   .tile-view.open .square {
     opacity: 0; }
   .tile-view.open .a {
@@ -306,6 +300,20 @@ section {
       background-size: 548px 200px; }
       .tiles .tile.m .character {
         font-weight: 900; }
+    .tiles .tile.o {
+      font-family: "mostra-nuova";
+      background-position: 80% 120%;
+      background-image: url("../img/o.gif");
+      background-size: 548px 200px; }
+      .tiles .tile.o .character {
+        font-weight: 900; }
+    .tiles .tile.p {
+      font-family: "mostra-nuova";
+      background-position: 80% 120%;
+      background-image: url("../img/p.gif");
+      background-size: 548px 200px; }
+      .tiles .tile.p .character {
+        font-weight: 900; }
   .tiles .character {
     -webkit-font-smoothing: antialiased;
     font-weight: bold;
@@ -431,6 +439,22 @@ section {
     background-size: 548px 200px; }
     .letter.m h2 {
       color: #d63544; }
+  .letter.o {
+    font-family: "mostra-nuova";
+    background-position: 0% 0%;
+    background-image: url("../img/o.gif");
+    background-origin: content-box;
+    background-size: 548px 200px; }
+    .letter.o h2 {
+      color: #d63544; }
+  .letter.p {
+    font-family: "mostra-nuova";
+    background-position: 0% 0%;
+    background-image: url("../img/p.gif");
+    background-origin: content-box;
+    background-size: 225px 449px; }
+    .letter.p h2 {
+      color: #d63544; }
   .letter.next {
     -webkit-transform: translateY(100%);
     -moz-transform: translateY(100%);
@@ -483,6 +507,43 @@ section {
     color: #fff; }
     .letter .background-artist a {
       color: #fff; }
+
+.claiming-tile {
+  box-shadow: 0px 5px 90px -10px rgba(0, 0, 0, 0.2);
+  margin-left: -235px;
+  border-radius: 4px;
+  background: #fff;
+  position: fixed;
+  display: block;
+  height: 640px;
+  width: 470px;
+  left: 50%;
+  top: 0px; }
+  .claiming-tile .claim-text {
+    font-family: "mostra-nuova";
+    text-transform: uppercase;
+    padding-top: 20px;
+    color: #d60000; }
+    .claiming-tile .claim-text .text {
+      border: 1px solid #d60000;
+      display: inline-block;
+      font-weight: normal;
+      letter-spacing: 9px;
+      line-height: 40px;
+      font-size: 10px;
+      width: 320px;
+      height: 40px; }
+    .claiming-tile .claim-text .line {
+      display: inline-block;
+      vertical-align: top;
+      background: #d60000;
+      margin-top: 20px;
+      height: 1px;
+      width: 50px; }
+      .claiming-tile .claim-text .line.right {
+        margin-left: -4px; }
+      .claiming-tile .claim-text .line.left {
+        margin-right: -4px; }
 
 @-webkit-keyframes slide-right {
   0% {

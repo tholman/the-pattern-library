@@ -41,8 +41,10 @@ function ScrollSystem() {
 
     this.parseScroll = function( event, delta ) {
         
+        // Sort out scroll deltas here!
         scrollPosition -= ( delta / 3 );
 
+        // Top scroll position
         if ( scrollPosition < 0 ) {
             scrollPosition = 0;
         } else if ( scrollPosition > ( ( wrappers.length - 1 ) * windowHeight ) ) {
@@ -67,8 +69,28 @@ function ScrollSystem() {
         }
 
         $( wrappers[ scrollLevel ] ).height( windowHeight - scrollDepth );
-
-        // console.log( -scrollPosition );
     }
 
+    this.resize = function() {
+
+        var oldWindowHeight = windowHeight;
+        windowHeight = window.innerHeight;
+
+        elements = $( '.letter' );
+        elements.height( windowHeight );
+
+        wrappers = $( '.wrapper' );
+        wrappers.height( windowHeight );
+
+        var ratio = windowHeight / oldWindowHeight;
+        scrollPosition = scrollPosition * ratio;
+
+        for( var i = 0; i < heights.length; i++ ) {
+
+            heights[ i ] = heights[ i ] * ratio;
+            $( wrappers[i] ).height( heights[ i ] );
+        }
+
+        this.parseScroll( null, 0 );
+    }
 }

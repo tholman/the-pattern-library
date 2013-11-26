@@ -11,6 +11,8 @@
 
 function App() {
 
+    var _this = this;
+
 	var pane = false;
 	var pageHeight = window.innerHeight; // px
 	var cardHeight = Math.ceil( window.innerHeight / 4 ); // px
@@ -21,20 +23,9 @@ function App() {
 	var nameSlider;
 	var nameSliderText;
 
-	this.a;
+    this.scrollSystem;
 
     this.init = function() {
-
-    	// this.prepareCards();
-    	// skewTiles();
-
-    	// Nav positioning.
-    	nav = $( 'nav ul' );
-    	var navMarginTop = ( pageHeight - nav.height() ) / 2
-    	nav.css({ 
-    		'padding-top': navMarginTop,
-    		'padding-bottom': navMarginTop
-		});
 
         $( '.tile' ).click( function() {
 
@@ -49,87 +40,40 @@ function App() {
         });
 
 
-
-    	// $( '.tile-view' ).mouseup( function() {
-    	// 	$( '.tile-view' ).toggleClass( 'open' );	
-    	// });
-
-    	// $( document.body ).click( function() {
-
-    	// 	if ( pane ) {
-    	// 		$( '.panes' ).removeClass( "active" );
-    	// 		$( '.tiles' ).removeClass( "ready" ).addClass( "active" );
-    	// 	} else {
-    	// 		$( '.tiles' ).removeClass( "active" );
-    	// 		$( '.panes' ).removeClass( "ready" ).addClass( "active" );
-    	// 	}
-
-    	// 	pane = !pane;
-    		
-    	// 	setTimeout( function() {
-
-    	// 		if ( pane ) {
-    	// 			$( '.tiles' ).addClass( 'ready' );
-    	// 			skewTiles();
-    	// 		} else {
-    	// 			$( '.panes' ).addClass( 'ready' );
-    	// 		}
-    			
-    	// 	}, 1000 )
-    	// })
-
-
     	// Bind nav hovering.
     	nameSlider = $( '.name-slider' );
     	nameSliderText = $( '.the-name', nameSlider );
-
     	$( 'nav li' ).on( "mouseover", this.moveNavName );
     	$( 'nav ul' ).on( "mouseout", this.hideNavName );
 
-    	// this.a = $( '.panes' ).onepage_scroll( {
-    	//	pagination: false
-    	// });
-		var scrollSystem = new ScrollSystem();
-		scrollSystem.init();
+		this.scrollSystem = new ScrollSystem();
+		this.scrollSystem.init();
 
-        // Set z indexing on scroll items
+        // Initial screen sizing
+        this.resize();
 
-    	// Position Mo
-    	$( '.showcase' ).css({
-    		'margin-top': ( (window.innerHeight - $( '.showcase' ).height() ) / 2 ) - 50 + 'px'
-    	})
-
+        // Resize event!
+        window.onresize = function() {
+            app.resize();
+            _this.scrollSystem.resize();
+        }
     }
 
-    this.prepareCards = function() {
-    	var items = $( '.tile' );
-		for( var i = 0; i < items.length; i++ ) {
+    this.resize = function() {
 
-			var column = i % 8;
-			var row = Math.floor( i / 8 );
+        // Nav positioning
+        nav = $( 'nav ul' );
+        var navMarginTop = ( pageHeight - nav.height() ) / 2
+        nav.css({ 
+            'padding-top': navMarginTop,
+            'padding-bottom': navMarginTop
+        });
 
-			$item = $( items[i] );
-			$item.css({
-				top: row * cardHeight,
-				left: column * cardWidth,
-				width: cardWidth,
-				height: cardHeight,
-				position: 'absolute'
-			})
-		}
-    }
+        // Letter positioning.
+        $( '.showcase' ).css({
+            'margin-top': ( (window.innerHeight - $( '.showcase' ).height() ) / 2 ) - 50 + 'px'
+        })
 
-    var skewTiles = function() {
-    	var items = $( '.tile' );
-		for( var i = 0; i < items.length; i++ ) {
-
-			$item = $( items[i] );
-			$item.css({
-				"-webkit-transform": "translate3d( 0, 0, " + (100 + ( Math.random() * 200 ) ) + "px)",
-				"-webkit-transition-delay": ( Math.random() * 500 ) + "ms",
-				"opacity": "300ms"
-			});
-		}
     }
 
     this.moveNavName = function( event ) {
