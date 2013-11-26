@@ -62,6 +62,7 @@ function App() {
     this.resize = function() {
 
         // Nav positioning
+        pageHeight = window.innerHeight;
         nav = $( 'nav ul' );
         var navMarginTop = ( pageHeight - nav.height() ) / 2
         nav.css({ 
