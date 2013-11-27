@@ -668,20 +668,63 @@ section {
 	}
 }
 
+body {
+	&.overlay-active {
+
+		.claiming-tile, .claim-overlay {
+			display: block;
+		}
+	}
+}
+
+.claim-overlay {
+	background: url( '../img/overlay-background.png' );
+	z-index: 10000;
+	position: fixed;
+	height: 100%;
+	width: 100%;
+	left: 0px;
+	top: 0px;
+
+	display: none;
+}
+
 .claiming-tile {
+	z-index: 10001;
 	box-shadow: 0px 5px 90px -10px rgba(0,0,0,0.2);
+	font-family: "mostra-nuova";
 	margin-left: -235px;
 	border-radius: 4px;
+	text-align: center;
 	background: #fff;
 	position: fixed;
 	display: block;
 	height: 640px;
 	width: 470px;
 	left: 50%;
-	top: 0px;
+	top: 50%;
+	margin-top: -320px;
+
+	display: none;
+
+	.background-letter {
+		font-family: "mostra-nuova";
+		line-height: 620px;
+		position: absolute;
+		font-weight: bold;
+		font-size: 550px;
+		width: 100%;
+		color: $red;
+		left: 0;
+		z-index: 1;
+	}
+
+	.claim-text, .instructions {
+		position: relative;
+		z-index: 2;
+	}
 
 	.claim-text {
-		font-family: "mostra-nuova";
 		text-transform: uppercase;
 		padding-top: 20px;
 		color: $red;
@@ -714,7 +757,52 @@ section {
 			}
 		}
 	}
+
+	.steps {
+		font-size: 18px;
+		width: 310px;
+		margin: auto;
+		margin-bottom: 40px;
+		margin-top: 35px;
+	}
+
+	.website, .typeface {
+		text-transform: uppercase;
+		font-size: 22px;
+		letter-spacing: 1px;
+	}
+
+	.website {
+
+		svg {
+			margin-top: 20px;
+			width: 250px;
+			height: 80px;
+		}
+	}
+
+	.and {
+		margin-bottom: 15px;
+		margin-top: 15px;
+	}
+
+	.letters {
+		margin-top: 30px;
+	}
+
+	.to {
+		margin-top: 60px;
+		font-size: 18px;
+
+		a {
+			text-decoration: none;
+			color: #00bde5;
+			border-bottom: 1px solid rgba(0, 189, 229, 0.15);
+		}
+	}
 }
+
+
 
 
 @-webkit-keyframes slide-right {

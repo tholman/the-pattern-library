@@ -27,11 +27,26 @@ function App() {
 
     this.init = function() {
 
-        $( '.tile' ).click( function() {
+        $( '.tile' ).not( ".claim" ).click( function() {
 
             $( '.tiles' ).removeClass( 'active' );
             $( '.tile-view' ).removeClass( 'open' );
         });
+
+        // Closing the claim item by clicking the overlay
+        $( '.claim-overlay' ).click( function( event) {
+
+            $( document.body ).removeClass( 'overlay-active' );
+        });
+
+        // Clicking a claim item!
+        $( '.claim' ).click( function( event ) {
+
+            var letter = $( '.character', event.currentTarget ).html();
+            $( '.background-letter' ).html( letter );
+
+            $( document.body ).addClass( 'overlay-active' );
+        })
 
         $( '.tile-view' ).click( function() {
 
