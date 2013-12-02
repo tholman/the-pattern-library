@@ -27,10 +27,25 @@ function App() {
 
     this.init = function() {
 
+        _this.scrollSystem = new ScrollSystem();
+        _this.scrollSystem.init();
+
         $( '.tile' ).not( ".claim" ).click( function() {
+
+            var letter = $( '.character', event.currentTarget ).html();
+            _this.scrollSystem.scrollTo( letter, false );
+
 
             $( '.tiles' ).removeClass( 'active' );
             $( '.tile-view' ).removeClass( 'open' );
+
+        });
+
+        // Nav
+        $( 'nav li' ).click( function() {
+
+            var letter = $( '.text', event.currentTarget ).html();
+            _this.scrollSystem.scrollTo( letter, false );
         });
 
         // Closing the claim item by clicking the overlay
@@ -61,8 +76,6 @@ function App() {
     	$( 'nav li' ).on( "mouseover", this.moveNavName );
     	$( 'nav ul' ).on( "mouseout", this.hideNavName );
 
-		this.scrollSystem = new ScrollSystem();
-		this.scrollSystem.init();
 
         // Initial screen sizing
         this.resize();

@@ -1,5 +1,7 @@
 function ScrollSystem() {
 
+    var indexMap = {};
+
     var _this = this;
 
     var windowHeight;
@@ -8,6 +10,8 @@ function ScrollSystem() {
     var heights = [];
 
     var scrollPosition = 0;
+
+    var scrollDelayDelta = 200; //ms
 
     this.init = function() {
 
@@ -19,8 +23,17 @@ function ScrollSystem() {
         wrappers = $( '.wrapper' );
         wrappers.height( windowHeight );
 
+        // Prepare letters.
+        // var letters = 'abcdefghijklmnopqrstuvwxyz';
+        // for ( var i = 0; i < elements.length; i++ ) {
+        // }
+
 
         for( var i = 0; i < elements.length; i++ ) {
+
+            // Prepare letters
+            var letter = elements[i].className.split( ' ' )[1];
+            indexMap[ letter ] = i;         
 
             $( elements[i] ).css({
                 'z-index': elements.length - i
@@ -71,6 +84,34 @@ function ScrollSystem() {
         $( wrappers[ scrollLevel ] ).height( windowHeight - scrollDepth );
     }
 
+    // Updates ALL wrappers scroll positions
+    this.updateScroll = function() {
+
+        // Animate scrolling as well.
+
+        var scrollLevel = Math.floor( scrollPosition / windowHeight );
+        var scrollDepth = windowHeight - ( scrollPosition % windowHeight );
+
+        for ( var i = 0; i < wrappers.length; i++ ) {
+
+            // Item is less than the scroll level
+            if ( i < scrollLevel ) {
+                $( wrappers[ i ] ).height( 0 );
+                continue;
+            }
+
+            if ( i === scrollLevel ) {
+                $( wrappers[ i ] ).height( scrollDepth );
+                continue;
+            }
+
+            if ( i > scrollLevel ) {
+                $( wrappers[ i ] ).height( windowHeight );   
+                continue;
+            }
+        }
+    }
+
     this.resize = function() {
 
         var oldWindowHeight = windowHeight;
@@ -91,6 +132,55 @@ function ScrollSystem() {
             $( wrappers[i] ).height( heights[ i ] );
         }
 
-        this.parseScroll( null, 0 );
+        this.updateScroll();
+    }
+
+    // Scroll to specific letter... 
+    // index: letter to scroll to
+    // transition: snap, or transition to the letter
+    this.scrollTo = function( index, transition ) {
+
+        // Scrolling to X
+        var scrollToItem = indexMap[ index.toLowerCase() ];
+
+        // Scrolling from Y
+        var currentItem = Math.floor( scrollPosition / windowHeight );
+
+        if ( scrollToItem > currentItem ) {
+
+            for( var i = currentItem; i < scrollToItem; i++ ) {
+
+                addDelay( wrappers[i], ( i - currentItem ) );
+            }
+
+        } else if ( currentItem > scrollToItem ){
+
+            for( var i = currentItem; i >= (scrollToItem - 1); i-- ) {
+                
+                console.log( "Item: ", currentItem - i );
+                addDelay( wrappers[i], ( ( currentItem - i ) - 1  ) );
+            }
+
+        }
+
+        scrollPosition = scrollToItem * windowHeight;
+        this.updateScroll();
+
+    }
+
+    var addDelay = function( element, delay ) {
+
+        delay = Math.abs( delay );
+
+        var $element = $( element );
+
+        console.log( $element, ( 'height ' + ( delay * scrollDelayDelta ) + 'ms' ) );
+        $element.css({
+            '-webkit-transition-delay': ( delay * scrollDelayDelta ) + 'ms'
+        })
+    }
+
+    this.removeDelays = function() {
+
     }
 }
