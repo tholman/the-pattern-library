@@ -155,10 +155,11 @@ function ScrollSystem() {
 
         } else if ( currentItem > scrollToItem ){
 
-            for( var i = currentItem; i >= (scrollToItem - 1); i-- ) {
-                
-                console.log( "Item: ", currentItem - i );
-                addDelay( wrappers[i], ( ( currentItem - i ) - 1  ) );
+            // Look into how this works, understanding is fun.
+            for( var i = currentItem - 1; i >= scrollToItem; i-- ) {
+
+                // console.log( wrappers[i], i, scrollToItem, currentItem);
+                addDelay( wrappers[i], ( currentItem - i - 1)  );
             }
 
         }
@@ -174,7 +175,7 @@ function ScrollSystem() {
 
         var $element = $( element );
 
-        console.log( $element, ( 'height ' + ( delay * scrollDelayDelta ) + 'ms' ) );
+        // console.log( $element, ( 'height ' + ( delay * scrollDelayDelta ) + 'ms' ) );
         $element.css({
             '-webkit-transition-delay': ( delay * scrollDelayDelta ) + 'ms'
         })
