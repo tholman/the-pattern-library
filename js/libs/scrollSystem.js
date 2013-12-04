@@ -13,6 +13,8 @@ function ScrollSystem() {
 
     var scrollDelayDelta = 200; //ms
 
+    var animationTimeout;
+
     this.init = function() {
 
         windowHeight = window.innerHeight;
@@ -140,29 +142,36 @@ function ScrollSystem() {
     // transition: snap, or transition to the letter
     this.scrollTo = function( index, transition ) {
 
+        $( document.body ).addClass( 'transitioning' );
+
         // Scrolling to X
         var scrollToItem = indexMap[ index.toLowerCase() ];
 
         // Scrolling from Y
         var currentItem = Math.floor( scrollPosition / windowHeight );
 
+        // Scrolling down
         if ( scrollToItem > currentItem ) {
 
             for( var i = currentItem; i < scrollToItem; i++ ) {
-
                 addDelay( wrappers[i], ( i - currentItem ) );
             }
 
+        // Scrolling up!
         } else if ( currentItem > scrollToItem ){
-
             // Look into how this works, understanding is fun.
             for( var i = currentItem - 1; i >= scrollToItem; i-- ) {
-
-                // console.log( wrappers[i], i, scrollToItem, currentItem);
                 addDelay( wrappers[i], ( currentItem - i - 1)  );
             }
-
         }
+
+        var scrollDifference = Math.abs( scrollToItem, currentItem );
+
+        clearTimeout( animationTimeout );
+
+        //500 is the total animation time
+        animationTimeout = setTimeout( _this.removeDelays, (scrollDifference * scrollDelayDelta + 500) )
+        console.log( 'delta: ', (scrollDifference * scrollDelayDelta + 500) );
 
         scrollPosition = scrollToItem * windowHeight;
         this.updateScroll();
@@ -172,16 +181,21 @@ function ScrollSystem() {
     var addDelay = function( element, delay ) {
 
         delay = Math.abs( delay );
-
         var $element = $( element );
 
-        // console.log( $element, ( 'height ' + ( delay * scrollDelayDelta ) + 'ms' ) );
         $element.css({
-            '-webkit-transition-delay': ( delay * scrollDelayDelta ) + 'ms'
+            'transition-delay': ( delay * scrollDelayDelta ) + 'ms'
         })
     }
 
     this.removeDelays = function() {
 
+        console.log( 'remove!' );
+
+        $( document.body ).removeClass( 'transitioning' );
+
+        $( '.wrapper' ).css({
+            'transition-delay': '0ms'
+        })
     }
 }

@@ -438,10 +438,16 @@ section {
 // 	border: 3px solid #ddd;
 // }
 
+.transitioning {
+
+	.wrapper {
+		@include transition( all, 500ms, ease-in-out );
+	}
+}
+
 .wrapper {
 
 	overflow: hidden;
-	@include transition( all, 500ms, ease-in-out );
 }
 
 .letter {
