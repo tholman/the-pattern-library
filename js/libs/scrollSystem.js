@@ -47,7 +47,6 @@ function ScrollSystem() {
         $( '.panes' ).bind( 'mousewheel DOMMouseScroll', function( event ) {
             
             event.preventDefault();
-            
             var delta = event.originalEvent.wheelDelta || -event.originalEvent.detail;
             
             _this.parseScroll( event, delta );

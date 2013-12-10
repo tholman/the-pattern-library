@@ -201,7 +201,7 @@ nav {
 
 			.text, .name-letter {
 				font-family: 'Times', sans-serif;
-				font-size: 24px;
+				font-size: 18px;
 				color: greenyellow;
 			}
 		}
@@ -470,7 +470,7 @@ section {
 		width: 600px;
 		margin: auto;
 
-		* {
+		.example, h1, h2 {
 			-webkit-font-smoothing: antialiased;
 		}
 
@@ -489,17 +489,23 @@ section {
 		}
 
 		h2 {
+			font-family: "mostra-nuova";
 			line-height: 26px;
 			font-size: 30px;
 		}
 
 		h3 {
+			font-family: 'Roboto Condensed', sans-serif;
 			text-transform: uppercase;
-			letter-spacing: 6px;
-			font-weight: 600;
-			margin-top: 20px;
-			font-size: 11px;
+			letter-spacing: 2px;
+			font-weight: 400;
+			font-size: 12px;
 			color: #fff;
+			margin-top: 20px;
+
+			a {
+				color: #fff;
+			}
 		}
 
 		hr {
@@ -513,27 +519,18 @@ section {
 			margin: 0;
 			margin-top: -30px;
 			border: 0px;
-			border-top: 1px dashed #fff;
 			background: none;
 		}
 	}
 
 	&.a {
-
-		// Temporary!
 		background-image: url('../img/stripe-1.png');
 		background-size: 200px 400px;
-
-		font-family: "mostra-nuova";
 	}
 
 	&.b {
-
-		// Temporary!
 		background-image: url('../img/stripe-2.png');
 		background-size: 200px 400px;
-
-		font-family: "mostra-nuova";
 	}
 
 	&.c {
@@ -594,11 +591,10 @@ section {
 		}
 	}
 
-
 	&.p {
 		font-family: "mostra-nuova";
 		background-position: 0% 0%;
-		background-image: url('../img/p.gif');
+		background-image: url('../img/p.png');
 		background-origin: content-box;
 		background-size: 225px 449px;
 		
@@ -606,8 +602,6 @@ section {
 			color: #d63544;
 		}
 	}
-
-
 
 	&.next {
 		@include transform( translateY( 100% ) ); 
@@ -669,7 +663,7 @@ section {
 		bottom: 40px;
 		font-weight: 400;
 		font-size: 12px;
-		letter-spacing: 1px;
+		letter-spacing: 2px;
 		color: #fff;
 
 		a {
