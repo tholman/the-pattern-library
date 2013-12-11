@@ -25,12 +25,6 @@ function ScrollSystem() {
         wrappers = $( '.wrapper' );
         wrappers.height( windowHeight );
 
-        // Prepare letters.
-        // var letters = 'abcdefghijklmnopqrstuvwxyz';
-        // for ( var i = 0; i < elements.length; i++ ) {
-        // }
-
-
         for( var i = 0; i < elements.length; i++ ) {
 
             // Prepare letters
@@ -170,7 +164,6 @@ function ScrollSystem() {
 
         //500 is the total animation time
         animationTimeout = setTimeout( _this.removeDelays, (scrollDifference * scrollDelayDelta + 500) )
-        console.log( 'delta: ', (scrollDifference * scrollDelayDelta + 500) );
 
         scrollPosition = scrollToItem * windowHeight;
         this.updateScroll();

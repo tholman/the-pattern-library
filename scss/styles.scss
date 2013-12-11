@@ -13,7 +13,7 @@ $black: #241F20;
 $red: #d60000;
 $topLevel: 1000;
 
-@mixin transition($what: all, $length: 1s, $easing: ease-in-out) {
+@mixin transition( $what: all, $length: 1s, $easing: ease-in-out ) {
     -webkit-transition: $what $length $easing;
     -moz-transition:    $what $length $easing;
     -ms-transition:     $what $length $easing;
@@ -21,7 +21,7 @@ $topLevel: 1000;
     transition:         $what $length $easing;
 }
 
-@mixin transform($params) {
+@mixin transform( $params ) {
     -webkit-transform: $params;
     -moz-transform:    $params;
     -ms-transform:     $params;
@@ -46,6 +46,33 @@ html, body {
 
 	-webkit-perspective: 600px;
 	overflow: hidden;
+}
+
+
+body {
+
+	&.overlay-active {
+		.claiming-tile, .claim-overlay {
+			display: block;
+		}
+	}
+}
+
+section {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0px;
+	left: 0px;
+}
+
+.wrapper {
+	overflow: hidden;
+}
+
+.panes {
+	width: 100%;
+	height: 100%;
 }
 
 // Tile button
@@ -142,160 +169,25 @@ html, body {
 	}
 }
 
-nav {
-	font-family: 'Roboto Condensed', sans-serif;
-	z-index: $topLevel;
-	background: $black;
-	position: fixed;
-	height: 100%;
-	width: 30px;
-	right: 0px;
-	top: 0px;
-
-	&.hovered {
-		.name-slider {
-
-			right: 30px !important;
-			opacity: 1 !important;
-		}
-	}
-
-	ul {
-		background: $black;
-		position: relative;
-		width: 100%;
-		display: block;
-		list-style: none;
-		padding: 0px;
-		margin: 0px;
-		color: #fff;
-		font-weight: 300;
-		font-size: 10px;
-		text-align: center;
-	}
-
-	li {
-		cursor: pointer;
-		position: relative;
-		line-height: 28px;
-		height: 28px;
-		width: 100%;
-
-		&.info {
-
-			.text {
-				border-radius: 100%;
-				line-height: 25px;
-				font-weight: bold;
-				background: #fff;
-				margin-left: 5px;
-				color: #000;
-				width: 23px;
-				height: 23px;
-				display: block;
-				margin-top: 4px;
-			}
-		}
-
-		&.claim-me {
-
-			.text, .name-letter {
-				font-family: 'Times', sans-serif;
-				font-size: 18px;
-				color: greenyellow;
-			}
-		}
-
-		&:hover {
-			.name {
-				opacity: 1;
-			}
-		}
-
-		.name {
-
-			// @include transition( opacity, 300ms );
-			// text-transform: uppercase;
-			pointer-events: none;
-			margin-right: -30px;
-			position: absolute;
-			line-height: 37px;
-			font-weight: bold;
-			background: #fff;
-			z-index: 2;
-			opacity: 0;
-			width: 30px;
-			height: 37px;
-			color: $black;
-			right: 30px;
-			top: -4px;
-
-			.name-letter {
-				border-left: 1px solid #eee;
-				height: 100%;
-				float: right;
-				width: 30px;
-			}
-		}
-	}
-
-	.name-slider {
-
-		@include transition( right, 300ms );
-
-		text-transform: uppercase;
-		pointer-events: none;
-		position: absolute;
-		text-align: center;
-		line-height: 37px;
-		line-height: 37px;
-		font-weight: bold;
-		background: #fff;
-		font-size: 10px;
-		color: $black;
-		width: 120px;
-		height: 37px;
-		right: -90px;
-		opacity: 1;
-		top: -4px;
-	}
-}
-
-section {
-
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	top: 0px;
-	left: 0px;
-
-	&.active {
-	}
-
-	&.ready {
-	}
-
-}
-
 .tiles {
-	text-align: center;
-	padding: 10px;
 	@include transform( translate3d(0px, 0px, 0px) );
-	background: #f7f7f7;
 	pointer-events: none;
+	text-align: center;
+	background: #f7f7f7;
+	padding: 10px;
 	// -webkit-perspective: 400px;
 
 	.tile {
 		@include transform( translate3d(0px, 0px, 0px) );
 		@include transition( all, 300ms );
-		cursor: pointer;
-		text-align: center;
-		width: 220px;
-		height: 300px;
-		border-radius: 4px;
-		margin: 10px;
+		background-size: contain;
 		display: inline-block;
-		background: #fff;
+		text-align: center;
+		border-radius: 4px;
+		cursor: pointer;
+		height: 300px;
+		width: 220px;
+		margin: 10px;
 		border: 0px;
 		color: #fff;
 
@@ -304,150 +196,27 @@ section {
 			@include transform( translate3d(0px, -10px, 0px) );
 			box-shadow: 0px 10px 15px 0px rgba(0, 0, 0, 0.15);
 		}
-
-		&.c {
-
-			.character {
-				font-size: 131px;
-			}
-
-			font-family: 'Comfortaa', cursive;
-			background: url('../img/c.jpg');
-			background-position: 50% 20%;
-			background-size: auto 720px;
-		}
-
-		&.e {
-
-			.character {
-				font-size: 138px;
-			}
-			
-			font-family: "effra";
-			background: url("../img/e.jpg");
-			background-position: 50% 50%;
-			background-size: auto 100%;
-		}
-
-		&.m {
-
-			.character {
-				font-weight: 900;
-			}
-
-			font-family: "mostra-nuova";
-			background-position: 80% 120%;
-			background-image: url("../img/m.jpg");
-			background-size: 548px 200px;
-		
-		}
-
-		&.o {
-
-			.character {
-				font-weight: 900;
-			}
-
-			font-family: "mostra-nuova";
-			background-position: 80% 120%;
-			background-image: url("../img/o.gif");
-			background-size: 548px 200px;
-		
-		}
-
-
-		&.p {
-
-			.character {
-				font-weight: 900;
-			}
-
-			font-family: "mostra-nuova";
-			background-position: 80% 120%;
-			background-image: url("../img/p.gif");
-			background-size: 548px 200px;
-		
-		}
-
-	}
-
-	.character {
-		-webkit-font-smoothing: antialiased;
-		font-weight: bold;
-		font-size: 140px;
-		margin-top: 45px;
 	}
 
 	.prompt {
+		font-family: 'Roboto Condensed', sans-serif;
+		text-shadow: -1px -1px 0px rgba(0,0,0,0.15);
+		-webkit-font-smoothing: antialiased;
+		font-weight: bold;
+		letter-spacing: 2px;
 		font-size: 12px;
+		position: absolute;
+		bottom: 20px;
+		width: 100%;
 	}
 
-	.claim {
-		font-family: "mostra-nuova";
-		border: 1px solid #e4e4e4;
-		color: $black;
-
-		div {
-			@include transition( color, 300ms );
-		}
-
-		.prompt {
-			letter-spacing: 1px;
-			color: #cccccc;
-		}
-
-		&:hover {
-			box-shadow: none;
-			@include transform( translate3d(0px, 0px, 0px) );
-
-			.character, .prompt {
-				color: #ff0000;
-			}
-		}
-	}
 
 	&.active {
 		z-index: 1001;
 		opacity: 1;
 		overflow: auto;
 		pointer-events: auto;
-
-		// .tile {
-		// 	@include transform( translate3d( 0, 0, 0 ) !important );
-		// 	opacity: 1 !important;
-		// }	
 	}
-
-	&.ready {
-
-		.tile {
-
-		}
-	}
-}
-
-.panes {
-	width: 100%;
-	height: 100%;
-}
-
-// .tile {
-// 	@include transition( all, 400ms, linear );
-// 	opacity: 0;
-// 	background: #f5f5f5;
-// 	border: 3px solid #ddd;
-// }
-
-.transitioning {
-
-	.wrapper {
-		@include transition( all, 500ms, ease-in-out );
-	}
-}
-
-.wrapper {
-
-	overflow: hidden;
 }
 
 .letter {
@@ -465,193 +234,8 @@ section {
 
 	background-position: 50% 50%;
 
-	.showcase {
-		text-align: center;
-		width: 600px;
-		margin: auto;
-
-		.example, h1, h2 {
-			-webkit-font-smoothing: antialiased;
-		}
-
-		.example {
-			position: relative;
-			text-align: center;
-			font-weight: 900;
-			font-size: 240px;
-			margin: auto;
-			color: #fff;
-		}
-
-		h1, h2, h3 {
-			padding: 0px;
-			margin: 0px;
-		}
-
-		h2 {
-			font-family: "mostra-nuova";
-			line-height: 26px;
-			font-size: 30px;
-		}
-
-		h3 {
-			font-family: 'Roboto Condensed', sans-serif;
-			text-transform: uppercase;
-			letter-spacing: 2px;
-			font-weight: 400;
-			font-size: 12px;
-			color: #fff;
-			margin-top: 20px;
-
-			a {
-				color: #fff;
-			}
-		}
-
-		hr {
-			position: absolute;
-			background: #fff;
-			display: block;
-			width: 100%;
-			height: 0px;
-			color: #fff;
-			padding: 0;
-			margin: 0;
-			margin-top: -30px;
-			border: 0px;
-			background: none;
-		}
-	}
-
-	&.a {
-		background-image: url('../img/stripe-1.png');
-		background-size: 200px 400px;
-	}
-
-	&.b {
-		background-image: url('../img/stripe-2.png');
-		background-size: 200px 400px;
-	}
-
-	&.c {
-		font-family: 'Comfortaa', cursive;
-
-		background-color: #ea9d73;
-		background-image: url('../img/c.jpg');
-		background-size: 320px 1440px;
-		background-repeat: repeat-x;
-
-		h2 {
-			color: #f2d795;
-		}
-	}
-
-	&.d {
-	}
-
-	&.e {
-		font-family: "effra";
-
-		
-		background-image: url('../img/e.jpg');
-		background-origin: content-box;
-		background-size: 760px 380px;
-		
-
-		h2 {
-			color: #9396a0;
-		}
-	}
-
-	&.m {
-		font-family: "mostra-nuova";
-		background-position: 0% 0%;
-		background-image: url('../img/m.jpg');
-		background-origin: content-box;
-		background-size: 548px 200px;
-		
-		h2 {
-			color: #d63544;
-		}
-		// -webkit-animation-name: slide-right;
-		// -webkit-animation-iteration-count: infinite;
-		// -webkit-animation-timing-function: linear;
-		// -webkit-animation-duration: 50000ms;
-	}
-
-	&.o {
-		font-family: "mostra-nuova";
-		background-position: 0% 0%;
-		background-image: url('../img/o.gif');
-		background-origin: content-box;
-		background-size: 548px 200px;
-		
-		h2 {
-			color: #d63544;
-		}
-	}
-
-	&.p {
-		font-family: "mostra-nuova";
-		background-position: 0% 0%;
-		background-image: url('../img/p.png');
-		background-origin: content-box;
-		background-size: 225px 449px;
-		
-		h2 {
-			color: #d63544;
-		}
-	}
-
 	&.next {
 		@include transform( translateY( 100% ) ); 
-	}
-
-	.link {
-		font-family: 'Roboto Condensed', sans-serif;
-		border-radius: 3px;
-		position: absolute;
-		overflow: hidden;
-		background: #fff;
-		width: 300px;
-		height: 60px;
-		bottom: 20px;
-		right: 50px;
-
-		div {
-			float: left;
-		}
-
-		.type {
-			background: $black;
-			width: 86px;
-			height: 100%;
-
-			svg {
-				margin-left: 23px;
-				margin-top: 10px;
-				height: 40px;
-				width: 40px;
-			}
-		}
-
-		.location {
-			padding-left: 20px;
-			padding-top: 13px;
-			width: 212px;
-			height: 100%;
-
-			.name {
-				font-size: 14px;
-				width: 100%;
-			}
-
-			.source {
-				letter-spacing: 1px;
-				font-size: 11px;
-				color: #A8E64E;
-			}
-		}
 	}
 
 	.background-artist {
@@ -668,15 +252,6 @@ section {
 
 		a {
 			color: #fff;
-		}
-	}
-}
-
-body {
-	&.overlay-active {
-
-		.claiming-tile, .claim-overlay {
-			display: block;
 		}
 	}
 }
@@ -806,20 +381,42 @@ body {
 	}
 }
 
-@-webkit-keyframes slide-right {
-  0% {
-    background-position: 0% 50%;
-  }
-  100% {
-    background-position: 100% 50%;
-  }
+// Transitioning state
+.transitioning {
+	.wrapper {
+		@include transition( all, 500ms, ease-in-out );
+	}
 }
 
-@-webkit-keyframes slide-up {
-  0% {
-    background-position: 50% 100%;
-  }
-  100% {
-    background-position: 50% 0%;
-  }
+
+.a {
+
+	background-color: #ea9d73;
+	background-image: url('../img/a.jpg');
+	background-size: 320px 1440px;
+	background-repeat: repeat-x;
+}
+
+.b {
+	background-image: url('../img/b.jpg');
+	background-origin: content-box;
+	background-size: 760px 380px;
+}
+
+.c {
+	background-position: 0% 0%;
+	background-image: url('../img/c.jpg');
+	background-origin: content-box;
+	background-size: 548px 200px;
+}
+
+.d {
+	background-position: 0% 0%;
+	background-image: url('../img/d.png');
+	background-origin: content-box;
+	background-size: 225px 449px;
+	
+	h2 {
+		color: #d63544;
+	}
 }

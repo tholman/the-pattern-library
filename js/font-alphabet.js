@@ -30,22 +30,13 @@ function App() {
         _this.scrollSystem = new ScrollSystem();
         _this.scrollSystem.init();
 
-        $( '.tile' ).not( ".claim" ).click( function() {
+        $( '.tile' ).click( function() {
 
-            var letter = $( '.character', event.currentTarget ).html();
+            var letter = this.className.split( ' ' )[1];
             _this.scrollSystem.scrollTo( letter, false );
-
 
             $( '.tiles' ).removeClass( 'active' );
             $( '.tile-view' ).removeClass( 'open' );
-
-        });
-
-        // Nav
-        $( 'nav li' ).click( function() {
-
-            var letter = $( '.text', event.currentTarget ).html();
-            _this.scrollSystem.scrollTo( letter, false );
         });
 
         // Closing the claim item by clicking the overlay
@@ -68,14 +59,6 @@ function App() {
            $( '.tiles' ).addClass( 'active' ); 
            $( '.tile-view' ).addClass( 'open' );
         });
-
-
-    	// Bind nav hovering.
-    	nameSlider = $( '.name-slider' );
-    	nameSliderText = $( '.the-name', nameSlider );
-    	$( 'nav li' ).on( "mouseover", this.moveNavName );
-    	$( 'nav ul' ).on( "mouseout", this.hideNavName );
-
 
         // Initial screen sizing
         this.resize();
@@ -102,36 +85,6 @@ function App() {
         $( '.showcase' ).css({
             'margin-top': ( (window.innerHeight - $( '.showcase' ).height() ) / 2 ) - 50 + 'px'
         })
-
-    }
-
-    this.moveNavName = function( event ) {
-    	
-    	$( 'nav' ).addClass( "hovered" );
-    	var $target = $( event.currentTarget );
-    	var top = $target.offset().top - 4; // Element is offset 4 above its position.
-    	nameSlider.css({
-    		top: top + 'px'
-    	})
-    	nameSliderText.html( $( '.text',  $target ).attr( 'data-name' ) );
-    }
-
-    this.hideNavName = function( event ) {
-
-        // Mouse has been moved off the screen.
-        if ( !event.relatedTarget ) {
-            $( 'nav' ).removeClass( "hovered" );
-            return;
-        }
-
-        // Mouse has moved to another list element.
-    	if ( event.relatedTarget.localName === 'li' ) {
-    		return;
-
-        // Mouse has been moved off the nav, but is in the screen.
-    	} else {
-    		$( 'nav' ).removeClass( "hovered" );
-    	}
 
     }
 }
