@@ -75,101 +75,10 @@ section {
 	height: 100%;
 }
 
-// Tile button
-.tile-view {
-	cursor: pointer;
-	position: absolute;
-	height: 23px;
-	width: 24px;
-	z-index: $topLevel; // Above all slides
-	left: 20px;
-	top: 20px;
-
-	.square {
-		@include transition( all, 200ms );
-		margin-bottom: 1px;
-		margin-right: 1px;
-		background: #fff;
-		float: left;
-		height: 7px;
-		width: 7px;
-	}
-
-	&:hover {
-	    .a {
-	     	@include transform( translate3d(-2px, -2px, 0px) );
-	    }
-
-	    .b {
-	      @include transform( translate3d(0px, -2px, 0px) );
-	    }
-
-	    .c {
-	      @include transform( translate3d(2px, -2px, 0px) );  
-	    }
-
-	    .d {
-	      @include transform( translate3d(-2px, 0px, 0px) );    
-	    }
-
-	    .f {
-	      @include transform( translate3d(2px, 0px, 0px) );    
-	    }
-
-	    .g {
-	      @include transform( translate3d(-2px, 2px, 0px) );          
-	    }
-
-	    .h {
-	      @include transform( translate3d(0px, 2px, 0px) );    
-	    }
-
-	    .i {
-	      @include transform( translate3d(2px, 2px, 0px) );    
-	    }
-	}
-
-	&.open {
-
-		.square {
-			opacity: 0;
-		}
-
-	    .a {
-	     	@include transform( translate3d(-6px, -6px, 0px) );
-	    }
-
-	    .b {
-	      @include transform( translate3d(0px, -6px, 0px) );
-	    }
-
-	    .c {
-	      @include transform( translate3d(6px, -6px, 0px) );  
-	    }
-
-	    .d {
-	      @include transform( translate3d(-6px, 0px, 0px) );    
-	    }
-
-	    .f {
-	      @include transform( translate3d(6px, 0px, 0px) );    
-	    }
-
-	    .g {
-	      @include transform( translate3d(-6px, 6px, 0px) );          
-	    }
-
-	    .h {
-	      @include transform( translate3d(0px, 6px, 0px) );    
-	    }
-
-	    .i {
-	      @include transform( translate3d(6px, 6px, 0px) );    
-	    }
-	}
-}
-
 .tiles {
+
+	display: none;
+
 	@include transform( translate3d(0px, 0px, 0px) );
 	pointer-events: none;
 	text-align: center;
@@ -223,10 +132,9 @@ section {
 
 	@include transform( translateZ(0px) );
 
-	background: #333;
-
+	font-family: "mostra-nuova";
 	position: absolute;
- 	padding-right: 30px;
+	background: #333;
 	top: 0px;
 	left: 0px;
 	width: 100%;
@@ -234,25 +142,29 @@ section {
 
 	background-position: 50% 50%;
 
-	&.next {
-		@include transform( translateY( 100% ) ); 
+	padding-left: 30px;
+	padding-top: 30px;
+
+
+	h1, h2, a {
+		text-transform: uppercase;
+		text-decoration: none;
+		padding: 0px;
+		color: #fff;
+		margin: 0px;
 	}
 
-	.background-artist {
-		font-family: 'Roboto Condensed', sans-serif;
-		padding-right: 30px;
-		position: absolute;
-		text-align: center;
-		width: 100%;
-		bottom: 40px;
-		font-weight: 400;
-		font-size: 12px;
-		letter-spacing: 2px;
-		color: #fff;
+	h1 {
+		-webkit-font-smoothing: antialiased;
+		font-size: 30px;
+		font-weight: 800;
+	}
 
-		a {
-			color: #fff;
-		}
+	h2 {
+		letter-spacing: 1px;
+		font-weight: 200;
+		font-size: 15px;
+		margin-top: 5px;
 	}
 }
 

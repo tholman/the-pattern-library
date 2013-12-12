@@ -39,126 +39,8 @@ section {
   width: 100%;
   height: 100%; }
 
-.tile-view {
-  cursor: pointer;
-  position: absolute;
-  height: 23px;
-  width: 24px;
-  z-index: 1000;
-  left: 20px;
-  top: 20px; }
-  .tile-view .square {
-    -webkit-transition: all 200ms ease-in-out;
-    -moz-transition: all 200ms ease-in-out;
-    -ms-transition: all 200ms ease-in-out;
-    -o-transition: all 200ms ease-in-out;
-    transition: all 200ms ease-in-out;
-    margin-bottom: 1px;
-    margin-right: 1px;
-    background: #fff;
-    float: left;
-    height: 7px;
-    width: 7px; }
-  .tile-view:hover .a {
-    -webkit-transform: translate3d(-2px, -2px, 0px);
-    -moz-transform: translate3d(-2px, -2px, 0px);
-    -ms-transform: translate3d(-2px, -2px, 0px);
-    -o-transform: translate3d(-2px, -2px, 0px);
-    transform: translate3d(-2px, -2px, 0px); }
-  .tile-view:hover .b {
-    -webkit-transform: translate3d(0px, -2px, 0px);
-    -moz-transform: translate3d(0px, -2px, 0px);
-    -ms-transform: translate3d(0px, -2px, 0px);
-    -o-transform: translate3d(0px, -2px, 0px);
-    transform: translate3d(0px, -2px, 0px); }
-  .tile-view:hover .c {
-    -webkit-transform: translate3d(2px, -2px, 0px);
-    -moz-transform: translate3d(2px, -2px, 0px);
-    -ms-transform: translate3d(2px, -2px, 0px);
-    -o-transform: translate3d(2px, -2px, 0px);
-    transform: translate3d(2px, -2px, 0px); }
-  .tile-view:hover .d {
-    -webkit-transform: translate3d(-2px, 0px, 0px);
-    -moz-transform: translate3d(-2px, 0px, 0px);
-    -ms-transform: translate3d(-2px, 0px, 0px);
-    -o-transform: translate3d(-2px, 0px, 0px);
-    transform: translate3d(-2px, 0px, 0px); }
-  .tile-view:hover .f {
-    -webkit-transform: translate3d(2px, 0px, 0px);
-    -moz-transform: translate3d(2px, 0px, 0px);
-    -ms-transform: translate3d(2px, 0px, 0px);
-    -o-transform: translate3d(2px, 0px, 0px);
-    transform: translate3d(2px, 0px, 0px); }
-  .tile-view:hover .g {
-    -webkit-transform: translate3d(-2px, 2px, 0px);
-    -moz-transform: translate3d(-2px, 2px, 0px);
-    -ms-transform: translate3d(-2px, 2px, 0px);
-    -o-transform: translate3d(-2px, 2px, 0px);
-    transform: translate3d(-2px, 2px, 0px); }
-  .tile-view:hover .h {
-    -webkit-transform: translate3d(0px, 2px, 0px);
-    -moz-transform: translate3d(0px, 2px, 0px);
-    -ms-transform: translate3d(0px, 2px, 0px);
-    -o-transform: translate3d(0px, 2px, 0px);
-    transform: translate3d(0px, 2px, 0px); }
-  .tile-view:hover .i {
-    -webkit-transform: translate3d(2px, 2px, 0px);
-    -moz-transform: translate3d(2px, 2px, 0px);
-    -ms-transform: translate3d(2px, 2px, 0px);
-    -o-transform: translate3d(2px, 2px, 0px);
-    transform: translate3d(2px, 2px, 0px); }
-  .tile-view.open .square {
-    opacity: 0; }
-  .tile-view.open .a {
-    -webkit-transform: translate3d(-6px, -6px, 0px);
-    -moz-transform: translate3d(-6px, -6px, 0px);
-    -ms-transform: translate3d(-6px, -6px, 0px);
-    -o-transform: translate3d(-6px, -6px, 0px);
-    transform: translate3d(-6px, -6px, 0px); }
-  .tile-view.open .b {
-    -webkit-transform: translate3d(0px, -6px, 0px);
-    -moz-transform: translate3d(0px, -6px, 0px);
-    -ms-transform: translate3d(0px, -6px, 0px);
-    -o-transform: translate3d(0px, -6px, 0px);
-    transform: translate3d(0px, -6px, 0px); }
-  .tile-view.open .c {
-    -webkit-transform: translate3d(6px, -6px, 0px);
-    -moz-transform: translate3d(6px, -6px, 0px);
-    -ms-transform: translate3d(6px, -6px, 0px);
-    -o-transform: translate3d(6px, -6px, 0px);
-    transform: translate3d(6px, -6px, 0px); }
-  .tile-view.open .d {
-    -webkit-transform: translate3d(-6px, 0px, 0px);
-    -moz-transform: translate3d(-6px, 0px, 0px);
-    -ms-transform: translate3d(-6px, 0px, 0px);
-    -o-transform: translate3d(-6px, 0px, 0px);
-    transform: translate3d(-6px, 0px, 0px); }
-  .tile-view.open .f {
-    -webkit-transform: translate3d(6px, 0px, 0px);
-    -moz-transform: translate3d(6px, 0px, 0px);
-    -ms-transform: translate3d(6px, 0px, 0px);
-    -o-transform: translate3d(6px, 0px, 0px);
-    transform: translate3d(6px, 0px, 0px); }
-  .tile-view.open .g {
-    -webkit-transform: translate3d(-6px, 6px, 0px);
-    -moz-transform: translate3d(-6px, 6px, 0px);
-    -ms-transform: translate3d(-6px, 6px, 0px);
-    -o-transform: translate3d(-6px, 6px, 0px);
-    transform: translate3d(-6px, 6px, 0px); }
-  .tile-view.open .h {
-    -webkit-transform: translate3d(0px, 6px, 0px);
-    -moz-transform: translate3d(0px, 6px, 0px);
-    -ms-transform: translate3d(0px, 6px, 0px);
-    -o-transform: translate3d(0px, 6px, 0px);
-    transform: translate3d(0px, 6px, 0px); }
-  .tile-view.open .i {
-    -webkit-transform: translate3d(6px, 6px, 0px);
-    -moz-transform: translate3d(6px, 6px, 0px);
-    -ms-transform: translate3d(6px, 6px, 0px);
-    -o-transform: translate3d(6px, 6px, 0px);
-    transform: translate3d(6px, 6px, 0px); }
-
 .tiles {
+  display: none;
   -webkit-transform: translate3d(0px, 0px, 0px);
   -moz-transform: translate3d(0px, 0px, 0px);
   -ms-transform: translate3d(0px, 0px, 0px);
@@ -223,33 +105,31 @@ section {
   -ms-transform: translateZ(0px);
   -o-transform: translateZ(0px);
   transform: translateZ(0px);
-  background: #333;
+  font-family: "mostra-nuova";
   position: absolute;
-  padding-right: 30px;
+  background: #333;
   top: 0px;
   left: 0px;
   width: 100%;
   height: 100%;
-  background-position: 50% 50%; }
-  .letter.next {
-    -webkit-transform: translateY(100%);
-    -moz-transform: translateY(100%);
-    -ms-transform: translateY(100%);
-    -o-transform: translateY(100%);
-    transform: translateY(100%); }
-  .letter .background-artist {
-    font-family: 'Roboto Condensed', sans-serif;
-    padding-right: 30px;
-    position: absolute;
-    text-align: center;
-    width: 100%;
-    bottom: 40px;
-    font-weight: 400;
-    font-size: 12px;
-    letter-spacing: 2px;
-    color: #fff; }
-    .letter .background-artist a {
-      color: #fff; }
+  background-position: 50% 50%;
+  padding-left: 30px;
+  padding-top: 30px; }
+  .letter h1, .letter h2, .letter a {
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 0px;
+    color: #fff;
+    margin: 0px; }
+  .letter h1 {
+    -webkit-font-smoothing: antialiased;
+    font-size: 30px;
+    font-weight: 800; }
+  .letter h2 {
+    letter-spacing: 1px;
+    font-weight: 200;
+    font-size: 15px;
+    margin-top: 5px; }
 
 .claim-overlay {
   background: url("../img/overlay-background.png");
