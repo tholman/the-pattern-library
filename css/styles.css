@@ -37,7 +37,93 @@ section {
 
 .panes {
   width: 100%;
-  height: 100%; }
+  height: 100%;
+  z-index: 1;
+  display: none; }
+
+.loading {
+  -webkit-transition: all 1000ms ease-in-out;
+  -moz-transition: all 1000ms ease-in-out;
+  -ms-transition: all 1000ms ease-in-out;
+  -o-transition: all 1000ms ease-in-out;
+  transition: all 1000ms ease-in-out;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  left: 0px;
+  top: 0px;
+  z-index: 10000; }
+  .loading.loaded {
+    -webkit-transform: translateY(-100%);
+    -moz-transform: translateY(-100%);
+    -ms-transform: translateY(-100%);
+    -o-transform: translateY(-100%);
+    transform: translateY(-100%); }
+  .loading table {
+    font-family: "mostra-nuova";
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    font-weight: 300;
+    color: #b2b2b2; }
+    .loading table .top {
+      background: #fff;
+      border: 0px;
+      height: 40%; }
+      .loading table .top .first, .loading table .top .last {
+        width: 50%; }
+      .loading table .top .middle {
+        vertical-align: bottom;
+        padding-bottom: 10px;
+        letter-spacing: 1px;
+        font-size: 20px; }
+    .loading table .center {
+      height: 63px; }
+      .loading table .center .first, .loading table .center .last {
+        background: #fff; }
+      .loading table .center img {
+        vertical-align: middle; }
+      .loading table .center .mask {
+        background: url("../img/title-mask.png");
+        width: 680px;
+        height: 63px; }
+    .loading table .bottom {
+      background: #fff;
+      height: 60%; }
+      .loading table .bottom .middle {
+        vertical-align: top; }
+      .loading table .bottom .subtitle {
+        font-family: 'Roboto Condensed', sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        padding-top: 20px;
+        font-weight: 300;
+        font-size: 11px; }
+
+nav {
+  position: fixed;
+  z-index: 100;
+  right: 20px;
+  top: 20px; }
+  nav ul {
+    list-style: none;
+    padding: 0px;
+    margin: 0; }
+  nav li {
+    margin-bottom: 10px;
+    height: 40px; }
+  nav circle, nav path {
+    -webkit-transition: fill 500ms linear;
+    -moz-transition: fill 500ms linear;
+    -ms-transition: fill 500ms linear;
+    -o-transition: fill 500ms linear;
+    transition: fill 500ms linear; }
+  nav svg {
+    cursor: pointer; }
+    nav svg:hover circle {
+      fill: #000; }
+    nav svg:hover path {
+      fill: #fff; }
 
 .tiles {
   display: none;

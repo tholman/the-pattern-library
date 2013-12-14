@@ -7,9 +7,8 @@
         <link href='./css/styles.css' rel='stylesheet'>
 
         <!-- JS -->
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script src="./js/libs/jquery.min.js"></script>
         <script src='./js/libs/scrollSystem.js'></script>
-        <script src='js/font-alphabet.js'></script>
 
         <!-- Fonts! -->
         <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700,300' rel='stylesheet' type='text/css'>
@@ -19,6 +18,127 @@
 
     </head>
     <body>
+
+        <div class="loading">
+
+            <table align="center" cellspacing="0" cellpadding="0">
+              <tbody>
+                
+                <tr class="top">
+                    <td class="first"></td>
+                    <td class="middle">
+                        <div class="title">
+                            THE AMAZING
+                        </div>
+                    </td>
+                    <td class="last"></td>
+                </tr>
+
+                <tr class="center">
+                    <td class="first"></td>
+                    <td>
+                        <div class="mask">
+                        </div>
+                        <!-- <img src="./img/title-mask.png"> -->
+                    </td>
+                    <td class="last"></td>
+                </tr>
+                    <tr class="bottom">
+                        <td></td>
+                        <td class="middle">
+                            <div class="subtitle">
+                                a project by tim holman and claudio guglieri
+                            </div>
+                        </td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <nav>
+
+            <ul>
+                <li class="up">
+                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px" height="40px" viewBox="0 0 40 40" enable-background="new 0 0 40 40" xml:space="preserve">
+                        <g enable-background="new">
+                            <g>
+                                <g>
+                                    <circle fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" cx="19.994" cy="20.001" r="20.004"/>
+                                </g>
+                            </g>
+                        </g>
+                        <g enable-background="new">
+                            <g>
+                                <g>
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M25.703,18.274l-4.902-4.884c-0.026-0.034-0.051-0.07-0.083-0.101
+                                        c-0.253-0.252-0.605-0.34-0.93-0.269c-0.048,0.009-0.093,0.025-0.138,0.041c-0.009,0.003-0.018,0.005-0.027,0.008
+                                        c-0.163,0.062-0.303,0.167-0.412,0.3l-4.916,4.898c-0.394,0.393-0.394,1.029,0,1.422c0.394,0.393,1.049,0.393,1.443,0
+                                        l3.276-3.249v10.56c0,0.549,0.432,0.993,0.983,0.993s0.983-0.445,0.983-0.993V16.41l3.297,3.287c0.394,0.393,1.032,0.393,1.426,0
+                                        C26.098,19.303,26.097,18.667,25.703,18.274z"/>
+                                </g>
+                            </g>
+                        </g>
+                    </svg>
+                </li>
+
+                <li class="random">
+                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px" height="40px" viewBox="0 0 40 40" enable-background="new 0 0 40 40" xml:space="preserve">
+                        <g enable-background="new">
+                            <g>
+                                <g>
+                                    <circle fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" cx="19.994" cy="20.001" r="20.004"/>
+                                </g>
+                            </g>
+                        </g>
+                        <g enable-background="new">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12.011,20c0-0.002,0-0.003,0-0.005c0-4.421,3.578-8.005,7.991-8.005
+                                c2.683,0,5.051,1.329,6.5,3.361l1.26-1.644c-1.834-2.254-4.627-3.696-7.76-3.696c-5.519,0-9.994,4.471-10.001,9.989H8.013
+                                l3.018,4.013L13.987,20H12.011z M32,20l-2.969-3.985L26,20h1.992c-0.003,4.419-3.579,8.001-7.99,8.001
+                                c-2.716,0-5.111-1.36-6.555-3.435l-1.284,1.644c1.832,2.314,4.66,3.803,7.84,3.803c5.524,0,10.001-4.478,10.001-10.001
+                                c0-0.004-0.001-0.008-0.001-0.012H32z"/>
+                        </g>
+                    </svg>
+                </li>
+
+                <li class="down">
+                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px" height="40px" viewBox="0 0 40 40" enable-background="new 0 0 40 40" xml:space="preserve">
+                        <g enable-background="new">
+                            <circle fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" cx="19.994" cy="20.001" r="20.004"/>
+                        </g>
+                        <g enable-background="new">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M25.705,21.311c-0.394-0.393-1.049-0.393-1.443,0l-3.276,3.249v-10.56
+                                c0-0.549-0.432-0.993-0.983-0.993c-0.551,0-0.983,0.445-0.983,0.993V24.59l-3.297-3.287c-0.394-0.393-1.032-0.393-1.426,0
+                                c-0.394,0.393-0.393,1.029,0.001,1.422l4.902,4.884c0.026,0.034,0.051,0.07,0.083,0.101c0.253,0.252,0.605,0.34,0.93,0.269
+                                c0.048-0.009,0.093-0.025,0.138-0.041c0.009-0.003,0.018-0.005,0.027-0.008c0.163-0.062,0.303-0.167,0.412-0.3l4.916-4.898
+                                C26.099,22.34,26.099,21.703,25.705,21.311z"/>
+                        </g>
+                    </svg>
+                </li>
+
+                <li class="grid">
+                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px" height="40px" viewBox="0 0 40 40" enable-background="new 0 0 40 40" xml:space="preserve">
+                        <g enable-background="new">
+                            <g>
+                                <g>
+                                    <circle fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" cx="19.994" cy="20.001" r="20.004"/>
+                                </g>
+                            </g>
+                        </g>
+                        <g enable-background="new">
+                            <g>
+                                <g>
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M13,17h4v-4h-4V17z M13,22h4v-4h-4V22z M13,27h4v-4h-4V27z M18,17h4v-4h-4V17z
+                                         M18,22h4v-4h-4V22z M18,27h4v-4h-4V27z M23,13v4h4v-4H23z M23,22h4v-4h-4V22z M23,27h4v-4h-4V27z"/>
+                                </g>
+                            </g>
+                        </g>
+                    </svg>
+                </li>
+
+            </ul>
+
+        </nav>
 
         <!-- Panes -->
         <div class="panes">
@@ -69,7 +189,7 @@
 
         </div>
 
-        <section class="tiles">
+<!--         <section class="tiles">
 
             <div class="tile a">
                 <div class="prompt"> by Claudio </div>
@@ -86,8 +206,7 @@
             <div class="tile d">
                 <div class="prompt"> by Claudio </div>
             </div>
-
-        </section>
+        </section> -->
 
         <div class="claim-overlay">
         </div>
@@ -129,6 +248,7 @@
             </div>
         </div> 
 
+        <script src='js/font-alphabet.js'></script>
         <script>
             var app = new App();
             app.init();

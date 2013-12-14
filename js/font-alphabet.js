@@ -27,41 +27,53 @@ function App() {
 
     this.init = function() {
 
+        var array = $( '.panes' ).children().get().sort( function() {
+            return 0.5 - Math.random();
+        });
+        $( '.panes' ).append( array );
+
         _this.scrollSystem = new ScrollSystem();
         _this.scrollSystem.init();
 
-        $( '.tile' ).click( function() {
+        $( '.panes' ).show();
 
-            var letter = this.className.split( ' ' )[1];
-            _this.scrollSystem.scrollTo( letter, false );
+        // $( '.tile' ).click( function() {
 
-            $( '.tiles' ).removeClass( 'active' );
-            $( '.tile-view' ).removeClass( 'open' );
-        });
+        //     var letter = this.className.split( ' ' )[1];
+        //     _this.scrollSystem.scrollTo( letter, false );
+
+        //     $( '.tiles' ).removeClass( 'active' );
+        //     $( '.tile-view' ).removeClass( 'open' );
+        // });
 
         // Closing the claim item by clicking the overlay
-        $( '.claim-overlay' ).click( function( event) {
+        // $( '.claim-overlay' ).click( function( event) {
 
-            $( document.body ).removeClass( 'overlay-active' );
-        });
+        //     $( document.body ).removeClass( 'overlay-active' );
+        // });
 
         // Clicking a claim item!
-        $( '.claim' ).click( function( event ) {
+        // $( '.claim' ).click( function( event ) {
 
-            var letter = $( '.character', event.currentTarget ).html();
-            $( '.background-letter' ).html( letter );
+        //     var letter = $( '.character', event.currentTarget ).html();
+        //     $( '.background-letter' ).html( letter );
 
-            $( document.body ).addClass( 'overlay-active' );
-        })
+        //     $( document.body ).addClass( 'overlay-active' );
+        // })
 
-        $( '.tile-view' ).click( function() {
+        // $( '.tile-view' ).click( function() {
 
-           $( '.tiles' ).addClass( 'active' ); 
-           $( '.tile-view' ).addClass( 'open' );
-        });
+        //    $( '.tiles' ).addClass( 'active' ); 
+        //    $( '.tile-view' ).addClass( 'open' );
+        // });
 
         // Initial screen sizing
         this.resize();
+
+        // Make this happen onload?
+        setTimeout( function() {
+            $( '.loading' ).addClass( 'loaded' );
+        }, 1500 );
 
         // Resize event!
         window.onresize = function() {
@@ -71,15 +83,6 @@ function App() {
     }
 
     this.resize = function() {
-
-        // Nav positioning
-        pageHeight = window.innerHeight;
-        nav = $( 'nav ul' );
-        var navMarginTop = ( pageHeight - nav.height() ) / 2
-        nav.css({ 
-            'padding-top': navMarginTop,
-            'padding-bottom': navMarginTop
-        });
 
         // Letter positioning.
         $( '.showcase' ).css({

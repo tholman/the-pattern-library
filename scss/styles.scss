@@ -73,6 +73,126 @@ section {
 .panes {
 	width: 100%;
 	height: 100%;
+	z-index: 1;
+
+	display: none;
+}
+
+.loading {
+
+	@include transition( all, 1000ms );
+	position: fixed;
+	height: 100%;
+	width: 100%;
+	left: 0px;
+	top: 0px;
+
+	z-index: 10000;
+
+	&.loaded {
+		@include transform( translateY( -100% ) );
+	}
+
+	table {
+		font-family: "mostra-nuova";
+		height: 100%;
+		width: 100%;
+
+		text-align: center;
+		font-weight: 300;
+		color: #b2b2b2;
+
+		.top {
+			background: #fff;
+			border: 0px;
+			height: 40%;
+
+			.first, .last {
+				width: 50%;
+			}
+
+			.middle {
+				vertical-align: bottom;
+				padding-bottom: 10px;
+				letter-spacing: 1px;
+				font-size: 20px;
+			}
+		}
+
+		.center {
+			height: 63px;
+
+			.first, .last {
+				background: #fff;
+			}
+
+			img {
+				vertical-align: middle;
+			}
+
+			.mask {
+				background: url( '../img/title-mask.png' );
+				width: 680px;
+				height: 63px;
+			}
+		}
+
+		.bottom {
+			background: #fff;
+			height: 60%;
+
+			.middle {
+				vertical-align: top;
+			}
+
+			.subtitle {
+				font-family: 'Roboto Condensed', sans-serif;
+				text-transform: uppercase;
+				letter-spacing: 2px;
+				padding-top: 20px;
+				font-weight: 300;
+				font-size: 11px;
+			}
+		}
+	}
+}
+
+nav {
+	position: fixed;
+	z-index: 100;
+	right: 20px;
+	top: 20px;
+
+	ul {
+		list-style: none;
+		padding: 0px;
+		margin: 0;
+	}
+
+	li {
+		margin-bottom: 10px;
+		height: 40px;
+	}
+
+	circle, path {
+		@include transition( fill, 500ms, linear );
+	}
+
+	svg {
+		cursor: pointer;
+
+		&:hover {
+
+			circle {
+				fill: #000;
+			}
+
+			path {
+				fill: #fff;
+			}
+		}
+	}
+
 }
 
 .tiles {

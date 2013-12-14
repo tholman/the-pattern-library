@@ -45,6 +45,14 @@ function ScrollSystem() {
             
             _this.parseScroll( event, delta );
         });
+
+        $( 'nav .up' ).click( function() {
+            _this.scrollUp();
+        })
+
+        $( 'nav .down' ).click( function() {
+            _this.scrollDown();
+        })
     }
 
     this.parseScroll = function( event, delta ) {
@@ -130,6 +138,32 @@ function ScrollSystem() {
         this.updateScroll();
     }
 
+    var getScrollLevel = function() {
+        return Math.floor( scrollPosition / windowHeight );
+    }
+
+    this.scrollUp = function() {
+
+        var scrollLevel = getScrollLevel();
+        if ( (scrollLevel - 1) >= 0 ) {
+
+            _this.scrollTo( scrollLevel - 1 );
+        }
+    }
+
+    this.scrollDown = function() {
+
+        var scrollLevel = getScrollLevel();
+        if ( (scrollLevel + 1) < elements.length ) {
+
+            _this.scrollTo( scrollLevel + 1 );
+        }
+    }
+
+    this.scrollRandom = function() {
+        
+    }
+
     // Scroll to specific letter... 
     // index: letter to scroll to
     // transition: snap, or transition to the letter
@@ -138,7 +172,11 @@ function ScrollSystem() {
         $( document.body ).addClass( 'transitioning' );
 
         // Scrolling to X
-        var scrollToItem = indexMap[ index.toLowerCase() ];
+        var scrollToItem = index;
+        if ( typeof( index ) == 'string' ) {
+            scrollToItem = indexMap[ index.toLowerCase() ];
+        }
+
 
         // Scrolling from Y
         var currentItem = Math.floor( scrollPosition / windowHeight );
@@ -162,12 +200,11 @@ function ScrollSystem() {
 
         clearTimeout( animationTimeout );
 
-        //500 is the total animation time
+        // 500 is the total animation time
         animationTimeout = setTimeout( _this.removeDelays, (scrollDifference * scrollDelayDelta + 500) )
 
         scrollPosition = scrollToItem * windowHeight;
         this.updateScroll();
-
     }
 
     var addDelay = function( element, delay ) {
