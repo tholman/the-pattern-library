@@ -27,24 +27,23 @@ function App() {
 
     this.init = function() {
 
-        var array = $( '.panes' ).children().get().sort( function() {
-            return 0.5 - Math.random();
-        });
-        $( '.panes' ).append( array );
+        // Randomize Pane Order
+
+        randomize();
 
         _this.scrollSystem = new ScrollSystem();
         _this.scrollSystem.init();
 
         $( '.panes' ).show();
 
-        // $( '.tile' ).click( function() {
+        $( '.grid' ).click( function() {
 
-        //     var letter = this.className.split( ' ' )[1];
-        //     _this.scrollSystem.scrollTo( letter, false );
+            var letter = this.className.split( ' ' )[1];
+            _this.scrollSystem.scrollTo( letter, false );
 
-        //     $( '.tiles' ).removeClass( 'active' );
-        //     $( '.tile-view' ).removeClass( 'open' );
-        // });
+            $( '.tiles' ).removeClass( 'active' );
+            $( '.tile-view' ).removeClass( 'open' );
+        });
 
         // Closing the claim item by clicking the overlay
         // $( '.claim-overlay' ).click( function( event) {
@@ -70,16 +69,42 @@ function App() {
         // Initial screen sizing
         this.resize();
 
-        // Make this happen onload?
-        setTimeout( function() {
-            $( '.loading' ).addClass( 'loaded' );
-        }, 1500 );
+        // Make this happen onload
+        $( window ).load(function() {
+            setTimeout( function() {
+                $( '.loading' ).addClass( 'loaded' );
+            }, 1000 );
+        });
+
+        $( '.trigger' ).mouseover( function() {
+
+            $( this ).parent().parent().addClass( 'active' );
+        });
+
+        $( '.trigger' ).mouseout( function() {
+            $( this ).parent().parent().removeClass( 'active' );
+        });
+        
 
         // Resize event!
         window.onresize = function() {
             app.resize();
             _this.scrollSystem.resize();
         }
+    }
+
+    // Randomize the order of the patterns.
+    var randomize = function() {
+        var array = $( '.panes' ).children().toArray();
+        var i = array.length,
+            j, temp;
+        while (--i) {
+            j = Math.floor(Math.random() * (i + 1));
+            temp = array[i];
+            array[i] = array[j];
+            array[j] = temp;
+        }
+        $( '.panes' ).append( array );
     }
 
     this.resize = function() {

@@ -113,15 +113,15 @@ nav {
     margin-bottom: 10px;
     height: 40px; }
   nav circle, nav path {
-    -webkit-transition: fill 500ms linear;
-    -moz-transition: fill 500ms linear;
-    -ms-transition: fill 500ms linear;
-    -o-transition: fill 500ms linear;
-    transition: fill 500ms linear; }
+    -webkit-transition: fill 300ms linear;
+    -moz-transition: fill 300ms linear;
+    -ms-transition: fill 300ms linear;
+    -o-transition: fill 300ms linear;
+    transition: fill 300ms linear; }
   nav svg {
     cursor: pointer; }
     nav svg:hover circle {
-      fill: #000; }
+      fill: #333; }
     nav svg:hover path {
       fill: #fff; }
 
@@ -198,10 +198,51 @@ nav {
   left: 0px;
   width: 100%;
   height: 100%;
-  background-position: 50% 50%;
-  padding-left: 30px;
-  padding-top: 30px; }
+  background-position: 50% 50%; }
+  .letter.active h1, .letter.active h2 {
+    color: #333; }
+  .letter.active .details {
+    background: #fff; }
+  .letter.active .download, .letter.active .twitter {
+    opacity: 1; }
+  .letter.active a {
+    -webkit-transition: all 300ms ease-in-out;
+    -moz-transition: all 300ms ease-in-out;
+    -ms-transition: all 300ms ease-in-out;
+    -o-transition: all 300ms ease-in-out;
+    transition: all 300ms ease-in-out;
+    color: #e37070; }
+    .letter.active a path, .letter.active a circle {
+      -webkit-transition: all 300ms ease-in-out;
+      -moz-transition: all 300ms ease-in-out;
+      -ms-transition: all 300ms ease-in-out;
+      -o-transition: all 300ms ease-in-out;
+      transition: all 300ms ease-in-out; }
+    .letter.active a:hover {
+      color: #c62727; }
+      .letter.active a:hover path {
+        fill: #c62727; }
+      .letter.active a:hover circle {
+        stroke: #c62727; }
+  .letter .details {
+    -webkit-transition: background-color 300ms linear;
+    -moz-transition: background-color 300ms linear;
+    -ms-transition: background-color 300ms linear;
+    -o-transition: background-color 300ms linear;
+    transition: background-color 300ms linear;
+    height: 100%; }
+  .letter .trigger {
+    float: left;
+    padding-left: 30px;
+    padding-top: 30px;
+    padding-right: 30px;
+    padding-bottom: 30px; }
   .letter h1, .letter h2, .letter a {
+    -webkit-transition: color 300ms linear;
+    -moz-transition: color 300ms linear;
+    -ms-transition: color 300ms linear;
+    -o-transition: color 300ms linear;
+    transition: color 300ms linear;
     text-transform: uppercase;
     text-decoration: none;
     padding: 0px;
@@ -213,9 +254,31 @@ nav {
     font-weight: 800; }
   .letter h2 {
     letter-spacing: 1px;
-    font-weight: 200;
+    font-weight: 300;
     font-size: 15px;
     margin-top: 5px; }
+  .letter .twitter {
+    -webkit-transition: opacity 300ms linear;
+    -moz-transition: opacity 300ms linear;
+    -ms-transition: opacity 300ms linear;
+    -o-transition: opacity 300ms linear;
+    transition: opacity 300ms linear;
+    opacity: 0; }
+  .letter .download {
+    -webkit-transition: opacity 300ms linear;
+    -moz-transition: opacity 300ms linear;
+    -ms-transition: opacity 300ms linear;
+    -o-transition: opacity 300ms linear;
+    transition: opacity 300ms linear;
+    opacity: 0;
+    margin-top: 40px;
+    font-weight: 800;
+    font-size: 30px; }
+    .letter .download svg {
+      margin-bottom: -7px;
+      margin-right: 3px;
+      height: 35px;
+      width: 35px; }
 
 .claim-overlay {
   background: url("../img/overlay-background.png");
@@ -336,5 +399,3 @@ nav {
   background-image: url("../img/d.png");
   background-origin: content-box;
   background-size: 225px 449px; }
-  .d h2 {
-    color: #d63544; }

@@ -13,7 +13,9 @@ function ScrollSystem() {
 
     var scrollDelayDelta = 200; //ms
 
-    var animationTimeout;
+    var animationTimeout, scrollTimeout;
+
+    this.transitioning = false;
 
     this.init = function() {
 
@@ -40,19 +42,48 @@ function ScrollSystem() {
 
         $( '.panes' ).bind( 'mousewheel DOMMouseScroll', function( event ) {
             
+            // Manage mouse deltas on different browsers/OS
             event.preventDefault();
+
+            if ( _this.transitioning === true ) {
+                return;
+            }
+
             var delta = event.originalEvent.wheelDelta || -event.originalEvent.detail;
+
+            // Activate when the user stops scrolling.
+            clearTimeout( scrollTimeout )
+            scrollTimeout = setTimeout( function() {
+                _this.finishScroll();
+            }, 500 );
+
             
             _this.parseScroll( event, delta );
         });
 
-        $( 'nav .up' ).click( function() {
-            _this.scrollUp();
-        })
+        $( document ).keydown( function( e ){
 
-        $( 'nav .down' ).click( function() {
-            _this.scrollDown();
-        })
+            if ( e.which == 38 ) { 
+               
+               _this.scrollUp();
+                return false;
+            } else if (e.which == 40) { 
+
+                _this.scrollDown();
+                return false;
+            }
+        });
+
+        $( 'nav .up' ).click( function() { _this.scrollUp(); })
+
+        $( 'nav .random' ).click( function() { _this.scrollRandom(); })
+
+        $( 'nav .down' ).click( function() { _this.scrollDown(); })
+    }
+
+    this.finishScroll = function() {
+        
+        _this.scrollTo( Math.round( scrollPosition / windowHeight ) );
     }
 
     this.parseScroll = function( event, delta ) {
@@ -161,7 +192,21 @@ function ScrollSystem() {
     }
 
     this.scrollRandom = function() {
-        
+
+        var scrollLevel = getScrollLevel();
+        var options = [];
+
+        // Create list of options.
+        for ( var i = 0; i < elements.length; i++ ) {
+            options.push( i );
+        }
+
+        // Remove the current pattern.
+        options.splice( scrollLevel, 1 );
+
+        var randomItem = options[ Math.floor( Math.random() * options.length ) ];
+        _this.scrollTo( randomItem );
+
     }
 
     // Scroll to specific letter... 
@@ -201,6 +246,7 @@ function ScrollSystem() {
         clearTimeout( animationTimeout );
 
         // 500 is the total animation time
+        _this.transitioning = true;
         animationTimeout = setTimeout( _this.removeDelays, (scrollDifference * scrollDelayDelta + 500) )
 
         scrollPosition = scrollToItem * windowHeight;
@@ -219,7 +265,7 @@ function ScrollSystem() {
 
     this.removeDelays = function() {
 
-        console.log( 'remove!' );
+        _this.transitioning = false;
 
         $( document.body ).removeClass( 'transitioning' );
 

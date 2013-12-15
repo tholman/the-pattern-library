@@ -175,7 +175,7 @@ nav {
 	}
 
 	circle, path {
-		@include transition( fill, 500ms, linear );
+		@include transition( fill, 300ms, linear );
 	}
 
 	svg {
@@ -184,7 +184,7 @@ nav {
 		&:hover {
 
 			circle {
-				fill: #000;
+				fill: #333;
 			}
 
 			path {
@@ -262,11 +262,59 @@ nav {
 
 	background-position: 50% 50%;
 
-	padding-left: 30px;
-	padding-top: 30px;
+	$activeHoverColor: #e37070;
 
+	&.active {
+
+		h1, h2 {	
+			color: #333;
+		}
+
+		.details {
+			background: #fff;
+		}
+
+		.download, .twitter {
+			opacity: 1;
+		}
+
+		a {
+			@include transition( all, 300ms );
+			color: $activeHoverColor;
+
+			path, circle {
+				@include transition( all, 300ms );
+			}
+
+			&:hover {
+				color: darken( $activeHoverColor, 20% );
+
+				path {
+					fill: darken( $activeHoverColor, 20% );
+				}
+
+				circle {
+					stroke: darken( $activeHoverColor, 20% );
+				}
+			}
+		}
+	}
+
+	.details {
+		@include transition( background-color, 300ms, linear );
+		height: 100%;
+	}
+
+	.trigger {
+		float: left;
+		padding-left: 30px;
+		padding-top: 30px;
+		padding-right: 30px;
+		padding-bottom: 30px;
+	}
 
 	h1, h2, a {
+		@include transition( color, 300ms, linear );
 		text-transform: uppercase;
 		text-decoration: none;
 		padding: 0px;
@@ -282,9 +330,30 @@ nav {
 
 	h2 {
 		letter-spacing: 1px;
-		font-weight: 200;
+		font-weight: 300;
 		font-size: 15px;
 		margin-top: 5px;
+	}
+
+	.twitter {
+		@include transition( opacity, 300ms, linear );
+		opacity: 0;
+	}
+
+	.download {
+		@include transition( opacity, 300ms, linear );
+		opacity: 0;
+
+		svg {
+			margin-bottom: -7px;
+			margin-right: 3px;
+			height: 35px;
+			width: 35px;
+		}
+
+		margin-top: 40px;
+		font-weight: 800;
+		font-size: 30px;
 	}
 }
 
@@ -447,8 +516,4 @@ nav {
 	background-image: url('../img/d.png');
 	background-origin: content-box;
 	background-size: 225px 449px;
-	
-	h2 {
-		color: #d63544;
-	}
 }
