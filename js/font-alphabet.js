@@ -23,6 +23,10 @@ function App() {
 	var nameSlider;
 	var nameSliderText;
 
+    // Tiles
+    var minWidth = 240;
+    var maxWidth = 300;
+
     this.scrollSystem;
 
     this.init = function() {
@@ -38,33 +42,19 @@ function App() {
 
         $( '.grid' ).click( function() {
 
+            // var letter = this.className.split( ' ' )[1];
+            // _this.scrollSystem.scrollTo( letter, false );
+
+            $( '.tiles' ).addClass( 'active' );
+            // $( '.tile-view' ).removeClass( 'open' );
+        });
+
+        $( '.tile' ).click( function() {
             var letter = this.className.split( ' ' )[1];
             _this.scrollSystem.scrollTo( letter, false );
 
             $( '.tiles' ).removeClass( 'active' );
-            $( '.tile-view' ).removeClass( 'open' );
-        });
-
-        // Closing the claim item by clicking the overlay
-        // $( '.claim-overlay' ).click( function( event) {
-
-        //     $( document.body ).removeClass( 'overlay-active' );
-        // });
-
-        // Clicking a claim item!
-        // $( '.claim' ).click( function( event ) {
-
-        //     var letter = $( '.character', event.currentTarget ).html();
-        //     $( '.background-letter' ).html( letter );
-
-        //     $( document.body ).addClass( 'overlay-active' );
-        // })
-
-        // $( '.tile-view' ).click( function() {
-
-        //    $( '.tiles' ).addClass( 'active' ); 
-        //    $( '.tile-view' ).addClass( 'open' );
-        // });
+        })
 
         // Initial screen sizing
         this.resize();
@@ -76,12 +66,13 @@ function App() {
             }, 1000 );
         });
 
-        $( '.trigger' ).mouseover( function() {
+        $( '.trigger' ).mouseenter( function() {
 
             $( this ).parent().parent().addClass( 'active' );
         });
 
-        $( '.trigger' ).mouseout( function() {
+        $( '.trigger' ).mouseleave( function( event ) {
+
             $( this ).parent().parent().removeClass( 'active' );
         });
         
@@ -114,5 +105,18 @@ function App() {
             'margin-top': ( (window.innerHeight - $( '.showcase' ).height() ) / 2 ) - 50 + 'px'
         })
 
+        // Tile Positioning.
+        var maxTiles = Math.floor( window.innerWidth / minWidth );
+        var overflow = window.innerWidth % minWidth;
+        var divvy = overflow / maxTiles;
+
+        $( '.main-tile' ).width( 2 * ( minWidth + divvy ) );
+        $( '.tile' ).width( minWidth + divvy );
+
+
+
     }
 }
+
+
+
