@@ -15,17 +15,27 @@ function ScrollSystem() {
 
     var animationTimeout, scrollTimeout;
 
+    var $body, $navUp, $navDown, $navRandom;
+
+    var upDisabled = true;
+    var downDisabled = false;
+    var totalItems;
+
     this.transitioning = false;
 
     this.init = function() {
 
         windowHeight = window.innerHeight;
 
+        $body = $( document.body );
+
         elements = $( '.letter' );
         elements.height( windowHeight );
 
         wrappers = $( '.wrapper' );
         wrappers.height( windowHeight );
+
+        totalItems = wrappers.length - 1;
 
         for( var i = 0; i < elements.length; i++ ) {
 
@@ -56,17 +66,19 @@ function ScrollSystem() {
             scrollTimeout = setTimeout( function() {
                 _this.finishScroll();
             }, 500 );
-
             
             _this.parseScroll( event, delta );
         });
 
         $( document ).keydown( function( e ){
 
+            // UP
             if ( e.which == 38 ) { 
                
                _this.scrollUp();
                 return false;
+
+            // DOWN
             } else if (e.which == 40) { 
 
                 _this.scrollDown();
@@ -74,11 +86,14 @@ function ScrollSystem() {
             }
         });
 
-        $( 'nav .up' ).click( function() { _this.scrollUp(); })
+        $navUp = $( 'nav .up' );
+        $navDown = $( 'nav .down' );
+        $navRandom = $( 'nav .random' );
 
-        $( 'nav .random' ).click( function() { _this.scrollRandom(); })
+        $navUp.click( function() { _this.scrollUp(); })
+        $navDown.click( function() { _this.scrollDown(); })
+        $navRandom.click( function() { _this.scrollRandom(); })
 
-        $( 'nav .down' ).click( function() { _this.scrollDown(); })
     }
 
     this.finishScroll = function() {
@@ -93,9 +108,13 @@ function ScrollSystem() {
 
         // Top scroll position
         if ( scrollPosition < 0 ) {
+
             scrollPosition = 0;
+
         } else if ( scrollPosition > ( ( wrappers.length - 1 ) * windowHeight ) ) {
+
             scrollPosition = ( ( wrappers.length - 1 ) * windowHeight );
+
         }
 
         var scrollLevel = Math.floor( scrollPosition / windowHeight );
@@ -206,7 +225,6 @@ function ScrollSystem() {
 
         var randomItem = options[ Math.floor( Math.random() * options.length ) ];
         _this.scrollTo( randomItem );
-
     }
 
     // Scroll to specific letter... 
@@ -221,7 +239,6 @@ function ScrollSystem() {
         if ( typeof( index ) == 'string' ) {
             scrollToItem = indexMap[ index.toLowerCase() ];
         }
-
 
         // Scrolling from Y
         var currentItem = Math.floor( scrollPosition / windowHeight );
@@ -241,13 +258,12 @@ function ScrollSystem() {
             }
         }
 
-        var scrollDifference = Math.abs( scrollToItem, currentItem );
-
+        var scrollDifference = Math.abs( scrollToItem - currentItem );
         clearTimeout( animationTimeout );
 
         // 500 is the total animation time
         _this.transitioning = true;
-        animationTimeout = setTimeout( _this.removeDelays, (scrollDifference * scrollDelayDelta + 500) )
+        animationTimeout = setTimeout( bind( this, _this.removeDelays ), (scrollDifference * scrollDelayDelta + 500) )
 
         scrollPosition = scrollToItem * windowHeight;
         this.updateScroll();
@@ -267,10 +283,37 @@ function ScrollSystem() {
 
         _this.transitioning = false;
 
-        $( document.body ).removeClass( 'transitioning' );
+        $body.removeClass( 'transitioning' );
 
-        $( '.wrapper' ).css({
+        wrappers.css({
             'transition-delay': '0ms'
         })
+
+        // Feels like this could have been done a bit better. :(
+        var scrollLevel = getScrollLevel();
+        if ( scrollLevel === 0 ) {
+
+            upDisabled = true;
+            $navUp.addClass( 'disabled' );
+
+            downDisabled = false;
+            $navDown.removeClass( 'disabled' );
+
+        } else if ( scrollLevel === totalItems ) {
+
+            downDisabled = true;
+            $navDown.addClass( 'disabled' );
+
+            upDisabled = false;
+            $navUp.removeClass( 'disabled' );
+
+        } else if ( downDisabled === true || upDisabled === true ){
+
+            downDisabled = false;
+            $navDown.removeClass( 'disabled' );
+
+            upDisabled = false;
+            $navUp.removeClass( 'disabled' );
+        }
     }
 }

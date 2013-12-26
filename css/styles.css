@@ -112,8 +112,16 @@ nav {
     padding: 0px;
     margin: 0; }
   nav li {
+    -webkit-transition: opacity 100ms linear;
+    -moz-transition: opacity 100ms linear;
+    -ms-transition: opacity 100ms linear;
+    -o-transition: opacity 100ms linear;
+    transition: opacity 100ms linear;
     margin-bottom: 10px;
     height: 40px; }
+    nav li.disabled {
+      opacity: 0.5;
+      pointer-events: none; }
   nav circle, nav path {
     -webkit-transition: fill 100ms linear;
     -moz-transition: fill 100ms linear;
@@ -143,7 +151,7 @@ nav {
   width: 100%;
   left: 0px;
   top: 0px;
-  z-index: -1; }
+  z-index: 1; }
   .tiles .main-tile {
     background: #fff;
     height: 560px;
@@ -397,3 +405,11 @@ nav {
 .i {
   background-image: url("../img/i.jpg");
   background-size: 447px 965px; }
+
+.j {
+  background-image: url("../img/j.jpg");
+  background-size: 320px 1140px; }
+
+.k {
+  background-image: url("../img/k.jpg");
+  background-size: 320px 1140px; }

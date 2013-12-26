@@ -1,6 +1,4 @@
 /*!
- * font-alphabet
- *
  * MIT licensed
  * Copyright (C) 2013 Tim Holman, http://tholman.com
  */
@@ -41,12 +39,7 @@ function App() {
         $( '.panes' ).show();
 
         $( '.grid' ).click( function() {
-
-            // var letter = this.className.split( ' ' )[1];
-            // _this.scrollSystem.scrollTo( letter, false );
-
             $( '.tiles' ).addClass( 'active' );
-            // $( '.tile-view' ).removeClass( 'open' );
         });
 
         $( '.tile' ).click( function() {
@@ -112,9 +105,6 @@ function App() {
 
         $( '.main-tile' ).width( 2 * ( minWidth + divvy ) );
         $( '.tile' ).width( minWidth + divvy );
-
-
-
     }
 }
 

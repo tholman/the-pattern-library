@@ -166,8 +166,15 @@ nav {
 	}
 
 	li {
+		@include transition( opacity, 100ms, linear );
 		margin-bottom: 10px;
 		height: 40px;
+
+
+		&.disabled {
+			opacity: 0.5;
+			pointer-events: none;
+		}
 	}
 
 	circle, path {
@@ -206,7 +213,7 @@ nav {
 	left: 0px;
 	top: 0px;
 
-	z-index: -1;
+	z-index: 1;
 
 	.main-tile {
 		
@@ -558,4 +565,14 @@ nav {
 .i {
 	background-image: url('../img/i.jpg');
 	background-size: 447px 965px;
+}
+
+.j {
+	background-image: url('../img/j.jpg');
+	background-size: 320px 1140px;
+}
+
+.k {
+	background-image: url('../img/k.jpg');
+	background-size: 320px 1140px;
 }
