@@ -62,6 +62,7 @@ section {
 }
 
 .wrapper {
+	@include transform( translateZ( 0px ) );
 	overflow: hidden;
 }
 
@@ -155,9 +156,10 @@ section {
 nav {
 	@include transform( translateZ( 0px ) );
 	position: fixed;
-	z-index: 100;
+	z-index: 1000;
 	right: 20px;
 	top: 20px;
+	width: 30px;
 
 	ul {
 		list-style: none;
@@ -511,68 +513,50 @@ nav {
 }
 
 
-.a {
+.letter, .tile {
+	
+	&.a {
+		background-image: url('../img/a.jpg');
+	}
 
-	background-color: #ea9d73;
-	background-image: url('../img/a.jpg');
-	background-size: 320px 1440px;
-	background-repeat: repeat-x;
-}
+	&.b {
+		background-image: url('../img/b.jpg');
+	}
 
-.b {
-	background-image: url('../img/b.jpg');
-	background-origin: content-box;
-	background-size: 760px 380px;
-}
+	&.c {
+		background-image: url('../img/c.jpg');
+	}
 
-.c {
-	background-position: 0% 0%;
-	background-image: url('../img/c.jpg');
-	background-origin: content-box;
-	background-size: 548px 200px;
-}
+	&.d {
+		background-image: url('../img/d.png');
+	}
 
-.d {
-	background-position: 0% 0%;
-	background-image: url('../img/d.png');
-	background-origin: content-box;
-	background-size: 225px 449px;
-}
+	&.e {
+		background-image: url('../img/e.png');
+	}
 
-.e {
-	background-position: 0% 0%;
-	background-image: url('../img/e.png');
-	background-size: 1190px 524px;
-}
+	&.f {
+		background-image: url('../img/f.jpg');
+	}
 
-.f {
-	background-position: 0% 0%;
-	background-image: url('../img/f.jpg');
-	background-size: 1962px 616px;
-}
+	&.g {
+		background-position: 50% 50%;
+		background-image: url('../img/g.gif');
+	}
 
-.g {
-	background-position: 50% 50%;
-	background-image: url('../img/g.gif');
-	background-size: 727px 868px;
-}
+	&.h {
+		background-image: url('../img/h.jpg');
+	}
 
-.h {
-	background-image: url('../img/h.jpg');
-	background-size: 600px 623px;
-}
+	&.i {
+		background-image: url('../img/i.jpg');
+	}
 
-.i {
-	background-image: url('../img/i.jpg');
-	background-size: 447px 965px;
-}
+	&.j {
+		background-image: url('../img/j.jpg');
+	}
 
-.j {
-	background-image: url('../img/j.jpg');
-	background-size: 320px 1140px;
-}
-
-.k {
-	background-image: url('../img/k.jpg');
-	background-size: 320px 1140px;
+	&.k {
+		background-image: url('../img/k.jpg');
+	}
 }

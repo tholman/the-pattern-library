@@ -30,6 +30,11 @@ section {
   left: 0px; }
 
 .wrapper {
+  -webkit-transform: translateZ(0px);
+  -moz-transform: translateZ(0px);
+  -ms-transform: translateZ(0px);
+  -o-transform: translateZ(0px);
+  transform: translateZ(0px);
   overflow: hidden; }
 
 .panes {
@@ -104,9 +109,10 @@ nav {
   -o-transform: translateZ(0px);
   transform: translateZ(0px);
   position: fixed;
-  z-index: 100;
+  z-index: 1000;
   right: 20px;
-  top: 20px; }
+  top: 20px;
+  width: 30px; }
   nav ul {
     list-style: none;
     padding: 0px;
@@ -360,56 +366,26 @@ nav {
   -o-transition: all 500ms ease-in-out;
   transition: all 500ms ease-in-out; }
 
-.a {
-  background-color: #ea9d73;
-  background-image: url("../img/a.jpg");
-  background-size: 320px 1440px;
-  background-repeat: repeat-x; }
-
-.b {
-  background-image: url("../img/b.jpg");
-  background-origin: content-box;
-  background-size: 760px 380px; }
-
-.c {
-  background-position: 0% 0%;
-  background-image: url("../img/c.jpg");
-  background-origin: content-box;
-  background-size: 548px 200px; }
-
-.d {
-  background-position: 0% 0%;
-  background-image: url("../img/d.png");
-  background-origin: content-box;
-  background-size: 225px 449px; }
-
-.e {
-  background-position: 0% 0%;
-  background-image: url("../img/e.png");
-  background-size: 1190px 524px; }
-
-.f {
-  background-position: 0% 0%;
-  background-image: url("../img/f.jpg");
-  background-size: 1962px 616px; }
-
-.g {
+.letter.a, .tile.a {
+  background-image: url("../img/a.jpg"); }
+.letter.b, .tile.b {
+  background-image: url("../img/b.jpg"); }
+.letter.c, .tile.c {
+  background-image: url("../img/c.jpg"); }
+.letter.d, .tile.d {
+  background-image: url("../img/d.png"); }
+.letter.e, .tile.e {
+  background-image: url("../img/e.png"); }
+.letter.f, .tile.f {
+  background-image: url("../img/f.jpg"); }
+.letter.g, .tile.g {
   background-position: 50% 50%;
-  background-image: url("../img/g.gif");
-  background-size: 727px 868px; }
-
-.h {
-  background-image: url("../img/h.jpg");
-  background-size: 600px 623px; }
-
-.i {
-  background-image: url("../img/i.jpg");
-  background-size: 447px 965px; }
-
-.j {
-  background-image: url("../img/j.jpg");
-  background-size: 320px 1140px; }
-
-.k {
-  background-image: url("../img/k.jpg");
-  background-size: 320px 1140px; }
+  background-image: url("../img/g.gif"); }
+.letter.h, .tile.h {
+  background-image: url("../img/h.jpg"); }
+.letter.i, .tile.i {
+  background-image: url("../img/i.jpg"); }
+.letter.j, .tile.j {
+  background-image: url("../img/j.jpg"); }
+.letter.k, .tile.k {
+  background-image: url("../img/k.jpg"); }

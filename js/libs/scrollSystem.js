@@ -43,7 +43,7 @@ function ScrollSystem() {
             var letter = elements[i].className.split( ' ' )[1];
             indexMap[ letter ] = i;         
 
-            $( elements[i] ).css({
+            $( wrappers[i] ).css({
                 'z-index': elements.length - i
             })
 
@@ -97,11 +97,15 @@ function ScrollSystem() {
     }
 
     this.finishScroll = function() {
+
+        console.log( "finish" );
         
         _this.scrollTo( Math.round( scrollPosition / windowHeight ) );
     }
 
     this.parseScroll = function( event, delta ) {
+
+        console.log( "parse" );
         
         // Sort out scroll deltas here!
         scrollPosition -= ( delta / 3 );
@@ -140,6 +144,8 @@ function ScrollSystem() {
     // Updates ALL wrappers scroll positions
     this.updateScroll = function() {
 
+        console.log( "update" );
+
         // Animate scrolling as well.
 
         var scrollLevel = Math.floor( scrollPosition / windowHeight );
@@ -166,6 +172,8 @@ function ScrollSystem() {
     }
 
     this.resize = function() {
+
+        console.log( "resize" );
 
         var oldWindowHeight = windowHeight;
         windowHeight = window.innerHeight;
