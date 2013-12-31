@@ -98,9 +98,11 @@ function App() {
             'margin-top': ( (window.innerHeight - $( '.showcase' ).height() ) / 2 ) - 50 + 'px'
         })
 
+        var width = $( '.tiles' ).width();
+
         // Tile Positioning.
-        var maxTiles = Math.floor( window.innerWidth / minWidth );
-        var overflow = window.innerWidth % minWidth;
+        var maxTiles = Math.floor( width / minWidth );
+        var overflow = width % minWidth;
         var divvy = overflow / maxTiles;
 
         $( '.main-tile' ).width( 2 * ( minWidth + divvy ) );

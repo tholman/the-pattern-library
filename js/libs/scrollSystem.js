@@ -297,7 +297,11 @@ function ScrollSystem() {
             'transition-delay': '0ms'
         })
 
-        // Feels like this could have been done a bit better. :(
+        this.manageNav();
+    }
+
+    this.manageNav = function() {
+         // Feels like this could have been done a bit better. :(
         var scrollLevel = getScrollLevel();
         if ( scrollLevel === 0 ) {
 

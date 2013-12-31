@@ -112,7 +112,8 @@ nav {
   z-index: 1000;
   right: 20px;
   top: 20px;
-  width: 30px; }
+  display: block;
+  width: 40px; }
   nav ul {
     list-style: none;
     padding: 0px;
@@ -219,7 +220,7 @@ nav {
     -ms-transform: translateZ(0px);
     -o-transform: translateZ(0px);
     transform: translateZ(0px);
-    background-size: contain;
+    background-position: 50% 50%;
     text-align: center;
     cursor: pointer;
     display: block;
@@ -271,8 +272,7 @@ nav {
   top: 0px;
   left: 0px;
   width: 100%;
-  height: 100%;
-  background-position: 50% 50%; }
+  height: 100%; }
   .letter.active h1, .letter.active h2 {
     color: #333; }
   .letter.active .details {
@@ -285,6 +285,8 @@ nav {
     -ms-transition: all 100ms ease-in-out;
     -o-transition: all 100ms ease-in-out;
     transition: all 100ms ease-in-out; }
+  .letter.active .trigger {
+    text-shadow: none; }
   .letter.active .download {
     -webkit-transition: all 100ms linear;
     -moz-transition: all 100ms linear;
@@ -302,11 +304,12 @@ nav {
     height: 100%; }
   .letter .trigger {
     float: left;
-    padding-left: 30px;
-    padding-top: 30px;
+    padding-left: 20px;
+    padding-top: 20px;
     padding-right: 45px;
     padding-bottom: 45px;
-    min-height: 200px; }
+    min-height: 200px;
+    text-shadow: -1px -1px rgba(0, 0, 0, 0.1); }
   .letter h1, .letter h2, .letter a {
     text-transform: uppercase;
     text-decoration: none;
@@ -354,9 +357,9 @@ nav {
     position: absolute;
     line-height: 20px;
     font-weight: 300;
-    bottom: 29px;
+    bottom: 20px;
     color: #333;
-    left: 30px;
+    left: 20px;
     opacity: 0; }
 
 .transitioning .wrapper {
@@ -366,10 +369,20 @@ nav {
   -o-transition: all 500ms ease-in-out;
   transition: all 500ms ease-in-out; }
 
+.sharing {
+  position: fixed;
+  z-index: 9999;
+  bottom: 20px;
+  right: 20px; }
+  .sharing .twitter-share-button {
+    margin-right: 10px; }
+
 .letter.a, .tile.a {
-  background-image: url("../img/a.jpg"); }
+  background-image: url("../img/a.jpg");
+  background-position: 50% 50%; }
 .letter.b, .tile.b {
-  background-image: url("../img/b.jpg"); }
+  background-image: url("../img/b.jpg");
+  background-position: 50% 0%; }
 .letter.c, .tile.c {
   background-image: url("../img/c.jpg"); }
 .letter.d, .tile.d {
@@ -379,8 +392,8 @@ nav {
 .letter.f, .tile.f {
   background-image: url("../img/f.jpg"); }
 .letter.g, .tile.g {
-  background-position: 50% 50%;
-  background-image: url("../img/g.gif"); }
+  background-image: url("../img/g.gif");
+  background-position: 50% 50%; }
 .letter.h, .tile.h {
   background-image: url("../img/h.jpg"); }
 .letter.i, .tile.i {
@@ -388,4 +401,17 @@ nav {
 .letter.j, .tile.j {
   background-image: url("../img/j.jpg"); }
 .letter.k, .tile.k {
-  background-image: url("../img/k.jpg"); }
+  background-image: url("../img/k.jpg");
+  background-position: 50% 0%; }
+.letter.l, .tile.l {
+  background-image: url("../img/l.jpg");
+  background-position: 50% 50%; }
+.letter.m, .tile.m {
+  background-image: url("../img/m.jpg"); }
+.letter.n, .tile.n {
+  background-image: url("../img/n.jpg");
+  background-position: 50% 50%; }
+.letter.o, .tile.o {
+  background-image: url("../img/o.jpg"); }
+.letter.p, .tile.p {
+  background-image: url("../img/p.gif"); }
