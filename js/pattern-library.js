@@ -54,9 +54,16 @@ function App() {
 
         // Make this happen onload
         $( window ).load(function() {
+
+            // Loaded
             setTimeout( function() {
                 $( '.loading' ).addClass( 'loaded' );
-            }, 1000 );
+            }, 500 );
+
+            // Hide completely
+            setTimeout( function() {
+                $( '.loading' ).addClass( 'hide' );
+            }, 1600 );
         });
 
         $( '.trigger' ).mouseenter( function() {
@@ -98,7 +105,9 @@ function App() {
             'margin-top': ( (window.innerHeight - $( '.showcase' ).height() ) / 2 ) - 50 + 'px'
         })
 
-        var width = $( '.tiles' ).width();
+        var element = document.querySelector( '.tiles' );
+        var width = element.offsetWidth - ( element.offsetWidth - element.clientWidth );
+        console.log( element.offsetWidth, element.clientWidth  );
 
         // Tile Positioning.
         var maxTiles = Math.floor( width / minWidth );

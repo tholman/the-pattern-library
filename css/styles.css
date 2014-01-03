@@ -61,6 +61,8 @@ section {
     -ms-transform: translateY(-100%);
     -o-transform: translateY(-100%);
     transform: translateY(-100%); }
+  .loading.hide {
+    display: none; }
   .loading table {
     font-family: "mostra-nuova";
     height: 100%;
@@ -101,6 +103,52 @@ section {
         padding-top: 20px;
         font-weight: 300;
         font-size: 11px; }
+  .loading .circle, .loading .bg-circle {
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+    -ms-transform: rotateY(180deg);
+    -o-transform: rotateY(180deg);
+    transform: rotateY(180deg);
+    position: absolute;
+    position: absolute;
+    margin-left: -40px;
+    height: 80px;
+    width: 80px;
+    left: 50%;
+    margin-top: 30px; }
+  .loading .circle {
+    -webkit-animation: load 5s linear infinite;
+    -moz-animation: load 5s linear infinite;
+    -ms-animation: load 5s linear infinite;
+    -o-animation: load 5s linear infinite;
+    animation: load 5s linear infinite;
+    stroke-dashoffset: 320;
+    stroke-dasharray: 160;
+    z-index: 2; }
+  .loading .bg-circle {
+    z-index: 1; }
+    .loading .bg-circle path {
+      stroke: #eee; }
+
+@-webkit-keyframes load {
+  to {
+    stroke-dashoffset: 0; } }
+
+@-moz-keyframes load {
+  to {
+    stroke-dashoffset: 0; } }
+
+@-ms-keyframes load {
+  to {
+    stroke-dashoffset: 0; } }
+
+@-o-keyframes load {
+  to {
+    stroke-dashoffset: 0; } }
+
+@keyframes load {
+  to {
+    stroke-dashoffset: 0; } }
 
 nav {
   -webkit-transform: translateZ(0px);
@@ -150,6 +198,7 @@ nav {
   transform: translateZ(0px);
   display: block;
   visibility: hidden;
+  overflow: auto;
   background: #f7f7f7;
   position: absolute;
   text-align: center;
@@ -256,8 +305,7 @@ nav {
       font-size: 15px;
       margin-top: 3px; }
   .tiles.active {
-    z-index: 10000001;
-    overflow: auto;
+    z-index: 10002;
     visibility: visible; }
 
 .letter {
@@ -376,6 +424,9 @@ nav {
   right: 20px; }
   .sharing .twitter-share-button {
     margin-right: 10px; }
+  .sharing .fb-like {
+    overflow: hidden;
+    height: 20px; }
 
 .letter.a, .tile.a {
   background-image: url("../img/a.jpg");

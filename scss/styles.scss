@@ -29,6 +29,14 @@ $topLevel: 1000;
     transform:         $params;
 }
 
+@mixin animation( $params ) {
+	-webkit-animation: $params;
+	-moz-animation:    $params;
+	-ms-animation:     $params;
+	-o-animation:      $params;
+	animation:         $params;
+}
+
 /*********************************************
  * MAIN
  *********************************************/
@@ -87,6 +95,10 @@ section {
 
 	&.loaded {
 		@include transform( translateY( -100% ) );
+	}
+
+	&.hide {
+		display: none;
 	}
 
 	table {
@@ -151,6 +163,63 @@ section {
 			}
 		}
 	}
+
+	// Loading
+	.circle, .bg-circle {
+		@include transform( rotateY(180deg) );
+
+		position: absolute;
+		position: absolute;
+		margin-left: -40px;
+		height: 80px;
+		width: 80px;
+		left: 50%;
+		margin-top: 30px;
+	}
+
+	.circle {
+			@include animation( load 5s linear infinite );
+			stroke-dashoffset: 320;
+			stroke-dasharray: 160;
+			z-index: 2;
+	}
+
+	.bg-circle {
+	  z-index: 1;
+	  path {
+	  	stroke: #eee;
+	  }
+	}
+}
+
+@-webkit-keyframes load {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@-moz-keyframes load {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@-ms-keyframes load {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@-o-keyframes load {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes load {
+  to {
+    stroke-dashoffset: 0;
+  }
 }
 
 nav {
@@ -206,6 +275,7 @@ nav {
 
 	display: block;
 	visibility: hidden;
+	overflow: auto;
 
 	background: #f7f7f7;
 	position: absolute;
@@ -345,8 +415,7 @@ nav {
 	}
 
 	&.active {
-		z-index: 10000001;
-		overflow: auto;
+		z-index: 10002; // Above all
 		visibility: visible;
 	}
 }
@@ -524,6 +593,11 @@ nav {
 
 	.twitter-share-button {
 		margin-right: 10px;
+	}
+
+	.fb-like {
+		overflow: hidden;
+		height: 20px;
 	}
 }
 
