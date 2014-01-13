@@ -77,8 +77,8 @@ section {
 .panes {
 	width: 100%;
 	height: 100%;
-	z-index: 1;
-
+	z-index: 2;
+	position: relative;
 	display: none;
 }
 
@@ -93,6 +93,21 @@ section {
 
 	z-index: 10000;
 
+	&.preload {
+
+		.mask {
+			background-color: #fff !important; // Hide the image!
+		}
+
+		.circle, .bg-circle {
+			@include transform( translateZ(0px) rotateY(180deg) translateY( -60px ) );
+		}
+
+		table {
+			color: #fff;
+		}
+	}
+
 	&.loaded {
 		@include transform( translateY( -100% ) );
 	}
@@ -102,6 +117,7 @@ section {
 	}
 
 	table {
+		@include transition( color, 300ms );
 		font-family: "mostra-nuova";
 		height: 100%;
 		width: 100%;
@@ -139,6 +155,7 @@ section {
 			}
 
 			.mask {
+				@include transition( background-color, 300ms );
 				background: url( '../img/title-mask.png' );
 				width: 680px;
 				height: 63px;
@@ -166,7 +183,13 @@ section {
 
 	// Loading
 	.circle, .bg-circle {
-		@include transform( rotateY(180deg) );
+		-webkit-transition: -webkit-transform 300ms;
+		-moz-transition: -moz-transform 300ms;
+		-ms-transition: -ms-transform 300ms;
+		-o-transition: -o-transform 300ms;
+		transition: transform 300ms;
+
+		@include transform( translateZ(0px) rotateY(180deg) translateY( 60px ) );
 
 		position: absolute;
 		position: absolute;
@@ -174,7 +197,6 @@ section {
 		height: 80px;
 		width: 80px;
 		left: 50%;
-		margin-top: 30px;
 	}
 
 	.circle {
@@ -271,10 +293,10 @@ nav {
 
 .tiles {
 
-	@include transform( translateZ( 0px ) );
-
+	// @include transform( translateZ( 0px ) );
+	-webkit-transform: scale(1);
 	display: block;
-	visibility: hidden;
+	// visibility: hidden;
 	overflow: auto;
 
 	background: #f7f7f7;
@@ -391,6 +413,7 @@ nav {
 	.prompt {
 		@include transition( opacity, 100ms );
 		font-family: "mostra-nuova";
+		text-transform: uppercase;
 		pointer-events: none;
 		background: #fff;
 		height: 100%;
@@ -603,74 +626,23 @@ nav {
 
 
 .letter, .tile {
-	
-	&.a {
-		background-image: url('../img/a.jpg');
+
+	&.a, &.g, &.l, &.n, &.x, &.y, &.z  {
 		background-position: 50% 50%;
-	}
+	}	
 
 	&.b {
-		background-image: url('../img/b.jpg');
 		background-position: 50% 0%;
 	}
 
-	&.c {
-		background-image: url('../img/c.jpg');
-	}
-
-	&.d {
-		background-image: url('../img/d.png');
-	}
-
-	&.e {
-		background-image: url('../img/e.png');
-	}
-
-	&.f {
-		background-image: url('../img/f.jpg');
-	}
-
-	&.g {
-		background-image: url('../img/g.gif');
-		background-position: 50% 50%;
-	}
-
-	&.h {
-		background-image: url('../img/h.jpg');
-	}
-
-	&.i {
-		background-image: url('../img/i.jpg');
-	}
-
-	&.j {
-		background-image: url('../img/j.jpg');
-	}
 
 	&.k {
-		background-image: url('../img/k.jpg');
 		background-position: 50% 0%;
 	}
 
-	&.l {
-		background-image: url('../img/l.jpg');
-		background-position: 50% 50%;
-	}
 
-	&.m {
-		background-image: url('../img/m.jpg');
-	}
 
-	&.n {
-		background-image: url('../img/n.jpg');
-		background-position: 50% 50%;
-	}
-
-	&.o {
-		background-image: url('../img/o.jpg');
-	}
-
-	&.p {
-		background-image: url('../img/p.gif');
+	&.s {
+		background-position: 0% 0%;
 	}
 }

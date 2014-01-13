@@ -50,8 +50,13 @@ function ScrollSystem() {
             heights.push( windowHeight );
         }
 
-        $( '.panes' ).bind( 'mousewheel DOMMouseScroll', function( event ) {
+        // $( '.panes' ).bind( 'mousewheel MozMousePixelScroll wheel', function( event ) {
+
+        $( '.panes' ).bind( 'mousewheel MozMousePixelScroll', function( event ) {
             
+            // -event.originalEvent.deltaY, if using the wheel event... I don't want to trust this, since mouse wheels
+            // may deliver strange things!
+
             // Manage mouse deltas on different browsers/OS
             event.preventDefault();
 
@@ -59,7 +64,7 @@ function ScrollSystem() {
                 return;
             }
 
-            var delta = event.originalEvent.wheelDelta || -event.originalEvent.detail;
+            var delta = ( event.originalEvent.wheelDelta / 3 ) || -event.originalEvent.detail;
 
             // Activate when the user stops scrolling.
             clearTimeout( scrollTimeout )
@@ -97,18 +102,13 @@ function ScrollSystem() {
     }
 
     this.finishScroll = function() {
-
-        console.log( "finish" );
-        
-        _this.scrollTo( Math.round( scrollPosition / windowHeight ) );
+        _this.scrollTo( Math.round( scrollPosition / windowHeight ), true );
     }
 
     this.parseScroll = function( event, delta ) {
-
-        console.log( "parse" );
         
         // Sort out scroll deltas here!
-        scrollPosition -= ( delta / 3 );
+        scrollPosition -= delta;
 
         // Top scroll position
         if ( scrollPosition < 0 ) {
@@ -144,8 +144,6 @@ function ScrollSystem() {
     // Updates ALL wrappers scroll positions
     this.updateScroll = function() {
 
-        console.log( "update" );
-
         // Animate scrolling as well.
 
         var scrollLevel = Math.floor( scrollPosition / windowHeight );
@@ -173,8 +171,6 @@ function ScrollSystem() {
 
     this.resize = function() {
 
-        console.log( "resize" );
-
         var oldWindowHeight = windowHeight;
         windowHeight = window.innerHeight;
 
@@ -196,6 +192,10 @@ function ScrollSystem() {
         this.updateScroll();
     }
 
+    this.getScrollLetter = function() {
+        return elements[ getScrollLevel() ].className.split( ' ' )[1];
+    }
+
     var getScrollLevel = function() {
         return Math.floor( scrollPosition / windowHeight );
     }
@@ -205,7 +205,7 @@ function ScrollSystem() {
         var scrollLevel = getScrollLevel();
         if ( (scrollLevel - 1) >= 0 ) {
 
-            _this.scrollTo( scrollLevel - 1 );
+            _this.scrollTo( scrollLevel - 1, true );
         }
     }
 
@@ -214,7 +214,7 @@ function ScrollSystem() {
         var scrollLevel = getScrollLevel();
         if ( (scrollLevel + 1) < elements.length ) {
 
-            _this.scrollTo( scrollLevel + 1 );
+            _this.scrollTo( scrollLevel + 1, true );
         }
     }
 
@@ -232,7 +232,7 @@ function ScrollSystem() {
         options.splice( scrollLevel, 1 );
 
         var randomItem = options[ Math.floor( Math.random() * options.length ) ];
-        _this.scrollTo( randomItem );
+        _this.scrollTo( randomItem, true );
     }
 
     // Scroll to specific letter... 
@@ -240,7 +240,6 @@ function ScrollSystem() {
     // transition: snap, or transition to the letter
     this.scrollTo = function( index, transition ) {
 
-        $( document.body ).addClass( 'transitioning' );
 
         // Scrolling to X
         var scrollToItem = index;
@@ -251,27 +250,33 @@ function ScrollSystem() {
         // Scrolling from Y
         var currentItem = Math.floor( scrollPosition / windowHeight );
 
-        // Scrolling down
-        if ( scrollToItem > currentItem ) {
+        if ( transition === true ) {
 
-            for( var i = currentItem; i < scrollToItem; i++ ) {
-                addDelay( wrappers[i], ( i - currentItem ) );
+             $( document.body ).addClass( 'transitioning' );
+
+            // Scrolling down
+            if ( scrollToItem > currentItem ) {
+
+                for( var i = currentItem; i < scrollToItem; i++ ) {
+                    addDelay( wrappers[i], ( i - currentItem ) );
+                }
+
+            // Scrolling up!
+            } else if ( currentItem > scrollToItem ){
+                // Look into how this works, understanding is fun.
+                for( var i = currentItem - 1; i >= scrollToItem; i-- ) {
+                    addDelay( wrappers[i], ( currentItem - i - 1)  );
+                }
             }
 
-        // Scrolling up!
-        } else if ( currentItem > scrollToItem ){
-            // Look into how this works, understanding is fun.
-            for( var i = currentItem - 1; i >= scrollToItem; i-- ) {
-                addDelay( wrappers[i], ( currentItem - i - 1)  );
-            }
+            var scrollDifference = Math.abs( scrollToItem - currentItem );
+            clearTimeout( animationTimeout );
+
+            // 500 is the total animation time
+            _this.transitioning = true;
+            animationTimeout = setTimeout( bind( this, _this.removeDelays ), (scrollDifference * scrollDelayDelta + 500) )
+
         }
-
-        var scrollDifference = Math.abs( scrollToItem - currentItem );
-        clearTimeout( animationTimeout );
-
-        // 500 is the total animation time
-        _this.transitioning = true;
-        animationTimeout = setTimeout( bind( this, _this.removeDelays ), (scrollDifference * scrollDelayDelta + 500) )
 
         scrollPosition = scrollToItem * windowHeight;
         this.updateScroll();
