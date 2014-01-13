@@ -72,10 +72,6 @@ section {
 .wrapper {
 	@include transform( translateZ( 0px ) );
 	overflow: hidden;
-
-	&.hide {
-		display: none;
-	}
 }
 
 .panes {

@@ -314,10 +314,9 @@ function App() {
             // Debounce
             setTimeout( function() {
                 $( '.loading' ).removeClass( 'preload' );
-            }, 100 )
-            loadSmall();
+            }, 500 )
             
-            // Debounce
+            loadSmall();
             loadSocial();
 
         });
@@ -382,11 +381,8 @@ function App() {
             createPane( patternData[ i ] );
         }
 
-        console.log( "loaded!" );
-
         // Inject and load slower patterns now the first X have loaded.
         for( var i = 0; i < slowPatternData.length; i++ ) {
-            console.log( "load slow one")
             createPane( slowPatternData[ i ] );
         }
 
@@ -419,11 +415,11 @@ function App() {
         // Show page
         setTimeout( function() {
             $( '.loading' ).addClass( 'loaded' );
-        }, 500 );
+        }, 1000 );
 
         setTimeout( function() {
             $( '.loading' ).hide();
-        }, 1500 );
+        }, 2500 );
     }
 
     var loadSocial = function() {

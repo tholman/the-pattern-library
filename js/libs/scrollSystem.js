@@ -43,11 +43,9 @@ function ScrollSystem() {
             var letter = elements[i].className.split( ' ' )[1];
             indexMap[ letter ] = i;         
 
-            wrappers.eq( i ).css({
+            $( wrappers[i] ).css({
                 'z-index': elements.length - i
             })
-
-            this.showNear();
 
             heights.push( windowHeight );
         }
@@ -128,21 +126,19 @@ function ScrollSystem() {
 
         if ( scrollLevel === ( wrappers.length - 1 ) ) {
 
-            wrappers.eq( scrollLevel - 1 ).height( 0 );   
+            $( wrappers[ scrollLevel - 1 ] ).height( 0 );   
             return;
         }
 
         if ( scrollLevel > 0 ) {
-            wrappers.eq( scrollLevel - 1 ).height( 0 );    
+            $( wrappers[ scrollLevel - 1 ] ).height( 0 );    
         }
 
         if ( scrollLevel < wrappers.length ) {
-            wrappers.eq( scrollLevel + 1 ).height( windowHeight );    
+            $( wrappers[ scrollLevel + 1 ] ).height( windowHeight );    
         }
 
-        wrappers.eq( scrollLevel).height( windowHeight - scrollDepth );
-
-        this.showNear();
+        $( wrappers[ scrollLevel ] ).height( windowHeight - scrollDepth );
     }
 
     // Updates ALL wrappers scroll positions
@@ -157,17 +153,17 @@ function ScrollSystem() {
 
             // Item is less than the scroll level
             if ( i < scrollLevel ) {
-                wrappers.eq( i ).height( 0 );
+                $( wrappers[ i ] ).height( 0 );
                 continue;
             }
 
             if ( i === scrollLevel ) {
-                wrappers.eq( i ).height( scrollDepth );
+                $( wrappers[ i ] ).height( scrollDepth );
                 continue;
             }
 
             if ( i > scrollLevel ) {
-                wrappers.eq( i ).height( windowHeight );   
+                $( wrappers[ i ] ).height( windowHeight );   
                 continue;
             }
         }
@@ -190,30 +186,10 @@ function ScrollSystem() {
         for( var i = 0; i < heights.length; i++ ) {
 
             heights[ i ] = heights[ i ] * ratio;
-            wrappers.eq( i ).height( heights[ i ] );
+            $( wrappers[i] ).height( heights[ i ] );
         }
 
         this.updateScroll();
-    }
-
-    this.showNear = function() {
-
-        var scrollLevel = getScrollLevel();
-
-        for( var i = 0; i < wrappers.length; i++ ) {
-
-            if ( (i > (scrollLevel - 5)) && (i < (scrollLevel + 5)) ) {
-                wrappers.eq( i ).removeClass('hide');
-            } else {
-                wrappers.eq( i ).addClass('hide');
-            }
-        }
-    }
-
-    this.showAll = function() {
-        for( var i = 0; i < wrappers.length; i++ ) {
-            wrappers.eq( i ).removeClass('hide');
-        }
     }
 
     this.getScrollLetter = function() {
@@ -226,8 +202,6 @@ function ScrollSystem() {
 
     this.scrollUp = function() {
 
-        this.showNear();
-
         var scrollLevel = getScrollLevel();
         if ( (scrollLevel - 1) >= 0 ) {
 
@@ -236,8 +210,6 @@ function ScrollSystem() {
     }
 
     this.scrollDown = function() {
-
-        this.showNear();
 
         var scrollLevel = getScrollLevel();
         if ( (scrollLevel + 1) < elements.length ) {
@@ -286,23 +258,19 @@ function ScrollSystem() {
             if ( scrollToItem > currentItem ) {
 
                 for( var i = currentItem; i < scrollToItem; i++ ) {
-                    addDelay( wrappers.eq( i ), ( i - currentItem ) );
+                    addDelay( wrappers[i], ( i - currentItem ) );
                 }
 
             // Scrolling up!
             } else if ( currentItem > scrollToItem ){
                 // Look into how this works, understanding is fun.
                 for( var i = currentItem - 1; i >= scrollToItem; i-- ) {
-                    addDelay( wrappers.eq( i ), ( currentItem - i - 1)  );
+                    addDelay( wrappers[i], ( currentItem - i - 1)  );
                 }
             }
 
             var scrollDifference = Math.abs( scrollToItem - currentItem );
             clearTimeout( animationTimeout );
-
-            if ( scrollDifference > 1 ) {
-                this.showAll();
-            }
 
             // 500 is the total animation time
             _this.transitioning = true;
@@ -317,16 +285,14 @@ function ScrollSystem() {
     var addDelay = function( element, delay ) {
 
         delay = Math.abs( delay );
-        // var $element = $( element );
+        var $element = $( element );
 
-        element.css({
+        $element.css({
             'transition-delay': ( delay * scrollDelayDelta ) + 'ms'
         })
     }
 
     this.removeDelays = function() {
-
-        _this.showNear();
 
         _this.transitioning = false;
 
