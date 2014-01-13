@@ -139,6 +139,8 @@ function ScrollSystem() {
         }
 
         $( wrappers[ scrollLevel ] ).height( windowHeight - scrollDepth );
+
+        this.showNear();
     }
 
     // Updates ALL wrappers scroll positions
@@ -192,6 +194,26 @@ function ScrollSystem() {
         this.updateScroll();
     }
 
+    this.showNear = function() {
+
+        var scrollLevel = getScrollLevel();
+
+        for( var i = 0; i < wrappers.length; i++ ) {
+
+            if ( (i > (scrollLevel - 5)) && (i < (scrollLevel + 5)) ) {
+                $( wrappers[i] ).removeClass('hide');
+            } else {
+                $( wrappers[i] ).addClass('hide');
+            }
+        }
+    }
+
+    this.showAll = function() {
+        for( var i = 0; i < wrappers.length; i++ ) {
+            $( wrappers[i] ).removeClass('hide');
+        }
+    }
+
     this.getScrollLetter = function() {
         return elements[ getScrollLevel() ].className.split( ' ' )[1];
     }
@@ -202,6 +224,8 @@ function ScrollSystem() {
 
     this.scrollUp = function() {
 
+        this.showNear();
+
         var scrollLevel = getScrollLevel();
         if ( (scrollLevel - 1) >= 0 ) {
 
@@ -210,6 +234,8 @@ function ScrollSystem() {
     }
 
     this.scrollDown = function() {
+
+        this.showNear();
 
         var scrollLevel = getScrollLevel();
         if ( (scrollLevel + 1) < elements.length ) {
@@ -272,6 +298,10 @@ function ScrollSystem() {
             var scrollDifference = Math.abs( scrollToItem - currentItem );
             clearTimeout( animationTimeout );
 
+            if ( scrollDifference > 1 ) {
+                this.showAll();
+            }
+
             // 500 is the total animation time
             _this.transitioning = true;
             animationTimeout = setTimeout( bind( this, _this.removeDelays ), (scrollDifference * scrollDelayDelta + 500) )
@@ -293,6 +323,8 @@ function ScrollSystem() {
     }
 
     this.removeDelays = function() {
+
+        _this.showNear();
 
         _this.transitioning = false;
 

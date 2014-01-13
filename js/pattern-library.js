@@ -23,7 +23,7 @@ function App() {
 	var nameSliderText;
 
     var paneData = 
-        '<section class="wrapper %letter%" style="z-index: %z-index%;">' +
+        '<section class="wrapper %letter% hide" style="z-index: %z-index%;">' +
             '<div class="letter %letter%">' + 
                 '<div class="details active">' +
                     '<span class="trigger">' +

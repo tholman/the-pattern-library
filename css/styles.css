@@ -36,6 +36,8 @@ section {
   -o-transform: translateZ(0px);
   transform: translateZ(0px);
   overflow: hidden; }
+  .wrapper.hide {
+    display: none; }
 
 .panes {
   -webkit-transform: translateZ(0px);
