@@ -38,6 +38,11 @@ section {
   overflow: hidden; }
 
 .panes {
+  -webkit-transform: translateZ(0px);
+  -moz-transform: translateZ(0px);
+  -ms-transform: translateZ(0px);
+  -o-transform: translateZ(0px);
+  transform: translateZ(0px);
   width: 100%;
   height: 100%;
   z-index: 2;
@@ -50,6 +55,11 @@ section {
   -ms-transition: all 1000ms ease-in-out;
   -o-transition: all 1000ms ease-in-out;
   transition: all 1000ms ease-in-out;
+  -webkit-transform: translateZ(0px);
+  -moz-transform: translateZ(0px);
+  -ms-transform: translateZ(0px);
+  -o-transform: translateZ(0px);
+  transform: translateZ(0px);
   position: fixed;
   height: 100%;
   width: 100%;
@@ -444,6 +454,11 @@ nav {
   transition: all 500ms ease-in-out; }
 
 .sharing {
+  -webkit-transform: translateZ(0px);
+  -moz-transform: translateZ(0px);
+  -ms-transform: translateZ(0px);
+  -o-transform: translateZ(0px);
+  transform: translateZ(0px);
   position: fixed;
   z-index: 9999;
   bottom: 20px;
