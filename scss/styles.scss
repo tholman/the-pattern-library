@@ -293,10 +293,9 @@ nav {
 
 .tiles {
 
-	// @include transform( translateZ( 0px ) );
-	-webkit-transform: scale(1);
+	@include transform( translateZ( 0px ) );
 	display: block;
-	// visibility: hidden;
+	visibility: hidden;
 	overflow: auto;
 
 	background: #f7f7f7;

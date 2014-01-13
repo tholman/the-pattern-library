@@ -216,8 +216,13 @@ nav {
       fill: #fff; }
 
 .tiles {
-  -webkit-transform: scale(1);
+  -webkit-transform: translateZ(0px);
+  -moz-transform: translateZ(0px);
+  -ms-transform: translateZ(0px);
+  -o-transform: translateZ(0px);
+  transform: translateZ(0px);
   display: block;
+  visibility: hidden;
   overflow: auto;
   background: #f7f7f7;
   position: absolute;
