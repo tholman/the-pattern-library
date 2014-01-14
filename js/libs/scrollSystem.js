@@ -110,6 +110,12 @@ function ScrollSystem() {
         // Sort out scroll deltas here!
         scrollPosition -= delta;
 
+        window.requestAnimationFrame( bind(this, this.doScroll) );
+    }
+
+    
+    this.doScroll = function() {
+
         // Top scroll position
         if ( scrollPosition < 0 ) {
 
@@ -149,23 +155,20 @@ function ScrollSystem() {
         var scrollLevel = Math.floor( scrollPosition / windowHeight );
         var scrollDepth = windowHeight - ( scrollPosition % windowHeight );
 
-        for ( var i = 0; i < wrappers.length; i++ ) {
+        var i = wrappers.length;
+        while( --i > -1 ) {
 
             // Item is less than the scroll level
             if ( i < scrollLevel ) {
-                $( wrappers[ i ] ).height( 0 );
-                continue;
+                wrappers[ i ].style.height = 0;
+            }
+            else if ( i === scrollLevel ) {
+                wrappers[ i ].style.height = scrollDepth + 'px';
+            }
+            else if ( i > scrollLevel ) {
+                wrappers[ i ].style.height = windowHeight + 'px';
             }
 
-            if ( i === scrollLevel ) {
-                $( wrappers[ i ] ).height( scrollDepth );
-                continue;
-            }
-
-            if ( i > scrollLevel ) {
-                $( wrappers[ i ] ).height( windowHeight );   
-                continue;
-            }
         }
     }
 
@@ -183,10 +186,10 @@ function ScrollSystem() {
         var ratio = windowHeight / oldWindowHeight;
         scrollPosition = scrollPosition * ratio;
 
-        for( var i = 0; i < heights.length; i++ ) {
-
+        var i = heights.length;
+        while( --i > -1 ) {
             heights[ i ] = heights[ i ] * ratio;
-            $( wrappers[i] ).height( heights[ i ] );
+            wrappers[ i ].style.height = heights[ i ] + 'px';
         }
 
         this.updateScroll();
@@ -240,7 +243,6 @@ function ScrollSystem() {
     // transition: snap, or transition to the letter
     this.scrollTo = function( index, transition ) {
 
-
         // Scrolling to X
         var scrollToItem = index;
         if ( typeof( index ) == 'string' ) {
@@ -252,7 +254,7 @@ function ScrollSystem() {
 
         if ( transition === true ) {
 
-             $( document.body ).addClass( 'transitioning' );
+             $body.addClass( 'transitioning' );
 
             // Scrolling down
             if ( scrollToItem > currentItem ) {
