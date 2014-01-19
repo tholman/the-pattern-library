@@ -102,7 +102,7 @@ function ScrollSystem() {
     }
 
     this.finishScroll = function() {
-        _this.scrollTo( Math.round( scrollPosition / windowHeight ), true );
+        _this.scrollTo( Math.round( scrollPosition / windowHeight ), 1 );
     }
 
     this.parseScroll = function( event, delta ) {
@@ -176,6 +176,7 @@ function ScrollSystem() {
 
         elements = $( '.letter' );
         elements.height( windowHeight );
+        elements.width( window.innerWidth );
 
         wrappers = $( '.wrapper' );
         wrappers.height( windowHeight );
@@ -205,7 +206,7 @@ function ScrollSystem() {
         var scrollLevel = getScrollLevel();
         if ( (scrollLevel - 1) >= 0 ) {
 
-            _this.scrollTo( scrollLevel - 1, true );
+            _this.scrollTo( scrollLevel - 1, 1 );
         }
     }
 
@@ -214,7 +215,7 @@ function ScrollSystem() {
         var scrollLevel = getScrollLevel();
         if ( (scrollLevel + 1) < elements.length ) {
 
-            _this.scrollTo( scrollLevel + 1, true );
+            _this.scrollTo( scrollLevel + 1, 1 );
         }
     }
 
@@ -232,13 +233,13 @@ function ScrollSystem() {
         options.splice( scrollLevel, 1 );
 
         var randomItem = options[ Math.floor( Math.random() * options.length ) ];
-        _this.scrollTo( randomItem, true );
+        _this.scrollTo( randomItem, 2 );
     }
 
     // Scroll to specific letter... 
     // index: letter to scroll to
     // transition: snap, or transition to the letter
-    this.scrollTo = function( index, transition ) {
+    this.scrollTo = function( index, transitionType ) {
 
 
         // Scrolling to X
@@ -250,22 +251,32 @@ function ScrollSystem() {
         // Scrolling from Y
         var currentItem = Math.floor( scrollPosition / windowHeight );
 
-        if ( transition === true ) {
+        if ( transitionType === 1 || transitionType === 2 ) {
 
-             $( document.body ).addClass( 'transitioning' );
+            $( document.body ).addClass( 'transitioning' );
 
             // Scrolling down
             if ( scrollToItem > currentItem ) {
 
                 for( var i = currentItem; i < scrollToItem; i++ ) {
-                    addDelay( wrappers[i], ( i - currentItem ) );
+
+                    if ( transitionType === 1 ) {
+                        addDelay( wrappers[i], ( i - currentItem ) );
+                    } else {
+                        addDelay( wrappers[i], ( 1 ) );
+                    }
                 }
 
             // Scrolling up!
             } else if ( currentItem > scrollToItem ){
                 // Look into how this works, understanding is fun.
                 for( var i = currentItem - 1; i >= scrollToItem; i-- ) {
-                    addDelay( wrappers[i], ( currentItem - i - 1)  );
+
+                    if ( transitionType === 1 ) {
+                        addDelay( wrappers[i], ( currentItem - i - 1)  );
+                    } else {
+                        addDelay( wrappers[i], 1 );
+                    }
                 }
             }
 
@@ -274,12 +285,26 @@ function ScrollSystem() {
 
             // 500 is the total animation time
             _this.transitioning = true;
-            animationTimeout = setTimeout( bind( this, _this.removeDelays ), (scrollDifference * scrollDelayDelta + 500) )
+
+            if ( transitionType === 1 ) {
+                animationTimeout = setTimeout( bind( this, _this.removeDelays ), (scrollDifference * scrollDelayDelta + 500) )
+            } else {
+                animationTimeout = setTimeout( bind( this, _this.removeDelays ), 500 )
+            }
 
         }
 
         scrollPosition = scrollToItem * windowHeight;
+        
         this.updateScroll();
+        this.manageHash();
+        this.manageNav();
+    }
+
+    this.manageHash = function() {
+
+        var scrollItem = getScrollLevel();
+        location.hash = '#' + $( 'h1', wrappers.eq( scrollItem ) ).text().toLowerCase().trim().split(' ').join('-');
     }
 
     var addDelay = function( element, delay ) {

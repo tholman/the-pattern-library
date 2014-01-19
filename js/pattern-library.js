@@ -54,7 +54,7 @@ function App() {
         {
             letter: 'a',
             file: 'a.jpg',
-            name: 'Sexy Ripples',
+            name: 'Kale Salad',
             creator: 'Claudio Guglieri',
             creatorWeb: 'http://whydontwetry.com',
             creatorTwitter: 'claudioguglieri'
@@ -70,7 +70,7 @@ function App() {
         {
             letter: 'c',
             file: 'c.jpg',
-            name: 'Kale Salad',
+            name: 'Ripples',
             creator: 'Claudio Guglieri',
             creatorWeb: 'http://whydontwetry.com',
             creatorTwitter: 'claudioguglieri'
@@ -90,14 +90,6 @@ function App() {
             creator: 'Claudio Guglieri',
             creatorWeb: 'http://whydontwetry.com',
             creatorTwitter: 'claudioguglieri'
-        },
-        {
-            letter: 'k',
-            file: 'k.jpg',
-            name: 'Crumble',
-            creator: 'Julien Bailly',
-            creatorWeb: 'http://julien-bailly.com/',
-            creatorTwitter: 'julien_bailly'
         },
         {
             letter: 'l',
@@ -120,7 +112,7 @@ function App() {
             file: 'p.gif',
             name: 'Brijan',
             creator: 'Brijan Powel',
-            creatorWeb: 'www.robothate.com',
+            creatorWeb: 'http://www.robothate.com',
             creatorTwitter: 'brijanp'
         },
         {
@@ -168,7 +160,7 @@ function App() {
             file: 'u.png',
             name: 'Wild Sea',
             creator: 'Henry Daubrez',
-            creatorWeb: 'www.dogstudio.be',
+            creatorWeb: 'http://www.dogstudio.be',
             creatorTwitter: 'upskydown'
         },
         {
@@ -176,31 +168,31 @@ function App() {
             file: 'v.png',
             name: 'The Illusionist',
             creator: 'Henry Daubrez',
-            creatorWeb: 'www.dogstudio.be',
+            creatorWeb: 'http://www.dogstudio.be',
             creatorTwitter: 'upskydown'
         },
         {
             letter: 'x',
             file: 'x.png',
-            name: 'Norwegian sweater 1',
+            name: 'Magnus 2050',
             creator: 'Kristoffer Brady',
-            creatorWeb: 'www.egosmoke.com',
+            creatorWeb: 'http://www.egosmoke.com',
             creatorTwitter: 'egosmoke'
         },
         {
             letter: 'y',
             file: 'y.png',
-            name: 'Norwegian sweater 2',
+            name: 'Magnus 2051',
             creator: 'Kristoffer Brady',
-            creatorWeb: 'www.egosmoke.com',
+            creatorWeb: 'http://www.egosmoke.com',
             creatorTwitter: 'egosmoke'
         },
         {
             letter: 'z',
             file: 'z.png',
-            name: 'Norwegian sweater 3',
+            name: 'Magnus 2052',
             creator: 'Kristoffer Brady',
-            creatorWeb: 'www.egosmoke.com',
+            creatorWeb: 'http://www.egosmoke.com',
             creatorTwitter: 'egosmoke'
         },
         {
@@ -210,6 +202,46 @@ function App() {
             creator: 'Claudio Guglieri',
             creatorWeb: 'http://whydontwetry.com',
             creatorTwitter: 'claudioguglieri'
+        },
+        {
+            letter: 'af',
+            file: 'af.png',
+            name: 'Bunting flag',
+            creator: 'Raul Varela',
+            creatorWeb: 'http://shonen.me',
+            creatorTwitter: 'shonenCMYK'
+        },
+        {
+            letter: 'ag',
+            file: 'ag.jpg',
+            name: 'Canvas Orange',
+            creator: 'Raul Varela',
+            creatorWeb: 'http://shonen.me',
+            creatorTwitter: 'shonenCMYK'
+        },
+        {
+            letter: 'ah',
+            file: 'ah.png',
+            name: 'Bicycles',
+            creator: 'Shaun Fox',
+            creatorWeb: 'http://shaunfox.com',
+            creatorTwitter: 'shaunrfox'
+        },
+        {
+            letter: 'ai',
+            file: 'ai.png',
+            name: 'Hodgepodge',
+            creator: 'Anatoliy Gromov',
+            creatorWeb: 'http://agromov.com',
+            creatorTwitter: 'agromov'
+        },
+        {
+            letter: 'ak',
+            file: 'ak.png',
+            name: 'Retro Furnish',
+            creator: 'Heury & Heury',
+            creatorWeb: 'http://heuryandheury.eu',
+            creatorTwitter: 'heuryheury'
         }
     ]
 
@@ -228,7 +260,7 @@ function App() {
             name: 'Special Delivery',
             creator: 'Matt Delbridge',
             creatorWeb: 'http://mattdelbridge.com/',
-            creatorTwitter: null
+            creatorTwitter: 'matt_delbridge'
         },
         {
             letter: 'i',
@@ -252,7 +284,7 @@ function App() {
             name: 'Junk Mail',
             creator: 'Matt Delbridge',
             creatorWeb: 'http://mattdelbridge.com/',
-            creatorTwitter: null
+            creatorTwitter: 'matt_delbridge'
         },
         {
             letter: 'e',
@@ -285,6 +317,38 @@ function App() {
             creator: 'Claudio Guglieri',
             creatorWeb: 'http://whydontwetry.com',
             creatorTwitter: 'claudioguglieri'
+        },
+        {
+            letter: 'ae',
+            file: 'ae.jpg',
+            name: 'Ocean',
+            creator: 'Jon Vlasach',
+            creatorWeb: 'http://colectiv.com/',
+            creatorTwitter: 'JonVlasach'
+        },
+        {
+            letter: 'ad',
+            file: 'ad.jpg',
+            name: 'Guglieri Speciale',
+            creator: 'Jon Vlasach',
+            creatorWeb: 'http://colectiv.com/',
+            creatorTwitter: 'JonVlasach'
+        },
+        {
+            letter: 'aj',
+            file: 'aj.png',
+            name: 'Geometrica',
+            creator: 'Guy Moorhouse',
+            creatorWeb: 'http://futurefabric.co.uk',
+            creatorTwitter: 'futurefabric'
+        },
+        {
+            letter: 'al',
+            file: 'al.png',
+            name: 'Glitch',
+            creator: 'Tim Green',
+            creatorWeb: 'http://destroywerk.com',
+            creatorTwitter: 'destroywerk'
         }
     ]
 
@@ -304,11 +368,54 @@ function App() {
         shuffle( patternData );
         shuffle( slowPatternData );
 
+        var firstPattern;
+        var hash = location.hash.slice(1);
+        var found = false;
+        if( hash !== '' ) {
+
+            // Search for in normal patterns
+            for( var i = 0; i < patternData.length; i++ ) {
+                if ( patternData[i].name.toLowerCase().split(' ').join('-') === hash ) {
+
+                    found = true;
+                    firstPattern = patternData[i];
+                    patternData.splice( i, 1 );
+                    break;
+                }
+            }
+
+            // Search for in large patterns
+            if ( found == false ) {
+                for( var i = 0; i < slowPatternData.length; i++ ) {
+                    if ( slowPatternData[i].name.toLowerCase().split(' ').join('-') === hash ) {
+
+                        found = true;
+                        firstPattern = slowPatternData[i];
+                        slowPatternData.splice( i, 1 );
+                        break;
+                    }
+                }
+            }
+
+            // If hash is fake, go back to normal.
+            if ( found == false ) {
+                removeHash();
+                firstPattern = patternData[0]
+                patternData.splice( i, 1 );
+            }
+
+        } else {
+
+            // No hash
+            removeHash();
+            firstPattern = patternData[0]
+            patternData.splice( i, 1 );
+        }
+
         // Loading first image & exiting preloader
-        var first = patternData[ 0 ];
-        loadImage( first, function() {
+        loadImage( firstPattern, function() {
             
-            createPane( first, 0 );
+            createPane( firstPattern, 0 );
             $( '.panes' ).show();
             
             // Debounce
@@ -323,7 +430,8 @@ function App() {
 
         $( '.grid' ).click( function() {
             
-            $( '.tiles' ).addClass( 'active' );
+            $( document.body ).addClass( 'tile-view' );
+            removeHash();
         });
 
         // Resize event!
@@ -347,7 +455,7 @@ function App() {
 
     var loadSmall = function() {
 
-        var i = 1;
+        var i = 0;
         
         for( var i; i < patternData.length; i++ ) {
 
@@ -376,7 +484,7 @@ function App() {
     var finalizePage = function() {
 
         // Create final panes!
-        var i = 1;
+        var i = 0;
         for( var i; i < patternData.length; i++ ) {
             createPane( patternData[ i ] );
         }
@@ -404,9 +512,12 @@ function App() {
         $( '.tile' ).click( function() {
 
             var letter = this.className.split( ' ' )[1];
-            _this.scrollSystem.scrollTo( letter, true );
+            _this.scrollSystem.scrollTo( letter, 0 );
 
-            $( '.tiles' ).removeClass( 'active' );
+            // Debounce
+            setTimeout( function() {
+                $( document.body ).removeClass( 'tile-view' );
+            }, 1 )
         })
 
         // Initial screen sizing
@@ -415,11 +526,11 @@ function App() {
         // Show page
         setTimeout( function() {
             $( '.loading' ).addClass( 'loaded' );
-        }, 1000 );
+        }, 2000 );
 
         setTimeout( function() {
             $( '.loading' ).hide();
-        }, 2500 );
+        }, 3500 );
     }
 
     var loadSocial = function() {
@@ -436,7 +547,7 @@ function App() {
             fjs.parentNode.insertBefore(js, fjs);
             }(document, 'script', 'facebook-jssdk'));
 
-        // Google Analytics
+        // Google Analytics (Its not social, but you get it!)
         var _gaq = _gaq || [];
         _gaq.push(['_setAccount', 'UA-47086520-1']);
         _gaq.push(['_trackPageview']);

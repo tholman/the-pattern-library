@@ -75,7 +75,11 @@ section {
 }
 
 .panes {
-	@include transform( translateZ( 0px ) );
+	// @include transform( translateZ( 0px ) );
+	
+	@include transition( height, 500ms );
+	overflow: hidden;
+
 	width: 100%;
 	height: 100%;
 	z-index: 2;
@@ -294,11 +298,18 @@ nav {
 	}
 }
 
+.tile-view {
+
+	.panes {
+		height: 0px;
+	}
+}
+
 .tiles {
 
 	@include transform( translateZ( 0px ) );
 	display: block;
-	visibility: hidden;
+	visibility: visible;
 	overflow: auto;
 
 	background: #f7f7f7;
@@ -437,11 +448,6 @@ nav {
 			font-size: 15px;
 			margin-top: 3px;
 		}
-	}
-
-	&.active {
-		z-index: 10002; // Above all
-		visibility: visible;
 	}
 }
 
@@ -611,7 +617,7 @@ nav {
 }
 
 .sharing {
-	@include transform( translateZ( 0px ) );
+	//@include transform( translateZ( 0px ) );
 	position: fixed;
 	z-index: 9999; // One less than the cover
 	bottom: 20px;
@@ -630,7 +636,7 @@ nav {
 
 .letter, .tile {
 
-	&.a, &.g, &.l, &.n, &.x, &.y, &.z  {
+	&.a, &.g, &.l, &.n, &.x, &.y, &.z, &.aj  {
 		background-position: 50% 50%;
 	}	
 
@@ -638,12 +644,9 @@ nav {
 		background-position: 50% 0%;
 	}
 
-
 	&.k {
 		background-position: 50% 0%;
 	}
-
-
 
 	&.s {
 		background-position: 0% 0%;
