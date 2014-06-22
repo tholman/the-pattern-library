@@ -54,6 +54,7 @@ html, body {
 
 	-webkit-perspective: 600px;
 	overflow: hidden;
+	background: #fff;
 }
 
 
@@ -312,7 +313,7 @@ nav {
 	visibility: visible;
 	overflow: auto;
 
-	background: #f7f7f7;
+	background: #fff;
 	position: absolute;
 	text-align: center;
 	z-index: 1000;
@@ -469,6 +470,10 @@ nav {
 
 		h1, h2 {	
 			color: #333;
+		}
+
+		.no-link {
+			color: #000;
 		}
 
 		.details {
@@ -636,7 +641,7 @@ nav {
 
 .letter, .tile {
 
-	&.a, &.g, &.l, &.n, &.x, &.y, &.z, &.aj  {
+	&.a, &.g, &.l, &.n, &.x, &.y, &.z, &.aj, &.az  {
 		background-position: 50% 50%;
 	}	
 

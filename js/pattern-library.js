@@ -242,10 +242,98 @@ function App() {
             creator: 'Heury & Heury',
             creatorWeb: 'http://heuryandheury.eu',
             creatorTwitter: 'heuryheury'
-        }
+        },
+        {
+            letter: 'ap',
+            file: 'ap.jpg',
+            name: 'Jade',
+            creator: 'Jade Meneguel',
+            creatorWeb: 'http://portfolio.jademeneguel.com',
+            creatorTwitter: 'jademeneguel'
+        },
+        {
+            letter: 'aq',
+            file: 'aq.jpg',
+            name: 'Plaid',
+            creator: 'Alexey Tretina',
+            creatorWeb: 'http://www.tretina.ru',
+            creatorTwitter: 'squilacci'
+        },
+        {
+            letter: 'ar',
+            file: 'ar.png',
+            name: 'Kitty',
+            creator: 'Penny Yu',
+            creatorWeb: null,
+            creatorTwitter: null
+        },
+        {
+            letter: 'az',
+            file: 'az.png',
+            name: 'Quake',
+            creator: 'Nina Geometrieva',
+            creatorWeb: 'https://www.behance.net/ninageo',
+            creatorTwitter: 'geometrieva'
+        },
+        {
+            letter: 'ba',
+            file: 'ba.jpg',
+            name: 'Flowers',
+            creator: 'Débora Sayuri',
+            creatorWeb: 'www.behance.net/deborasayuri',
+            creatorTwitter: null
+        },
+        {
+            letter: 'bc',
+            file: 'bc.png',
+            name: 'Science',
+            creator: 'Fabricio Marques',
+            creatorWeb: 'http://fabric8.de',
+            creatorTwitter: 'fabric_8'
+        },
     ]
 
     slowPatternData = [
+        {
+            letter: 'ay',
+            file: 'ay.jpg',
+            name: 'Hotdogs',
+            creator: 'Román Jusdado',
+            creatorWeb: 'http://www.romanjusdado.com',
+            creatorTwitter: 'romanjusdado'
+        },
+        {
+            letter: 'ax',
+            file: 'ax.jpg',
+            name: 'Design Tools',
+            creator: 'Miguel Angel Avila',
+            creatorWeb: 'http://dribbble.com/geeklangel',
+            creatorTwitter: 'geeklangel'
+        },
+        {
+            letter: 'aw',
+            file: 'aw.png',
+            name: 'Green Goblin',
+            creator: 'Dmitry Grigorev',
+            creatorWeb: 'http://dgrigoriev.com/index.php/info',
+            creatorTwitter: 'alieneye'
+        },
+        {
+            letter: 'av',
+            file: 'av.gif',
+            name: 'raspberry lace',
+            creator: 'Ana Novakovic',
+            creatorWeb: 'http://ananovakovicdesign.com/',
+            creatorTwitter: 'Ana_Novakovic_'
+        },
+        {
+            letter: 'au',
+            file: 'au.jpg',
+            name: 'Isometropolis',
+            creator: 'Alan Geraghty',
+            creatorWeb: 'http://cargocollective.com/tigerpixel',
+            creatorTwitter: 'tigerpixel'
+        },
         {
             letter: 'g',
             file: 'g.gif',
@@ -327,8 +415,8 @@ function App() {
             creatorTwitter: 'JonVlasach'
         },
         {
-            letter: 'ad',
-            file: 'ad.jpg',
+            letter: 'am',
+            file: 'am.jpg',
             name: 'Guglieri Speciale',
             creator: 'Jon Vlasach',
             creatorWeb: 'http://colectiv.com/',
@@ -349,7 +437,47 @@ function App() {
             creator: 'Tim Green',
             creatorWeb: 'http://destroywerk.com',
             creatorTwitter: 'destroywerk'
-        }
+        },
+        {
+            letter: 'an',
+            file: 'an.jpg',
+            name: 'Asteroids',
+            creator: 'Sanja Kusturica',
+            creatorWeb: 'http://noumevon.com',
+            creatorTwitter: 'kustkunst'
+        },
+        {
+            letter: 'ao',
+            file: 'ao.gif',
+            name: 'Shattered Island',
+            creator: 'Julien Renvoye',
+            creatorWeb: 'http://www.julienrenvoye.com/',
+            creatorTwitter: 'julienrenvoye'
+        },
+        {
+            letter: 'as',
+            file: 'as.gif',
+            name: 'Neon Autumn',
+            creator: 'Dailey Crafton',
+            creatorWeb: 'http://daileycrafton.com',
+            creatorTwitter: 'daileycrafton'
+        },
+        {
+            letter: 'at',
+            file: 'at.png',
+            name: 'Celebration',
+            creator: 'Prabhu Kandavelu',
+            creatorWeb: null,
+            creatorTwitter: 'prabhuk1986'
+        },
+        {
+            letter: 'bb',
+            file: 'bb.jpg',
+            name: 'Ahoy',
+            creator: 'Lorena G',
+            creatorWeb: 'http://behance.net/lorena-g',
+            creatorTwitter: 'Lorena_Disseny'
+        },
     ]
 
     var loaded = 0;
@@ -546,17 +674,6 @@ function App() {
             js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
             fjs.parentNode.insertBefore(js, fjs);
             }(document, 'script', 'facebook-jssdk'));
-
-        // Google Analytics (Its not social, but you get it!)
-        var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', 'UA-47086520-1']);
-        _gaq.push(['_trackPageview']);
-
-        (function() {
-            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-        })();
     }
 
     var createPane = function( data, index ) {
@@ -587,6 +704,11 @@ function App() {
         if ( data.creatorTwitter === null ) {
             $( '.twitter', pane ).remove();
         }
+
+        if ( data.creatorWeb === null ) {
+            $( 'h2 a', pane ).eq(0).removeAttr( 'href' ).addClass( 'no-link' );
+        }
+
 
         paneElement.append( $( pane ) );
     }

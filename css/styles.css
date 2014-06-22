@@ -20,7 +20,8 @@ html, body {
   padding: 0px;
   margin: 0px;
   -webkit-perspective: 600px;
-  overflow: hidden; }
+  overflow: hidden;
+  background: #fff; }
 
 section {
   position: absolute;
@@ -238,7 +239,7 @@ nav {
   display: block;
   visibility: visible;
   overflow: auto;
-  background: #f7f7f7;
+  background: #fff;
   position: absolute;
   text-align: center;
   z-index: 1000;
@@ -360,6 +361,8 @@ nav {
   height: 100%; }
   .letter.active h1, .letter.active h2 {
     color: #333; }
+  .letter.active .no-link {
+    color: #000; }
   .letter.active .details {
     background: white; }
   .letter.active .download .text, .letter.active .twitter, .letter.active .self-promotion {
@@ -465,7 +468,7 @@ nav {
     overflow: hidden;
     height: 20px; }
 
-.letter.a, .letter.g, .letter.l, .letter.n, .letter.x, .letter.y, .letter.z, .letter.aj, .tile.a, .tile.g, .tile.l, .tile.n, .tile.x, .tile.y, .tile.z, .tile.aj {
+.letter.a, .letter.g, .letter.l, .letter.n, .letter.x, .letter.y, .letter.z, .letter.aj, .letter.az, .tile.a, .tile.g, .tile.l, .tile.n, .tile.x, .tile.y, .tile.z, .tile.aj, .tile.az {
   background-position: 50% 50%; }
 .letter.b, .tile.b {
   background-position: 50% 0%; }
