@@ -1,10 +1,9 @@
-## - TODO
+## The Pattern Library
+A simple, nicely designed gallery project built to show and share simple patterns and designs from around the world.
 
--. Snapping of the scroll system.
--. Start grid view.
--. Grid view transition?
--. Grid view card flip transition.
--. Background by x
+![Loading Screen](http://i.imgur.com/2Ftb3oP.png "Loading")
+![Main page](http://i.imgur.com/hVbfoWR.png "Main Page")
+![Menu](http://i.imgur.com/kIojxDr.png "Menu Gallery")
 
-
--. Scroll system normalization of delta
+### Housekeeping
+Currently accepting submissions via the mail link included on the site (patterns@thepatternlibrary.com), rather than pull requests.
