@@ -13,6 +13,7 @@ function App() {
 
     var paneElement;
     var loading;
+    var introShown;
 
     var paneData = 
         '<section class="wrapper %letter%">' +
@@ -504,16 +505,28 @@ function App() {
 
         totalItems = patternData.length;
 
+        // Hold the intro text back until the fonts are in (or 3s), so it doesn't swap fonts in view.
+        var fontsReady = Promise.race([
+            document.fonts ? document.fonts.ready : Promise.resolve(),
+            new Promise( function( resolve ) { setTimeout( resolve, 3000 ); })
+        ]);
+
         // Loading first image & exiting preloader
         loadImage( firstPattern, function() {
 
             createPane( firstPattern );
             paneElement.style.display = 'block';
 
-            // Debounce
-            setTimeout( function() {
-                loading.classList.remove( 'preload' );
-            }, 500 );
+            introShown = fontsReady.then( function() {
+
+                // Debounce
+                return new Promise( function( resolve ) {
+                    setTimeout( function() {
+                        loading.classList.remove( 'preload' );
+                        resolve();
+                    }, 500 );
+                });
+            });
 
             loadSmall();
         });
@@ -630,14 +643,17 @@ function App() {
         // Initial screen sizing
         _this.resize();
 
-        // Show page
-        setTimeout( function() {
-            loading.classList.add( 'loaded' );
-        }, 2000 );
+        // Show page, once the intro has had its moment.
+        introShown.then( function() {
 
-        setTimeout( function() {
-            loading.style.display = 'none';
-        }, 3500 );
+            setTimeout( function() {
+                loading.classList.add( 'loaded' );
+            }, 2000 );
+
+            setTimeout( function() {
+                loading.style.display = 'none';
+            }, 3500 );
+        });
     }
 
     var createPane = function( data ) {
