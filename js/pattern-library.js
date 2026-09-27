@@ -12,6 +12,7 @@ function App() {
     var _this = this;
 
     var paneElement;
+    var loading;
 
     var paneData = 
         '<section class="wrapper %letter%">' +
@@ -484,7 +485,9 @@ function App() {
 
     this.init = function() {
 
-        paneElement = $( '.panes' );
+        loading = document.querySelector( '.loading' );
+
+        paneElement = document.querySelector( '.panes' );
 
         // Randomize Pane Order
         shuffle( patternData );
@@ -505,24 +508,24 @@ function App() {
         loadImage( firstPattern, function() {
 
             createPane( firstPattern );
-            $( '.panes' ).show();
+            paneElement.style.display = 'block';
 
             // Debounce
             setTimeout( function() {
-                $( '.loading' ).removeClass( 'preload' );
+                loading.classList.remove( 'preload' );
             }, 500 );
 
             loadSmall();
         });
 
-        $( '.grid' ).click( function() {
+        document.querySelector( '.grid' ).addEventListener( 'click', function() {
 
-            $( document.body ).addClass( 'tile-view' );
+            document.body.classList.add( 'tile-view' );
             removeHash();
         });
 
         // Resize event!
-        $( window ).on( 'resize', function() {
+        window.addEventListener( 'resize', function() {
             _this.resize();
 
             if ( _this.scrollSystem ) {
@@ -597,26 +600,31 @@ function App() {
         _this.scrollSystem.init();
 
         // Trigger mouse events
-        $( '.trigger' ).mouseenter( function() {
+        each( '.trigger', function( trigger ) {
 
-            $( this ).parent().parent().addClass( 'active' );
-        });
+            var letter = trigger.closest( '.letter' );
 
-        $( '.trigger' ).mouseleave( function( event ) {
+            trigger.addEventListener( 'mouseenter', function() {
+                letter.classList.add( 'active' );
+            });
 
-            $( this ).parent().parent().removeClass( 'active' );
+            trigger.addEventListener( 'mouseleave', function() {
+                letter.classList.remove( 'active' );
+            });
         });
 
         // Add Tile Events
-        $( '.tile' ).click( function() {
+        each( '.tile', function( tile ) {
 
-            var letter = this.className.split( ' ' )[1];
-            _this.scrollSystem.scrollTo( letter, 0 );
+            tile.addEventListener( 'click', function() {
 
-            // Debounce
-            setTimeout( function() {
-                $( document.body ).removeClass( 'tile-view' );
-            }, 1 );
+                _this.scrollSystem.scrollTo( tile.dataset.letter, 0 );
+
+                // Debounce
+                setTimeout( function() {
+                    document.body.classList.remove( 'tile-view' );
+                }, 1 );
+            });
         });
 
         // Initial screen sizing
@@ -624,11 +632,11 @@ function App() {
 
         // Show page
         setTimeout( function() {
-            $( '.loading' ).addClass( 'loaded' );
+            loading.classList.add( 'loaded' );
         }, 2000 );
 
         setTimeout( function() {
-            $( '.loading' ).hide();
+            loading.style.display = 'none';
         }, 3500 );
     }
 
@@ -644,27 +652,30 @@ function App() {
         pane = pane.replace( /%creatorTwitter%/g, data.creatorTwitter );
         pane = pane.replace( /%downloadName%/g, slugify( data.name ) + '.' + data.file.split( '.' )[1] );
 
+        var holder = document.createElement( 'div' );
+        holder.innerHTML = pane;
+        pane = holder.firstChild;
+
         // Set background image... not the template way :S
-        pane = $( pane );
-        $( '.letter', pane ).css({
-            'background-image': 'url("' + imageDir + data.file + '")'
-        });
+        pane.querySelector( '.letter' ).style.backgroundImage = 'url("' + imageDir + data.file + '")';
 
         if ( data.creatorTwitter === null ) {
-            $( '.twitter', pane ).remove();
+            pane.querySelector( '.twitter' ).remove();
         }
 
         if ( data.creatorWeb === null ) {
-            $( 'h2 a', pane ).eq( 0 ).removeAttr( 'href' ).addClass( 'no-link' );
+            var link = pane.querySelector( 'h2 a' );
+            link.removeAttribute( 'href' );
+            link.classList.add( 'no-link' );
         }
 
-        paneElement.append( pane );
+        paneElement.appendChild( pane );
     }
 
     // Tiles are built from the same data as the panes, alphabetically.
     var createTiles = function() {
 
-        var tiles = $( '.tiles' );
+        var tiles = document.querySelector( '.tiles' );
         var patterns = [ firstPattern ].concat( patternData, slowPatternData ).sort( function( a, b ) {
             return a.name.localeCompare( b.name );
         });
@@ -672,14 +683,16 @@ function App() {
         for ( var i = 0; i < patterns.length; i++ ) {
 
             var data = patterns[ i ];
-            var tile = $( '<div class="tile"><div class="prompt"><div class="name"></div><div class="author"></div></div></div>' );
+            var tile = document.createElement( 'div' );
+            tile.innerHTML = '<div class="prompt"><div class="name"></div><div class="author"></div></div>';
 
-            tile.addClass( data.letter );
-            tile.css( 'background-image', 'url("' + imageDir + data.file + '")' );
-            $( '.name', tile ).text( data.name );
-            $( '.author', tile ).text( 'BY ' + data.creator );
+            tile.className = 'tile ' + data.letter;
+            tile.dataset.letter = data.letter;
+            tile.style.backgroundImage = 'url("' + imageDir + data.file + '")';
+            tile.querySelector( '.name' ).textContent = data.name;
+            tile.querySelector( '.author' ).textContent = 'BY ' + data.creator;
 
-            tiles.append( tile );
+            tiles.appendChild( tile );
         }
     }
 
@@ -693,7 +706,10 @@ function App() {
         var maxTiles = Math.max( 1, Math.floor( width / min ) );
         var tileWidth = Math.floor( width / maxTiles * 100 ) / 100;
 
-        $( '.main-tile' ).width( maxTiles > 2 ? tileWidth * 2 : width );
-        $( '.tile' ).width( tileWidth );
+        document.querySelector( '.main-tile' ).style.width = ( maxTiles > 2 ? tileWidth * 2 : width ) + 'px';
+
+        each( '.tile', function( tile ) {
+            tile.style.width = tileWidth + 'px';
+        });
     }
 }

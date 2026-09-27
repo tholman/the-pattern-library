@@ -14,10 +14,8 @@ function ScrollSystem() {
 
     var animationTimeout, scrollTimeout;
 
-    var $body, $navUp, $navDown, $navRandom;
+    var body, navUp, navDown, navRandom;
 
-    var upDisabled = true;
-    var downDisabled = false;
     var totalItems;
 
     var lastWheel = 0;
@@ -29,13 +27,13 @@ function ScrollSystem() {
 
         windowHeight = window.innerHeight;
 
-        $body = $( document.body );
+        body = document.body;
 
-        elements = $( '.letter' );
-        elements.height( windowHeight );
+        elements = document.querySelectorAll( '.letter' );
+        setHeights( elements, windowHeight );
 
-        wrappers = $( '.wrapper' );
-        wrappers.height( windowHeight );
+        wrappers = document.querySelectorAll( '.wrapper' );
+        setHeights( wrappers, windowHeight );
 
         totalItems = wrappers.length - 1;
 
@@ -45,15 +43,15 @@ function ScrollSystem() {
             var letter = elements[i].className.split( ' ' )[1];
             indexMap[ letter ] = i;         
 
-            $( wrappers[i] ).css({
-                'z-index': elements.length - i
-            })
+            wrappers[i].style.zIndex = elements.length - i;
 
         }
 
         showRange( 0, 1 );
 
-        $( '.panes' ).on( 'wheel', function( event ) {
+        var panes = document.querySelector( '.panes' );
+
+        panes.addEventListener( 'wheel', function( event ) {
 
             event.preventDefault();
 
@@ -73,11 +71,10 @@ function ScrollSystem() {
             ignoringMomentum = false;
 
             // Normalize line/page deltas (Firefox mouse wheels) to pixels, and slow it down a touch.
-            var original = event.originalEvent;
-            var deltaY = original.deltaY;
-            if ( original.deltaMode === 1 ) {
+            var deltaY = event.deltaY;
+            if ( event.deltaMode === 1 ) {
                 deltaY *= 40;
-            } else if ( original.deltaMode === 2 ) {
+            } else if ( event.deltaMode === 2 ) {
                 deltaY *= windowHeight;
             }
 
@@ -90,22 +87,22 @@ function ScrollSystem() {
             }, 500 );
 
             _this.parseScroll( event, delta );
-        });
+        }, { passive: false });
 
         // Swipe up/down on touch screens.
         var touchStartY = null;
 
-        $( '.panes' ).on( 'touchstart', function( event ) {
-            touchStartY = event.originalEvent.touches[0].clientY;
+        panes.addEventListener( 'touchstart', function( event ) {
+            touchStartY = event.touches[0].clientY;
         });
 
-        $( '.panes' ).on( 'touchend', function( event ) {
+        panes.addEventListener( 'touchend', function( event ) {
 
             if ( touchStartY === null ) {
                 return;
             }
 
-            var distance = touchStartY - event.originalEvent.changedTouches[0].clientY;
+            var distance = touchStartY - event.changedTouches[0].clientY;
             touchStartY = null;
 
             if ( Math.abs( distance ) < 50 || _this.transitioning === true ) {
@@ -119,34 +116,34 @@ function ScrollSystem() {
             }
         });
 
-        $( document ).keydown( function( e ) {
+        document.addEventListener( 'keydown', function( e ) {
 
             // Let the tile view scroll normally.
-            if ( $body.hasClass( 'tile-view' ) ) {
+            if ( body.classList.contains( 'tile-view' ) ) {
                 return;
             }
 
             // UP
-            if ( e.which == 38 ) {
+            if ( e.key === 'ArrowUp' ) {
 
+                e.preventDefault();
                 _this.scrollUp();
-                return false;
 
             // DOWN
-            } else if ( e.which == 40 ) {
+            } else if ( e.key === 'ArrowDown' ) {
 
+                e.preventDefault();
                 _this.scrollDown();
-                return false;
             }
         });
 
-        $navUp = $( 'nav .up' );
-        $navDown = $( 'nav .down' );
-        $navRandom = $( 'nav .random' );
+        navUp = document.querySelector( 'nav .up' );
+        navDown = document.querySelector( 'nav .down' );
+        navRandom = document.querySelector( 'nav .random' );
 
-        $navUp.click( function() { _this.scrollUp(); })
-        $navDown.click( function() { _this.scrollDown(); })
-        $navRandom.click( function() { _this.scrollRandom(); })
+        navUp.addEventListener( 'click', function() { _this.scrollUp(); });
+        navDown.addEventListener( 'click', function() { _this.scrollDown(); });
+        navRandom.addEventListener( 'click', function() { _this.scrollRandom(); });
 
     }
 
@@ -177,19 +174,19 @@ function ScrollSystem() {
 
         if ( scrollLevel === ( wrappers.length - 1 ) ) {
 
-            $( wrappers[ scrollLevel - 1 ] ).height( 0 );   
+            setHeight( wrappers[ scrollLevel - 1 ], 0 );
             return;
         }
 
         if ( scrollLevel > 0 ) {
-            $( wrappers[ scrollLevel - 1 ] ).height( 0 );    
+            setHeight( wrappers[ scrollLevel - 1 ], 0 );
         }
 
-        if ( scrollLevel < wrappers.length ) {
-            $( wrappers[ scrollLevel + 1 ] ).height( windowHeight );    
+        if ( scrollLevel + 1 < wrappers.length ) {
+            setHeight( wrappers[ scrollLevel + 1 ], windowHeight );
         }
 
-        $( wrappers[ scrollLevel ] ).height( windowHeight - scrollDepth );
+        setHeight( wrappers[ scrollLevel ], windowHeight - scrollDepth );
     }
 
     // Updates ALL wrappers scroll positions
@@ -204,17 +201,17 @@ function ScrollSystem() {
 
             // Item is less than the scroll level
             if ( i < scrollLevel ) {
-                $( wrappers[ i ] ).height( 0 );
+                setHeight( wrappers[ i ], 0 );
                 continue;
             }
 
             if ( i === scrollLevel ) {
-                $( wrappers[ i ] ).height( scrollDepth );
+                setHeight( wrappers[ i ], scrollDepth );
                 continue;
             }
 
             if ( i > scrollLevel ) {
-                $( wrappers[ i ] ).height( windowHeight );   
+                setHeight( wrappers[ i ], windowHeight );
                 continue;
             }
         }
@@ -225,18 +222,11 @@ function ScrollSystem() {
         var level = scrollPosition / windowHeight;
         windowHeight = window.innerHeight;
 
-        elements = $( '.letter' );
-        elements.height( windowHeight );
-
-        wrappers = $( '.wrapper' );
+        setHeights( elements, windowHeight );
 
         scrollPosition = level * windowHeight;
         this.updateScroll();
         showRange( getScrollLevel(), getScrollLevel() + 1 );
-    }
-
-    this.getScrollLetter = function() {
-        return elements[ getScrollLevel() ].className.split( ' ' )[1];
     }
 
     var getScrollLevel = function() {
@@ -295,7 +285,7 @@ function ScrollSystem() {
 
         if ( transitionType === 1 || transitionType === 2 ) {
 
-            $( document.body ).addClass( 'transitioning' );
+            body.classList.add( 'transitioning' );
 
             // Scrolling down
             if ( scrollToItem > currentItem ) {
@@ -336,9 +326,9 @@ function ScrollSystem() {
             _this.transitioning = true;
 
             if ( transitionType === 1 ) {
-                animationTimeout = setTimeout( bind( this, _this.removeDelays ), (scrollDifference * scrollDelayDelta + 500) )
+                animationTimeout = setTimeout( _this.removeDelays, scrollDifference * scrollDelayDelta + 500 );
             } else {
-                animationTimeout = setTimeout( bind( this, _this.removeDelays ), 500 )
+                animationTimeout = setTimeout( _this.removeDelays, 500 );
             }
 
         }
@@ -357,7 +347,7 @@ function ScrollSystem() {
     this.manageHash = function() {
 
         var scrollItem = getScrollLevel();
-        setHash( slugify( $( 'h1', wrappers.eq( scrollItem ) ).text() ) );
+        setHash( slugify( wrappers[ scrollItem ].querySelector( 'h1' ).textContent ) );
     }
 
     // Only the current pane and the one under it are ever seen. Hiding the rest stops the
@@ -379,58 +369,40 @@ function ScrollSystem() {
         showOnly( indices );
     }
 
+    var setHeight = function( element, height ) {
+        element.style.height = height + 'px';
+    }
+
+    var setHeights = function( list, height ) {
+        for ( var i = 0; i < list.length; i++ ) {
+            setHeight( list[ i ], height );
+        }
+    }
+
     var addDelay = function( element, delay ) {
-
-        delay = Math.abs( delay );
-        var $element = $( element );
-
-        $element.css({
-            'transition-delay': ( delay * scrollDelayDelta ) + 'ms'
-        })
+        element.style.transitionDelay = ( Math.abs( delay ) * scrollDelayDelta ) + 'ms';
     }
 
     this.removeDelays = function() {
 
         _this.transitioning = false;
 
-        $body.removeClass( 'transitioning' );
+        body.classList.remove( 'transitioning' );
 
-        wrappers.css({
-            'transition-delay': '0ms'
-        })
+        for ( var i = 0; i < wrappers.length; i++ ) {
+            wrappers[ i ].style.transitionDelay = '0ms';
+        }
 
         var level = getScrollLevel();
         showRange( level, level + 1 );
 
-        this.manageNav();
+        _this.manageNav();
     }
 
     this.manageNav = function() {
-         // Feels like this could have been done a bit better. :(
+
         var scrollLevel = getScrollLevel();
-        if ( scrollLevel === 0 ) {
-
-            upDisabled = true;
-            $navUp.addClass( 'disabled' );
-
-            downDisabled = false;
-            $navDown.removeClass( 'disabled' );
-
-        } else if ( scrollLevel === totalItems ) {
-
-            downDisabled = true;
-            $navDown.addClass( 'disabled' );
-
-            upDisabled = false;
-            $navUp.removeClass( 'disabled' );
-
-        } else if ( downDisabled === true || upDisabled === true ){
-
-            downDisabled = false;
-            $navDown.removeClass( 'disabled' );
-
-            upDisabled = false;
-            $navUp.removeClass( 'disabled' );
-        }
+        navUp.classList.toggle( 'disabled', scrollLevel === 0 );
+        navDown.classList.toggle( 'disabled', scrollLevel === totalItems );
     }
 }

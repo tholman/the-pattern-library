@@ -3,13 +3,11 @@
  */
 
 /*********************************************
- * Bind Context
+ * Run a function over every element matching a selector
  *********************************************/
 
-function bind( scope, fn ) {
-    return function () {
-        fn.apply( scope, arguments );
-    };
+function each( selector, fn ) {
+    Array.prototype.forEach.call( document.querySelectorAll( selector ), fn );
 }
 
 /*********************************************
