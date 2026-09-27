@@ -20,6 +20,9 @@ function ScrollSystem() {
     var downDisabled = false;
     var totalItems;
 
+    var lastWheel = 0;
+    var ignoringMomentum = false;
+
     this.transitioning = false;
 
     this.init = function() {
@@ -48,13 +51,26 @@ function ScrollSystem() {
 
         }
 
+        showRange( 0, 1 );
+
         $( '.panes' ).on( 'wheel', function( event ) {
 
             event.preventDefault();
 
+            var now = Date.now();
+            var quiet = now - lastWheel > 150;
+            lastWheel = now;
+
             if ( _this.transitioning === true ) {
+                ignoringMomentum = true;
                 return;
             }
+
+            if ( ignoringMomentum && !quiet ) {
+                return;
+            }
+
+            ignoringMomentum = false;
 
             // Normalize line/page deltas (Firefox mouse wheels) to pixels, and slow it down a touch.
             var original = event.originalEvent;
@@ -157,6 +173,8 @@ function ScrollSystem() {
         var scrollLevel = Math.floor( scrollPosition / windowHeight );
         var scrollDepth = scrollPosition % windowHeight;
 
+        showRange( scrollLevel, scrollLevel + 1 );
+
         if ( scrollLevel === ( wrappers.length - 1 ) ) {
 
             $( wrappers[ scrollLevel - 1 ] ).height( 0 );   
@@ -214,6 +232,7 @@ function ScrollSystem() {
 
         scrollPosition = level * windowHeight;
         this.updateScroll();
+        showRange( getScrollLevel(), getScrollLevel() + 1 );
     }
 
     this.getScrollLetter = function() {
@@ -303,6 +322,13 @@ function ScrollSystem() {
                 }
             }
 
+            // Stepping shows every pane on the way, a random jump only needs the two ends.
+            if ( transitionType === 1 ) {
+                showRange( Math.min( currentItem, scrollToItem ), Math.max( currentItem, scrollToItem ) + 1 );
+            } else {
+                showOnly( [ currentItem, scrollToItem, scrollToItem + 1 ] );
+            }
+
             var scrollDifference = Math.abs( scrollToItem - currentItem );
             clearTimeout( animationTimeout );
 
@@ -318,7 +344,11 @@ function ScrollSystem() {
         }
 
         scrollPosition = scrollToItem * windowHeight;
-        
+
+        if ( !_this.transitioning ) {
+            showRange( scrollToItem, scrollToItem + 1 );
+        }
+
         this.updateScroll();
         this.manageHash();
         this.manageNav();
@@ -328,6 +358,25 @@ function ScrollSystem() {
 
         var scrollItem = getScrollLevel();
         setHash( slugify( $( 'h1', wrappers.eq( scrollItem ) ).text() ) );
+    }
+
+    // Only the current pane and the one under it are ever seen. Hiding the rest stops the
+    // browser painting (and animating GIFs in) ~50 stacked full screen layers.
+    var showOnly = function( indices ) {
+
+        for ( var i = 0; i < wrappers.length; i++ ) {
+            wrappers[ i ].classList.toggle( 'off', indices.indexOf( i ) === -1 );
+        }
+    }
+
+    var showRange = function( from, to ) {
+
+        var indices = [];
+        for ( var i = from; i <= to; i++ ) {
+            indices.push( i );
+        }
+
+        showOnly( indices );
     }
 
     var addDelay = function( element, delay ) {
@@ -349,6 +398,9 @@ function ScrollSystem() {
         wrappers.css({
             'transition-delay': '0ms'
         })
+
+        var level = getScrollLevel();
+        showRange( level, level + 1 );
 
         this.manageNav();
     }

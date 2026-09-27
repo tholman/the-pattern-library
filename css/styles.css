@@ -26,8 +26,10 @@ section {
   left: 0px; }
 
 .wrapper {
-  transform: translateZ(0px);
-  overflow: hidden; }
+  overflow: hidden;
+  contain: strict; }
+  .wrapper.off {
+    visibility: hidden; }
 
 .panes {
   transition: height 500ms ease-in-out;
@@ -153,13 +155,18 @@ nav {
 .tile-view .panes {
   height: 0px; }
 
+.tile-view .tiles {
+  visibility: visible;
+  transition-delay: 0s; }
+
 .tile-view nav {
   opacity: 0;
   pointer-events: none; }
 
 .tiles {
+  visibility: hidden;
+  transition: visibility 0s 500ms;
   display: block;
-  visibility: visible;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
   background: #fff;
