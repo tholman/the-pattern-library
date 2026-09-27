@@ -11,29 +11,20 @@ function App() {
 
     var _this = this;
 
-	var pane = false;
     var paneElement;
-	var pageHeight = window.innerHeight; // px
-	var cardHeight = Math.ceil( window.innerHeight / 4 ); // px
-	var cardWidth = Math.ceil( window.innerWidth / 8 ); // px
-
-	var nav;
-
-	var nameSlider;
-	var nameSliderText;
 
     var paneData = 
-        '<section class="wrapper %letter% hide" style="z-index: %z-index%;">' +
+        '<section class="wrapper %letter%">' +
             '<div class="letter %letter%">' + 
                 '<div class="details active">' +
                     '<span class="trigger">' +
                         '<h1> %name% </h1>' +
                         '<h2>' + 
-                            'BY <a href="%creatorWeb%" target="_blank">%creator%</a><span class="twitter"> - ' + 
-                            '<a href="http://twitter.com/%creatorTwitter%" target="_blank">@%creatorTwitter%</a></span>' +
+                            'BY <a href="%creatorWeb%" target="_blank" rel="noopener">%creator%</a><span class="twitter"> - ' + 
+                            '<a href="https://twitter.com/%creatorTwitter%" target="_blank" rel="noopener">@%creatorTwitter%</a></span>' +
                         '</h2>' + 
                         '<div class="download">' +
-                            '<a href="./img/%file%" download="%downloadName%" target="_blank">' +
+                            '<a href="./img/%file%" download="%downloadName%">' +
                                 '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="31.5px" height="31.5px" viewBox="-1.51 8.919 31.5 31.5" enable-background="new -1.51 8.919 31.5 31.5" xml:space="preserve">' + 
                                     '<circle fill="none" stroke="#E37070" stroke-width="1.5" stroke-miterlimit="10" cx="14.24" cy="24.669" r="15"/>' + 
                                     '<path fill="#E37070" d="M18.522,25.65c-0.296-0.295-0.786-0.295-1.082,0l-2.456,2.438v-7.92c0-0.412-0.323-0.745-0.737-0.745 c-0.413,0-0.737,0.334-0.737,0.745v7.94l-2.473-2.464c-0.295-0.296-0.772-0.296-1.069,0c-0.295,0.294-0.294,0.771,0.001,1.065 l3.676,3.664c0.02,0.023,0.038,0.053,0.062,0.074c0.189,0.189,0.454,0.255,0.697,0.202c0.036-0.006,0.069-0.02,0.104-0.031 c0.007-0.002,0.014-0.003,0.021-0.005c0.122-0.047,0.228-0.126,0.31-0.226l3.686-3.673C18.818,26.423,18.818,25.945,18.522,25.65z" />' + 
@@ -111,7 +102,7 @@ function App() {
             letter: 'p',
             file: 'p.gif',
             name: 'Brijan',
-            creator: 'Brijan Powel',
+            creator: 'Brijan Powell',
             creatorWeb: 'http://www.robothate.com',
             creatorTwitter: 'brijanp'
         },
@@ -280,7 +271,7 @@ function App() {
             file: 'ba.jpg',
             name: 'Flowers',
             creator: 'Débora Sayuri',
-            creatorWeb: 'www.behance.net/deborasayuri',
+            creatorWeb: 'https://www.behance.net/deborasayuri',
             creatorTwitter: null
         },
         {
@@ -293,7 +284,8 @@ function App() {
         },
     ]
 
-    slowPatternData = [
+    // Heavier files, loaded after the first batch is ready.
+    var slowPatternData = [
         {
             letter: 'ay',
             file: 'ay.jpg',
@@ -480,11 +472,13 @@ function App() {
         },
     ]
 
+    var firstPattern;
     var loaded = 0;
-    var totalItems = ( patternData.length - 1 );
+    var totalItems = 0;
+
     // Tiles
     var minWidth = 240;
-    var maxWidth = 300;
+    var minWidthSmall = 160;
 
     this.scrollSystem;
 
@@ -496,114 +490,90 @@ function App() {
         shuffle( patternData );
         shuffle( slowPatternData );
 
-        var firstPattern;
-        var hash = location.hash.slice(1);
-        var found = false;
-        if( hash !== '' ) {
+        // Start on the pattern in the hash if there is one, otherwise the first (random) pattern.
+        var hash = decodeURIComponent( location.hash.slice( 1 ) );
+        firstPattern = takePattern( patternData, hash ) || takePattern( slowPatternData, hash );
 
-            // Search for in normal patterns
-            for( var i = 0; i < patternData.length; i++ ) {
-                if ( patternData[i].name.toLowerCase().split(' ').join('-') === hash ) {
-
-                    found = true;
-                    firstPattern = patternData[i];
-                    patternData.splice( i, 1 );
-                    break;
-                }
-            }
-
-            // Search for in large patterns
-            if ( found == false ) {
-                for( var i = 0; i < slowPatternData.length; i++ ) {
-                    if ( slowPatternData[i].name.toLowerCase().split(' ').join('-') === hash ) {
-
-                        found = true;
-                        firstPattern = slowPatternData[i];
-                        slowPatternData.splice( i, 1 );
-                        break;
-                    }
-                }
-            }
-
-            // If hash is fake, go back to normal.
-            if ( found == false ) {
-                removeHash();
-                firstPattern = patternData[0]
-                patternData.splice( i, 1 );
-            }
-
-        } else {
-
-            // No hash
+        if ( !firstPattern ) {
             removeHash();
-            firstPattern = patternData[0]
-            patternData.splice( i, 1 );
+            firstPattern = patternData.shift();
         }
+
+        totalItems = patternData.length;
 
         // Loading first image & exiting preloader
         loadImage( firstPattern, function() {
-            
-            createPane( firstPattern, 0 );
+
+            createPane( firstPattern );
             $( '.panes' ).show();
-            
+
             // Debounce
             setTimeout( function() {
                 $( '.loading' ).removeClass( 'preload' );
-            }, 500 )
-            
-            loadSmall();
-            loadSocial();
+            }, 500 );
 
+            loadSmall();
         });
 
         $( '.grid' ).click( function() {
-            
+
             $( document.body ).addClass( 'tile-view' );
             removeHash();
         });
 
         // Resize event!
-        window.onresize = function() {
-            app.resize();
-            _this.scrollSystem.resize();
-        }
+        $( window ).on( 'resize', function() {
+            _this.resize();
+
+            if ( _this.scrollSystem ) {
+                _this.scrollSystem.resize();
+            }
+        });
     }
 
-    var set
+    // Pulls the pattern matching the slug out of the list.
+    var takePattern = function( list, hash ) {
+
+        if ( hash === '' ) {
+            return null;
+        }
+
+        for ( var i = 0; i < list.length; i++ ) {
+            if ( slugify( list[i].name ) === hash ) {
+                return list.splice( i, 1 )[0];
+            }
+        }
+
+        return null;
+    }
 
     var loadImage = function( data, callback ) {
 
+        // A missing image shouldn't hold the whole page hostage.
         var image = new Image();
-        image.onload = function() {
-            callback();
-        };
-
+        image.onload = callback;
+        image.onerror = callback;
         image.src = imageDir + data.file;
     }
 
     var loadSmall = function() {
 
-        var i = 0;
-        
-        for( var i; i < patternData.length; i++ ) {
+        if ( totalItems === 0 ) {
+            finalizePage();
+            return;
+        }
 
-            (function( element, index ) {
-
-                loadImage( element , function() {
-                
-                    checkLoad();
-                });
-
-            })( patternData[ i ], i );
+        for ( var i = 0; i < patternData.length; i++ ) {
+            loadImage( patternData[ i ], checkLoad );
         }
     }
 
     var checkLoad = function() {
-        
+
         loaded++;
 
         if ( loaded === totalItems ) {
-            
+
             // Haha, loaded.
             finalizePage();
         }
@@ -612,15 +582,16 @@ function App() {
     var finalizePage = function() {
 
         // Create final panes!
-        var i = 0;
-        for( var i; i < patternData.length; i++ ) {
+        for ( var i = 0; i < patternData.length; i++ ) {
             createPane( patternData[ i ] );
         }
 
         // Inject and load slower patterns now the first X have loaded.
-        for( var i = 0; i < slowPatternData.length; i++ ) {
+        for ( var i = 0; i < slowPatternData.length; i++ ) {
             createPane( slowPatternData[ i ] );
         }
+
+        createTiles();
 
         _this.scrollSystem = new ScrollSystem();
         _this.scrollSystem.init();
@@ -645,8 +616,8 @@ function App() {
             // Debounce
             setTimeout( function() {
                 $( document.body ).removeClass( 'tile-view' );
-            }, 1 )
-        })
+            }, 1 );
+        });
 
         // Initial screen sizing
         _this.resize();
@@ -661,22 +632,7 @@ function App() {
         }, 3500 );
     }
 
-    var loadSocial = function() {
-
-        // Twitter
-        !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
-
-        // Facebook
-        (function(d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s); js.id = id;
-            js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
-            fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'facebook-jssdk'));
-    }
-
-    var createPane = function( data, index ) {
+    var createPane = function( data ) {
 
         // Update template data
         var pane = paneData;
@@ -686,52 +642,58 @@ function App() {
         pane = pane.replace( /%creator%/g, data.creator );
         pane = pane.replace( /%creatorWeb%/g, data.creatorWeb );
         pane = pane.replace( /%creatorTwitter%/g, data.creatorTwitter );
-        
-        pane = pane.replace( /%downloadName%/g, (data.name.toLowerCase().split(' ').join('-') + '.' + data.file.split('.')[1]) );
-        pane = pane.replace( /%z-index%/g, totalItems - index );
+        pane = pane.replace( /%downloadName%/g, slugify( data.name ) + '.' + data.file.split( '.' )[1] );
 
         // Set background image... not the template way :S
         pane = $( pane );
         $( '.letter', pane ).css({
             'background-image': 'url("' + imageDir + data.file + '")'
-        })
-
-        // Set tile background
-        $( '.tile.' + data.letter ).css({
-            'background-image': 'url("' + imageDir + data.file + '")'
-        })
+        });
 
         if ( data.creatorTwitter === null ) {
             $( '.twitter', pane ).remove();
         }
 
         if ( data.creatorWeb === null ) {
-            $( 'h2 a', pane ).eq(0).removeAttr( 'href' ).addClass( 'no-link' );
+            $( 'h2 a', pane ).eq( 0 ).removeAttr( 'href' ).addClass( 'no-link' );
         }
 
+        paneElement.append( pane );
+    }
 
-        paneElement.append( $( pane ) );
+    // Tiles are built from the same data as the panes, alphabetically.
+    var createTiles = function() {
+
+        var tiles = $( '.tiles' );
+        var patterns = [ firstPattern ].concat( patternData, slowPatternData ).sort( function( a, b ) {
+            return a.name.localeCompare( b.name );
+        });
+
+        for ( var i = 0; i < patterns.length; i++ ) {
+
+            var data = patterns[ i ];
+            var tile = $( '<div class="tile"><div class="prompt"><div class="name"></div><div class="author"></div></div></div>' );
+
+            tile.addClass( data.letter );
+            tile.css( 'background-image', 'url("' + imageDir + data.file + '")' );
+            $( '.name', tile ).text( data.name );
+            $( '.author', tile ).text( 'BY ' + data.creator );
+
+            tiles.append( tile );
+        }
     }
 
     this.resize = function() {
 
-        // Letter positioning.
-        $( '.showcase' ).css({
-            'margin-top': ( (window.innerHeight - $( '.showcase' ).height() ) / 2 ) - 50 + 'px'
-        })
-
         var element = document.querySelector( '.tiles' );
-        var width = element.offsetWidth - ( element.offsetWidth - element.clientWidth );
+        var width = element.clientWidth;
 
         // Tile Positioning.
-        var maxTiles = Math.floor( width / minWidth );
-        var overflow = width % minWidth;
-        var divvy = overflow / maxTiles;
+        var min = width < 600 ? minWidthSmall : minWidth;
+        var maxTiles = Math.max( 1, Math.floor( width / min ) );
+        var tileWidth = Math.floor( width / maxTiles * 100 ) / 100;
 
-        $( '.main-tile' ).width( 2 * ( minWidth + divvy ) );
-        $( '.tile' ).width( minWidth + divvy );
+        $( '.main-tile' ).width( maxTiles > 2 ? tileWidth * 2 : width );
+        $( '.tile' ).width( tileWidth );
     }
 }
-
-
-

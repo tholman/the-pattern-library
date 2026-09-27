@@ -7,7 +7,6 @@ function ScrollSystem() {
     var windowHeight;
 
     var elements, wrappers;
-    var heights = [];
 
     var scrollPosition = 0;
 
@@ -47,44 +46,78 @@ function ScrollSystem() {
                 'z-index': elements.length - i
             })
 
-            heights.push( windowHeight );
         }
 
-        // $( '.panes' ).bind( 'mousewheel MozMousePixelScroll wheel', function( event ) {
+        $( '.panes' ).on( 'wheel', function( event ) {
 
-        $( '.panes' ).bind( 'mousewheel MozMousePixelScroll', function( event ) {
-            
-            // -event.originalEvent.deltaY, if using the wheel event... I don't want to trust this, since mouse wheels
-            // may deliver strange things!
-
-            // Manage mouse deltas on different browsers/OS
             event.preventDefault();
 
             if ( _this.transitioning === true ) {
                 return;
             }
 
-            var delta = ( event.originalEvent.wheelDelta / 3 ) || -event.originalEvent.detail;
+            // Normalize line/page deltas (Firefox mouse wheels) to pixels, and slow it down a touch.
+            var original = event.originalEvent;
+            var deltaY = original.deltaY;
+            if ( original.deltaMode === 1 ) {
+                deltaY *= 40;
+            } else if ( original.deltaMode === 2 ) {
+                deltaY *= windowHeight;
+            }
+
+            var delta = -deltaY * 0.4;
 
             // Activate when the user stops scrolling.
-            clearTimeout( scrollTimeout )
+            clearTimeout( scrollTimeout );
             scrollTimeout = setTimeout( function() {
                 _this.finishScroll();
             }, 500 );
-            
+
             _this.parseScroll( event, delta );
         });
 
-        $( document ).keydown( function( e ){
+        // Swipe up/down on touch screens.
+        var touchStartY = null;
+
+        $( '.panes' ).on( 'touchstart', function( event ) {
+            touchStartY = event.originalEvent.touches[0].clientY;
+        });
+
+        $( '.panes' ).on( 'touchend', function( event ) {
+
+            if ( touchStartY === null ) {
+                return;
+            }
+
+            var distance = touchStartY - event.originalEvent.changedTouches[0].clientY;
+            touchStartY = null;
+
+            if ( Math.abs( distance ) < 50 || _this.transitioning === true ) {
+                return;
+            }
+
+            if ( distance > 0 ) {
+                _this.scrollDown();
+            } else {
+                _this.scrollUp();
+            }
+        });
+
+        $( document ).keydown( function( e ) {
+
+            // Let the tile view scroll normally.
+            if ( $body.hasClass( 'tile-view' ) ) {
+                return;
+            }
 
             // UP
-            if ( e.which == 38 ) { 
-               
-               _this.scrollUp();
+            if ( e.which == 38 ) {
+
+                _this.scrollUp();
                 return false;
 
             // DOWN
-            } else if (e.which == 40) { 
+            } else if ( e.which == 40 ) {
 
                 _this.scrollDown();
                 return false;
@@ -171,25 +204,15 @@ function ScrollSystem() {
 
     this.resize = function() {
 
-        var oldWindowHeight = windowHeight;
+        var level = scrollPosition / windowHeight;
         windowHeight = window.innerHeight;
 
         elements = $( '.letter' );
         elements.height( windowHeight );
-        elements.width( window.innerWidth );
 
         wrappers = $( '.wrapper' );
-        wrappers.height( windowHeight );
 
-        var ratio = windowHeight / oldWindowHeight;
-        scrollPosition = scrollPosition * ratio;
-
-        for( var i = 0; i < heights.length; i++ ) {
-
-            heights[ i ] = heights[ i ] * ratio;
-            $( wrappers[i] ).height( heights[ i ] );
-        }
-
+        scrollPosition = level * windowHeight;
         this.updateScroll();
     }
 
@@ -304,7 +327,7 @@ function ScrollSystem() {
     this.manageHash = function() {
 
         var scrollItem = getScrollLevel();
-        location.hash = '#' + $( 'h1', wrappers.eq( scrollItem ) ).text().toLowerCase().trim().split(' ').join('-');
+        setHash( slugify( $( 'h1', wrappers.eq( scrollItem ) ).text() ) );
     }
 
     var addDelay = function( element, delay ) {
